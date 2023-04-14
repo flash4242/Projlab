@@ -83,10 +83,10 @@ public abstract class Csucs extends Mezo{
     }
 
     /**
-     * Visszaadja a szomszédos csövek listáját, Cso típusú listaként. A függvény csak a Csucsok számára elérhető.
+     * Visszaadja a szomszédos csövek listáját, Cso típusú listaként.
      * @return A szomszédos csövek listája.
      */
-    protected List<Cso> getSzomszedosCso(){
+    public List<Cso> getSzomszedosCso(){
         return szomszedosCso;
     }
 }

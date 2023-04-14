@@ -11,17 +11,14 @@ public class Ciszterna extends Csucs{
     public Ciszterna(){
         super();
     }
-
-    //TODO maybe void???
+    
     /**
      * Létrehoz egy új Cso objektumot, és beállítja magát a cső mindkét végpontjának.
-     * @return A létrehozott Cso objektum.
      */
-    public Cso csoLetrehozasa(){
+    public void csoLetrehozasa(){
         Cso cs = new Cso();
         //ToDo Itt sem tudom hogyan mukodik, ezt meg lehet valtoztatni kell
         cs.setSzomszedosCsucs(this, this);
-        return cs;
     }
 
     /**
