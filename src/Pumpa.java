@@ -30,7 +30,8 @@ public class Pumpa extends Csucs{
      */
     @Override
     public void atallit(int kimeneti, int bemeneti) {
-        //TODO atallit
+        bemenetiCso = bemeneti % getSzomszedosCso().size();
+        kimenetiCso = kimeneti % getSzomszedosCso().size();
     }
 
     /**
@@ -38,7 +39,13 @@ public class Pumpa extends Csucs{
      */
     @Override
     public void vizetPumpal() {
-        //TODO pumpal
+        if(!Skeleton.kerdes("El van romolva a pumpa?")){
+            if(Skeleton.kerdes("Van viz a pumpaban?")){
+                if(getSzomszedosCso().get(kimenetiCso).vizetKap()){
+                    getSzomszedosCso().get(bemenetiCso).vizetVeszit();
+                }
+            }
+        }
     }
 
     /**

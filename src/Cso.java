@@ -49,12 +49,12 @@ public class Cso extends Mezo {
         //csucs amirol lecsatoljuk a csovet
         Csucs szCsucs = this.szomszedosCsucs.get(0);
         //az eredetit átkötjük
-        szCsucs.Lecsatol(this);
-        p.Felcsatol(this);
+        szCsucs.lecsatol(this);
+        p.felcsatol(this);
         //az uj csőrész
         Cso fele = new Cso();
-        szCsucs.Felcsatol(fele);
-        p.Felcsatol(fele);
+        szCsucs.felcsatol(fele);
+        p.felcsatol(fele);
 
     }
 
