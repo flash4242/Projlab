@@ -55,7 +55,7 @@ public abstract class Csucs extends Mezo{
     }
 
     /**
-     * A a paraméterként kapott mezőt nem lehet kivenni a Csucs listájából.
+     * A paraméterként kapott mezőt nem lehet kivenni a Csucs listájából.
      * A hívót tájokoztattjuk azzal, hogy hamisat adunk vissza.
      * @param m A kapott mező, amit kivennénk a listából.
      * @return Mindig hamisat ad vissza.
