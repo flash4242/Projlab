@@ -13,6 +13,7 @@ public class Forras extends Csucs{
     /**
      * A forrás minden szomszédos csőbe vizet pumpál.
      */
+    @Override
     public void vizetPumpal(){
         for(Cso c : getSzomszedosCso()){
             c.vizetKap();

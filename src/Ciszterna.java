@@ -24,6 +24,7 @@ public class Ciszterna extends Csucs{
      * Létrehoz egy új Pumpa objektumot amit visszaad.
      * @return A létrehozott Pumpa objektum.
      */
+    @Override
     public Pumpa pumpaLetrehozasa(){
         return new Pumpa();
     }
@@ -32,6 +33,7 @@ public class Ciszterna extends Csucs{
      * A ciszterna minden szomszédos csőből vizet szív be.
      * Ha sikerült vizet szívni, akkor a szerelők pontot kapnak.
      */
+    @Override
     public void vizetPumpal() {
         for (Cso c : getSzomszedosCso()){
             boolean teli = c.vizetVeszit();

@@ -5,7 +5,6 @@ import java.util.List;
  * A játékban lévő Csúcsokat reprezentáló absztrakt osztály.
  */
 public abstract class Csucs extends Mezo{
-
     /**
      * A szomszédos csövek listája.
      */
@@ -46,6 +45,7 @@ public abstract class Csucs extends Mezo{
      * @param m A paraméterként kapott Mező, amit eltávolítunk a listából.
      * @return Igazat ad vissza, ha eltávolítottuk a listából, egyébként hamisat.
      */
+    @Override
     public boolean setCsoToNull(Mezo m){
         if(!Skeleton.kerdes("Ez az utolso cso ami a csucshoz hozza van kotve?")) {
             szomszedosCso.remove(m);
@@ -80,6 +80,7 @@ public abstract class Csucs extends Mezo{
      * Visszaadja a szomszédos csövek listáját, Mezo típusú listaként.
      * @return A szomszédos csövek listája.
      */
+    @Override
     public List<? extends Mezo> getNeighbours(){
         return szomszedosCso;
     }
