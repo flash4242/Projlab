@@ -11,7 +11,7 @@ public class Ciszterna extends Csucs{
     public Ciszterna(){
         super();
     }
-    
+
     /**
      * Létrehoz egy új Cso objektumot, és beállítja magát a cső mindkét végpontjának.
      */

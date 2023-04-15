@@ -52,14 +52,17 @@ public abstract class Csucs extends Mezo{
     }
 
     /**
-     * A paraméterként kapott Mezőt eltávolítja a szomszedosCso listából.
+     * A paraméterként kapott Mezőt eltávolítja a szomszedosCso listából, amennyiben ez nem az utolsó cső ami a csúcshoz van kötve.
      * @param m A paraméterként kapott Mező, amit eltávolítunk a listából.
-     * @return Igazat ad vissza minden esetben, hogy tájokoztassuk a hívót a törlés sikerességéről.
+     * @return Igazat ad vissza, ha eltávolítottuk a listából, egyébként hamisat.
      */
     @Override
     public boolean setCsoToNull(Mezo m){
-        szomszedosCso.remove(m);
-        return true;
+        if(!Skeleton.kerdes("Ez az utolso cso ami a csucshoz hozza van kotve?")) {
+            szomszedosCso.remove(m);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -88,5 +91,12 @@ public abstract class Csucs extends Mezo{
      */
     public List<Cso> getSzomszedosCso(){
         return szomszedosCso;
+    }
+    /**
+     * Beállítja a szomszédos csövek listáját.
+     * @param szomszedosCso A beállítandó szomszédos csövek listája.
+     */
+    public void setSzomszedosCso(List<Cso> szomszedosCso){
+        this.szomszedosCso = szomszedosCso;
     }
 }
