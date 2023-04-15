@@ -85,7 +85,7 @@ public abstract class Csucs extends Mezo{
      * A kapott csövet eltávolítja a szomszedosCso listából, és a cső szomszédjából is a csúcsot.
      * @param cs A kapott cső, amit eltávolítunk a listából.
      */
-    public void Lecsatol(Cso cs){
+    public void lecsatol(Cso cs){
         szomszedosCso.remove(cs);
         cs.getSzomszedosCsucs().remove(this);
     }
@@ -94,7 +94,7 @@ public abstract class Csucs extends Mezo{
      * A kapott csövet hozzáadja a szomszedosCso listához, és a cső szomszédjához is a csúcsot.
      * @param cs A kapott cső, amit hozzáadunk a listához.
      */
-    public void Felcsatol(Cso cs){
+    public void felcsatol(Cso cs){
         szomszedosCso.add(cs);
         cs.getSzomszedosCsucs().add(this);
     }
