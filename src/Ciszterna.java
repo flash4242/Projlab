@@ -32,7 +32,6 @@ public class Ciszterna extends Csucs{
      * A ciszterna minden szomszédos csőből vizet szív be.
      * Ha sikerült vizet szívni, akkor a szerelők pontot kapnak.
      */
-    @Override
     public void vizetPumpal() {
         for (Cso c : getSzomszedosCso()){
             boolean teli = c.vizetVeszit();
