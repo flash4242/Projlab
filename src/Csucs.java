@@ -35,10 +35,15 @@ public abstract class Csucs extends Mezo{
      */
     @Override
     public void targyLerakas(Cso cs){
-        //ToDo Check if this works
         cs.setSzomszedosCsucs(this);
         szomszedosCso.add(cs);
     }
+
+    /**
+     * A csúcs gyárt egy csövet. Ez üres függvény, mert nem minden csúcs tud csövet gyártani.
+     * Azon csúcsoknak, amik tudnak csövet gyártani felül kell írniuk ezt a függvényt.
+     */
+    public void csoLetrehozasa(){}
 
     /**
      * A paraméterként kapott Mezőt eltávolítja a szomszedosCso listából, amennyiben ez nem az utolsó cső ami a csúcshoz van kötve.

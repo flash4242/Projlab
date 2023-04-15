@@ -17,14 +17,30 @@ public class Ciszterna extends Csucs{
 
     /**
      * Létrehoz egy új Cso objektumot, és beállítja magát a cső mindkét végpontjának.
+     * Ezt akkor teszi meg, ha a Ciszterna szomszédos csövei között nincs hurok.
      */
+    @Override
     public void csoLetrehozasa(){
-        Cso cs = new Cso();
-        //ToDo Check if this works
-        List<Csucs> csucsok = new ArrayList<>();
-        csucsok.add(this);
-        csucsok.add(this);
-        cs.setSzomszedosCsucs(csucsok);
+        if(!vanHurok()){
+            Cso cs = new Cso();
+            List<Csucs> csucsok = new ArrayList<>();
+            csucsok.add(this);
+            csucsok.add(this);
+            cs.setSzomszedosCsucs(csucsok);
+        }
+    }
+
+    /**
+     * Ellenőrzi, hogy a Ciszterna szomszédos csövei között van-e hurok.
+     * @return Igazat ad vissza, ha van hurok, egyébként hamisat.
+     */
+    private boolean vanHurok(){
+        for (Cso c : getSzomszedosCso()){
+            if(c.getNeighbours().get(0) == this && c.getNeighbours().get(1) == this){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
