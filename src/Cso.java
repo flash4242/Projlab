@@ -9,4 +9,7 @@ public class Cso {
 	
 
     }
+
+    //itt most nagyon porog az elet
+    //Lokalisan valtoztatom a dolgokat
 }
