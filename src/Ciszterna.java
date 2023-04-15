@@ -4,7 +4,6 @@
  * Ez a víz egyből el is tűnik. És a szerelők pontot kapnak.
  */
 public class Ciszterna extends Csucs{
-
     /**
      * Létrehoz egy Ciszterna objektumot.
      */
