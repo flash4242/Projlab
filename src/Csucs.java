@@ -54,11 +54,6 @@ public abstract class Csucs extends Mezo{
         return false;
     }
 
-    //TODO komment
-    public boolean setCsucsToNull(Mezo m){
-        return false;
-    }
-
     /**
      * A a paraméterként kapott mezőt nem lehet kivenni a Csucs listájából.
      * A hívót tájokoztattjuk azzal, hogy hamisat adunk vissza.
