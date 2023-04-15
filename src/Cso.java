@@ -40,10 +40,22 @@ public class Cso extends Mezo {
         }
     }
 
-    //TODO komment
+    /**
+     * A paraméterként kapott pumpát lehelyezi a cső közepén ezzel egy új csövet is létrehozva.
+     * @param p A kapott pumpa, amit lerakunk a csőre.
+     */
     @Override
     public void targyLerakas(Pumpa p) {
-        //TODO
+        //csucs amirol lecsatoljuk a csovet
+        Csucs szCsucs = this.szomszedosCsucs.get(0);
+        //az eredetit átkötjük
+        szCsucs.Lecsatol(this);
+        p.Felcsatol(this);
+        //az uj csőrész
+        Cso fele = new Cso();
+        szCsucs.Felcsatol(fele);
+        p.Felcsatol(fele);
+
     }
 
     /**
@@ -99,8 +111,12 @@ public class Cso extends Mezo {
      * @return Igazat ad vissza, ha elfogadta a vizet.
      */
     public boolean vizetKap() {
-        //TODO
-        return false;
+        if (Skeleton.kerdes("Van a kimeneti csoben viz?")) {
+            return false;
+        } else if (Skeleton.kerdes("Lyukas a kimeneti cso, vagy szabad a masik vege?")) {
+            Kontroller.getInstance().pontNovel("szabotor");
+        }
+        return true;
     }
 
     /**
@@ -108,7 +124,9 @@ public class Cso extends Mezo {
      * @return Igazat ad vissza, ha volt benne víz.
      */
     public boolean vizetVeszit() {
-        //TODO
+        if(Skeleton.kerdes("Van a bemeneti csoben viz?")){
+            return true;
+        }
         return false;
     }
 

@@ -1,3 +1,6 @@
+/**
+ * A játékban lévő pumpákat reprezentáló osztály.
+ */
 public class Pumpa extends Csucs{
 
     /**
@@ -27,7 +30,7 @@ public class Pumpa extends Csucs{
      */
     @Override
     public void atallit(int kimeneti, int bemeneti) {
-        //TODO
+        //TODO atallit
     }
 
     /**
@@ -35,7 +38,7 @@ public class Pumpa extends Csucs{
      */
     @Override
     public void vizetPumpal() {
-        //TODO
+        //TODO pumpal
     }
 
     /**
