@@ -20,16 +20,6 @@ public class Skeleton {
     void teszt1(){
         System.out.println("\t"+"1-es teszteset\n");
     }
-    /**
-     * Teszt: Pumpa átállítása
-     * Létrehoz egy pumpát, 3 csövet és egy szerelőt, és beállítja a kapcsolatokat.
-     * A pumpa szomszédos csövei: cs0, cs1, cs2
-     * A cs0,cs1,cs2 szomszédos csúcsa: p1
-     * A szerelő aktuális mezője: p1
-     * A p1-en lévő játékos: sz
-     * A kapcsolatok felallítása után leteszteljük, hogy ét tudjuk-e helyesen állítani a pumpát.
-     * Először cs0-ból cs1-be pumpálunk, majd cs2-ből cs2-be.
-     */
 
     //TODO rename
     void teszt11(){
@@ -59,6 +49,17 @@ public class Skeleton {
 
         sz.mozgas(2);
     }
+
+    /**
+     * Teszt: Pumpa átállítása
+     * Létrehoz egy pumpát, 3 csövet és egy szerelőt, és beállítja a kapcsolatokat.
+     * A pumpa szomszédos csövei: cs0, cs1, cs2
+     * A cs0,cs1,cs2 szomszédos csúcsa: p1
+     * A szerelő aktuális mezője: p1
+     * A p1-en lévő játékos: sz
+     * A kapcsolatok felallítása után leteszteljük, hogy ét tudjuk-e helyesen állítani a pumpát.
+     * Először cs0-ból cs1-be pumpálunk, majd cs2-ből cs2-be.
+     */
     void teszt3(){
         Pumpa p1 = new Pumpa();
         Cso cs0 = new Cso();
