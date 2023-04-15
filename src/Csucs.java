@@ -82,6 +82,24 @@ public abstract class Csucs extends Mezo{
     public void kontrollerElront(){}
 
     /**
+     * A kapott csövet eltávolítja a szomszedosCso listából, és a cső szomszédjából is a csúcsot.
+     * @param cs A kapott cső, amit eltávolítunk a listából.
+     */
+    public void Lecsatol(Cso cs){
+        szomszedosCso.remove(cs);
+        cs.getSzomszedosCsucs().remove(this);
+    }
+
+    /**
+     * A kapott csövet hozzáadja a szomszedosCso listához, és a cső szomszédjához is a csúcsot.
+     * @param cs A kapott cső, amit hozzáadunk a listához.
+     */
+    public void Felcsatol(Cso cs){
+        szomszedosCso.add(cs);
+        cs.getSzomszedosCsucs().add(this);
+    }
+
+    /**
      * Visszaadja a szomszédos csövek listáját, Mezo típusú listaként.
      * @return A szomszédos csövek listája.
      */
