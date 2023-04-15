@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * A játékban lévő Ciszternákat reprezentáló osztály.
  * Egy Ciszterna egy olyan Csúcs, amelynek mőködése során az összes szomszédos csőből vizet szív be.
@@ -16,8 +20,11 @@ public class Ciszterna extends Csucs{
      */
     public void csoLetrehozasa(){
         Cso cs = new Cso();
-        //ToDo Itt sem tudom hogyan mukodik, ezt meg lehet valtoztatni kell
-        cs.setSzomszedosCsucs(this, this);
+        //ToDo Check if this works
+        List<Csucs> csucsok = new ArrayList<>();
+        csucsok.add(this);
+        csucsok.add(this);
+        cs.setSzomszedosCsucs(csucsok);
     }
 
     /**

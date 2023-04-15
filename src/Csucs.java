@@ -35,7 +35,7 @@ public abstract class Csucs extends Mezo{
      */
     @Override
     public void targyLerakas(Cso cs){
-        //ToDo Ohm, nem tudom hogy hogyan mukodik a setSzomszedosCsucs. A diagrammon igy van, lehet hogy valtoztatni kell
+        //ToDo Check if this works
         cs.setSzomszedosCsucs(this);
         szomszedosCso.add(cs);
     }
