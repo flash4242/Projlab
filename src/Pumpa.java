@@ -71,4 +71,13 @@ public class Pumpa extends Csucs{
     public void setRossz(boolean r){
         rossz = r;
     }
+
+    //TODO komment
+    public void setBemenetiCso(int be){
+        bemenetiCso = be;
+    }
+
+    public void setKimenetiCso(int ki){
+        kimenetiCso = ki;
+    }
 }

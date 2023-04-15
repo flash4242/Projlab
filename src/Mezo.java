@@ -89,4 +89,8 @@ public abstract class Mezo {
 	 * @param bemeneti kimeneti cső index a szomszédos mezőkhöz
 	 */
 	public void atallit(int kimeneti, int bemeneti){}
+
+	public void setJatekosRajta(Jatekos j){
+		jatekosRajta.add(j);
+	}
 }

@@ -30,6 +30,35 @@ public class Skeleton {
      * A kapcsolatok felallítása után leteszteljük, hogy ét tudjuk-e helyesen állítani a pumpát.
      * Először cs0-ból cs1-be pumpálunk, majd cs2-ből cs2-be.
      */
+
+    //TODO rename
+    void teszt11(){
+        Szerelo sz = new Szerelo();
+        Cso cs = new Cso();
+        Pumpa p = new Pumpa();
+        List<Cso> cso = new ArrayList<>();
+        cso.add(cs);
+        p.setSzomszedosCso(cso);
+        cs.setSzomszedosCsucs(p);
+        sz.setAktMezo(cs);
+        cs.setJatekosRajta(sz);
+
+        sz.mozgas(2);
+    }
+
+    void teszt2(){
+        Szerelo sz = new Szerelo();
+        Cso cs = new Cso();
+        Pumpa p = new Pumpa();
+        List<Cso> cso = new ArrayList<>();
+        cso.add(cs);
+        p.setSzomszedosCso(cso);
+        cs.setSzomszedosCsucs(p);
+        sz.setAktMezo(p);
+        p.setJatekosRajta(sz);
+
+        sz.mozgas(2);
+    }
     void teszt3(){
         Pumpa p1 = new Pumpa();
         Cso cs0 = new Cso();
@@ -134,5 +163,37 @@ public class Skeleton {
         p.setSzomszedosCso(csok);
 
         sz.csovegFelvetele(0);
+    }
+
+    void teszt18(){
+        Cso cs1 = new Cso();
+        Cso cs2 = new Cso();
+        Pumpa p = new Pumpa();
+        List<Cso> csovek = new ArrayList<>();
+        csovek.add(cs1);
+        csovek.add(cs2);
+        p.setSzomszedosCso(csovek);
+        cs1.setSzomszedosCsucs(p);
+        cs2.setSzomszedosCsucs(p);
+        p.setBemenetiCso(0);
+        p.setKimenetiCso(1);
+
+        //TODO ide kell kontroller ami meghívja a pumpán a továbbítot?
+        p.vizetPumpal();
+    }
+
+    void teszt20(){
+        Cso cs1 = new Cso();
+        Cso cs2 = new Cso();
+        Forras f = new Forras();
+        List<Cso> csovek = new ArrayList<>();
+        csovek.add(cs1);
+        csovek.add(cs2);
+        f.setSzomszedosCso(csovek);
+        cs1.setSzomszedosCsucs(f);
+        cs2.setSzomszedosCsucs(f);
+
+        //TODO teszt18-hoz hasonlóan.
+        f.vizetPumpal();
     }
 }
