@@ -30,16 +30,6 @@ public abstract class Csucs extends Mezo{
         return true;
     }
 
-    //TODO: Kell ez?
-    /**
-     * Eltávolítja a paramétkent kapott játekost a játekosRajta listából.
-     * @param j A játékos, akit el akarunk távolítani a listaból.
-     */
-    @Override
-    public void jatekostEltavolit(Jatekos j){
-        jatekosRajta.remove(j);
-    }
-
     /**
      * A paraméterként kapott csövet hozzáadja a szomszedosCso listához. Továbbá beállítja a csőnek magat szomszédnak.
      * @param cs A kapott cső, amit hozzáadunk a listához.
@@ -62,6 +52,17 @@ public abstract class Csucs extends Mezo{
             szomszedosCso.remove(m);
             return true;
         }
+        return false;
+    }
+
+    /**
+     * A a paraméterként kapott mezőt nem lehet kivenni a Csucs listájából.
+     * A hívót tájokoztattjuk azzal, hogy hamisat adunk vissza.
+     * @param m A kapott mező, amit kivennénk a listából.
+     * @return Mindig hamisat ad vissza.
+     */
+    @Override
+    public boolean setCsucsToNull(Mezo m){
         return false;
     }
 
