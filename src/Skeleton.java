@@ -3,6 +3,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Skeleton {
+    private static int indent=0;
+    static void startMethod(Object object, String method){
+        ++indent;
+        for(int i =0; i<indent;++i)
+            System.out.print("\t");
+        System.out.println(object.getClass().getName()+"."+method);
+    }
+    static void endMethod(){
+        --indent;
+    }
     static boolean kerdes(String szoveg){ //TODO Megvaltoztattam staticra ez igy oki?
         System.out.println(szoveg);
         Scanner scan = new Scanner(System.in);
