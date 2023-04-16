@@ -3,10 +3,10 @@ import java.util.Scanner;
 public class Main {
     public static void main(String args[])
     {
-        System.out.println("0: Kilepes");
-        for(int i=1; i<21;i++){
-            System.out.println(i+": <"+i+". Teszteset>");
-        }
+        System.out.println("0: Kilepes\n" +
+                "1: <1. Teszteset>\n" +
+                "2: <2. Teszteset>\n" +
+                "3: <3. Teszteset>\n");
         Skeleton skeleton = new Skeleton();
         int input = 1;
         Scanner scan = new Scanner(System.in);
@@ -16,6 +16,7 @@ public class Main {
             System.out.println("START");
             skeleton.tesztesetValaszto(input);
             System.out.println("END");
+
         }
         scan.close();
     }

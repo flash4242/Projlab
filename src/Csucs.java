@@ -35,8 +35,7 @@ public abstract class Csucs extends Mezo{
      */
     @Override
     public void targyLerakas(Cso cs){
-        cs.setSzomszedosCsucs(this);
-        szomszedosCso.add(cs);
+        felcsatol(cs);
     }
 
     /**
@@ -46,14 +45,14 @@ public abstract class Csucs extends Mezo{
     public void csoLetrehozasa(){}
 
     /**
-     * A paraméterként kapott Mezőt eltávolítja a szomszedosCso listából, amennyiben ez nem az utolsó cső ami a csúcshoz van kötve.
+     * A paraméterként kapott Mezőt eltávolítja a szomszedosCso listából. Amennyiben ez nem az utolsó cső ami a csúcshoz van kötve helyesen cselekedtünk, különben nem.
      * @param m A paraméterként kapott Mező, amit eltávolítunk a listából.
-     * @return Igazat ad vissza, ha eltávolítottuk a listából, egyébként hamisat.
+     * @return Igazat ad vissza, ha eltávolíthottuk a listából, egyébként hamisat.
      */
     @Override
     public boolean setCsoToNull(Mezo m){
+        szomszedosCso.remove(m);
         if(!Skeleton.kerdes("Ez az utolso cso ami a csucshoz hozza van kotve?")) {
-            szomszedosCso.remove(m);
             return true;
         }
         return false;
@@ -87,7 +86,7 @@ public abstract class Csucs extends Mezo{
      */
     public void lecsatol(Cso cs){
         szomszedosCso.remove(cs);
-        cs.getSzomszedosCsucs().remove(this);
+        cs.setSzomszedosCsucs(this);
     }
 
     /**

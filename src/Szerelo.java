@@ -37,7 +37,9 @@ public class Szerelo extends Jatekos{
      * Megjavitja a mezőt, amin éppen áll
      */
     public void mezotJavit(){
-        getAktMezo().szereloJavit();
+        if(Skeleton.kerdes("Csövön vagy pumpán áll?")) {
+            getAktMezo().szereloJavit();
+        }
     }
 
     /**
@@ -45,10 +47,14 @@ public class Szerelo extends Jatekos{
      * @param cs
      */
     public void csovegFelvetele(int cs){
-        if(pumpa==null && csoveg==null && getAktMezo().getNeighbours().get(cs).jatekosRajta.isEmpty()){
-            if(getAktMezo().getNeighbours().get(cs).setCsucsToNull(getAktMezo())){
-                setCsoveg((Cso) getAktMezo().getNeighbours().get(cs));
-            }
+        if(cs>=0 && cs<getAktMezo().getNeighbours().size()
+                && getAktMezo().getNeighbours().get(cs).jatekosRajta.isEmpty()
+                && getAktMezo().getNeighbours().get(cs).setCsucsToNull(getAktMezo())
+                && getAktMezo().getNeighbours().get(cs).setCsoToNull(getAktMezo().getNeighbours().get(cs))){
+            setCsoveg((Cso) getAktMezo().getNeighbours().get(cs));
+        }
+        else{
+            getAktMezo().targyLerakas((Cso) getAktMezo().getNeighbours().get(cs));
         }
     }
 
@@ -56,7 +62,7 @@ public class Szerelo extends Jatekos{
      * Lerakja a nála lévő csövet
      */
     public void csovegetLerak(){
-        if(csoveg!=null){
+        if(Skeleton.kerdes("Van a szerelőnél cső?")){
             getAktMezo().targyLerakas(csoveg);
             csoveg=null;
         }
@@ -66,8 +72,8 @@ public class Szerelo extends Jatekos{
      * Felveszi a pumpát a mezőről, amin áll
      */
     public void pumpaFelvetele(){
-        if(pumpa==null && csoveg==null) {
-            pumpa=getAktMezo().pumpaLetrehozasa();
+        if(!Skeleton.kerdes("Van a szerelőnél pumpa vagy csővég?")) {
+            setPumpa(getAktMezo().pumpaLetrehozasa());
         }
     }
 
@@ -75,7 +81,7 @@ public class Szerelo extends Jatekos{
      * Lerakja a nála lévő pumpát
      */
     public void pumpatLerak(){
-        if(pumpa!=null){
+        if(Skeleton.kerdes("Van a szerelőnél pumpa?")){
             getAktMezo().targyLerakas(pumpa);
             pumpa=null;
         }

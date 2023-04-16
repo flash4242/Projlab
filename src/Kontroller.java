@@ -37,7 +37,7 @@ public  class Kontroller {
     public void veletlenPumpaElrontas(){
         Random rand = new Random();
         for (Csucs csucs:csucsok
-             ) {
+        ) {
             int breakNumber = rand.nextInt(25);
             if(breakNumber == 7)
                 csucs.kontrollerElront();
@@ -57,7 +57,7 @@ public  class Kontroller {
      */
     public void vizLeptet(){
         for (Csucs csucs:csucsok
-             ) {
+        ) {
             csucs.vizetPumpal();
         }
     }
