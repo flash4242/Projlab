@@ -2,7 +2,6 @@ import java.util.List;
 import java.util.Random;
 
 public  class Kontroller {
-    private Skeleton skeleton;
     /**
      * A játékban lévő csúcsok listája
      */
@@ -31,12 +30,6 @@ public  class Kontroller {
     public void setCsucsok(Csucs csucs){
         csucsok.add(csucs);
     }
-
-    public void addSkeleton(Skeleton skeleton1){
-        skeleton = skeleton1;
-    }
-
-    public Skeleton getSkeleton(){return skeleton;}
 
     /**
      * Véletlenszerűen elront véletlenszerű számú pumpát

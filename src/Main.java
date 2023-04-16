@@ -8,7 +8,6 @@ public class Main {
                 "2: <2. Teszteset>\n" +
                 "3: <3. Teszteset>\n");
         Skeleton skeleton = new Skeleton();
-        Kontroller.getInstance().addSkeleton(skeleton);
 
         int input = 1;
         Scanner scan = new Scanner(System.in);
