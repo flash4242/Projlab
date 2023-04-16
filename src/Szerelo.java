@@ -37,7 +37,9 @@ public class Szerelo extends Jatekos{
      * Megjavitja a mezőt, amin éppen áll
      */
     public void mezotJavit(){
-        getAktMezo().szereloJavit();
+        if(Skeleton.kerdes("Csövön vagy pumpán áll?")) {
+            getAktMezo().szereloJavit();
+        }
     }
 
     /**
@@ -60,29 +62,29 @@ public class Szerelo extends Jatekos{
      * Lerakja a nála lévő csövet
      */
     public void csovegetLerak(){
-       // if(csoveg!=null){
+       if(Skeleton.kerdes("Van a szerelőnél cső?")){
             getAktMezo().targyLerakas(csoveg);
             csoveg=null;
-        //}
+        }
     }
 
     /**
      * Felveszi a pumpát a mezőről, amin áll
      */
     public void pumpaFelvetele(){
-        //if(pumpa==null && csoveg==null) {
+        if(!Skeleton.kerdes("Van a szerelőnél pumpa vagy csővég?")) {
             setPumpa(getAktMezo().pumpaLetrehozasa());
-        //}
+        }
     }
 
     /**
      * Lerakja a nála lévő pumpát
      */
     public void pumpatLerak(){
-        //if(pumpa!=null){
+        if(Skeleton.kerdes("Van a szerelőnél pumpa?")){
             getAktMezo().targyLerakas(pumpa);
             pumpa=null;
-        //}
+        }
     }
 
 }
