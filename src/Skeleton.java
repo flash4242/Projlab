@@ -61,6 +61,7 @@ public class Skeleton {
      * A kapcsolatok felállítása után teszteljük, hogy helyesen mozog-e a szerelő a pumpára.
      */
     void teszt1(){
+        init = true;
         Szerelo sz = new Szerelo();
         Cso cs = new Cso();
         Pumpa p = new Pumpa();
@@ -71,6 +72,7 @@ public class Skeleton {
         sz.setAktMezo(cs);
         cs.setJatekosRajta(sz);
 
+        init = false;
         sz.mozgas(2);
     }
 
@@ -83,6 +85,7 @@ public class Skeleton {
      * A kapcsolatok felállítása után teszteljük, hogy helyesen mozog-e a szerelő a csőre.
      */
     void teszt2(){
+        init = true;
         Szerelo sz = new Szerelo();
         Cso cs = new Cso();
         Pumpa p = new Pumpa();
@@ -93,6 +96,7 @@ public class Skeleton {
         sz.setAktMezo(p);
         p.setJatekosRajta(sz);
 
+        init = false;
         sz.mozgas(2);
     }
 
@@ -107,6 +111,7 @@ public class Skeleton {
      * Először cs0-ból cs1-be pumpálunk, majd cs2-ből cs2-be.
      */
     void teszt3(){
+        init = true;
         Pumpa p1 = new Pumpa();
         Cso cs0 = new Cso();
         Cso cs1 = new Cso();
@@ -124,6 +129,7 @@ public class Skeleton {
         Szerelo sz = new Szerelo();
         sz.setAktMezo(p1);
         p1.setJatekosRajta(sz);
+        init = false;
 
         sz.pumpaAtallitasa(0,1);
         sz.pumpaAtallitasa(2,2);
@@ -139,6 +145,7 @@ public class Skeleton {
      * A kapcsolatok felallítása után leteszteljük, hogy tudunk-e helyesen felvenni a csővégét a pumpáról.
      */
     void teszt4(){
+        init = true;
         Cso cs = new Cso();
         Szerelo sz = new Szerelo();
         Pumpa p = new Pumpa();
@@ -152,6 +159,7 @@ public class Skeleton {
         csucsok.add(p);
         cs.setSzomszedosCsucs(csucsok);
 
+        init = false;
         sz.csovegFelvetele(0);
     }
 
@@ -198,10 +206,12 @@ public class Skeleton {
      * A kapcsolatok felallítása után leteszteljük, hogy ki tud-e lyukasztani a szabotőr egy csövet.
      */
     void teszt10(){
+        init = true;
         Cso cs = new Cso();
         Szabotor sz = new Szabotor();
         cs.setJatekosRajta(sz);
         sz.setAktMezo(cs);
+        init = false;
 
         sz.csoKilyukasztasa();
     }
@@ -214,10 +224,12 @@ public class Skeleton {
      * A kapcsolatok felallítása után leteszteljük, hogy helyesen nem történik-e semmi amikor egy csövet át akarunk állítani.
      */
     void teszt11(){
+        init = true;
         Cso cs = new Cso();
         Szerelo sz = new Szerelo();
         cs.setJatekosRajta(sz);
         sz.setAktMezo(cs);
+        init = false;
 
         sz.pumpaAtallitasa(0,1);
     }
@@ -232,6 +244,7 @@ public class Skeleton {
      * A kapcsolatok felallítása után leteszteljük, hogy ha egy csövön állva szeretnénk felvenni egy csővéget, akkor helyesen nem történik-e semmi.
      */
     void teszt12(){
+        init = true;
         Szerelo sz = new Szerelo();
         Cso cs = new Cso();
         Pumpa p = new Pumpa();
@@ -244,6 +257,7 @@ public class Skeleton {
         csok.add(cs);
         p.setSzomszedosCso(csok);
 
+        init = false;
         sz.csovegFelvetele(0);
     }
 
@@ -256,6 +270,7 @@ public class Skeleton {
      * A kapcsolatok felallítása után leteszteljük, hogy, ha egy csövön állva szeretnénk letenni egy csővéget, akkor helyesen nem történik-e semmi.
      */
     void teszt13(){
+        init = true;
         Szerelo sz = new Szerelo();
         Cso cs1 = new Cso();
         Cso cs2 = new Cso();
@@ -263,6 +278,7 @@ public class Skeleton {
         sz.setCsoveg(cs2);
         cs1.setJatekosRajta(sz);
 
+        init = false;
         sz.csovegetLerak();
     }
 
@@ -273,11 +289,13 @@ public class Skeleton {
      * a szerelő
      */
     void teszt14(){
+        init = true;
         Szerelo sz = new Szerelo();
         Cso cs = new Cso();
         sz.setAktMezo(cs);
         cs.setJatekosRajta(sz);
 
+        init = false;
         sz.pumpaFelvetele();
     }
 
@@ -289,6 +307,7 @@ public class Skeleton {
      * történik-e meg a lerakás
      */
     void teszt15(){
+        init = true;
         Szerelo sz = new Szerelo();
         Pumpa aktmezo = new Pumpa();
         Pumpa p = new Pumpa();
@@ -296,6 +315,7 @@ public class Skeleton {
         aktmezo.setJatekosRajta(sz);
         sz.setPumpa(p);
 
+        init = false;
         sz.pumpatLerak();
     }
 
@@ -309,11 +329,13 @@ public class Skeleton {
      * A kapcsolatok felallítása után leteszteljük, hogy, ha egy pumpán állva szeretnénk szabotőrként azt kilyukasztani, akkor helyesen nem történik-e semmi.
      */
     void teszt16(){
+        init = true;
         Szabotor sz = new Szabotor();
         Pumpa p = new Pumpa();
         sz.setAktMezo(p);
         p.setJatekosRajta(sz);
 
+        init = false;
         sz.csoKilyukasztasa();
     }
 
@@ -323,12 +345,14 @@ public class Skeleton {
      * Leteszteljük, hogy a kontroller általi pumpaelrontások során a ciszterna valóban nem romlik-e el soha és a pumpa elromlik-e véletlenszerűen
      */
     void teszt17(){
+        init = true;
         Kontroller k = new Kontroller();
         Ciszterna c = new Ciszterna();
         Pumpa p = new Pumpa();
         k.setCsucsok(c);
         k.setCsucsok(p);
 
+        init = false;
         k.veletlenPumpaElrontas();
     }
 
@@ -339,6 +363,7 @@ public class Skeleton {
      * vizetPumpal függvényét és leteszteljük, hogy helyesen működik-e a víztovábbítás.
      */
     void teszt18(){
+        init = true;
         Cso cs1 = new Cso();
         Cso cs2 = new Cso();
         Pumpa p = new Pumpa();
@@ -351,6 +376,7 @@ public class Skeleton {
         p.setBemenetiCso(0);
         p.setKimenetiCso(1);
 
+        init = false;
         Kontroller.getInstance().setCsucsok(p);
         Kontroller.getInstance().vizLeptet();
     }
@@ -369,6 +395,7 @@ public class Skeleton {
      * hogy helyesen működik-e a víztovábbítás.
      */
     void teszt20(){
+        init = true;
         Cso cs1 = new Cso();
         Cso cs2 = new Cso();
         Forras f = new Forras();
@@ -379,6 +406,7 @@ public class Skeleton {
         cs1.setSzomszedosCsucs(f);
         cs2.setSzomszedosCsucs(f);
 
+        init = false;
         Kontroller.getInstance().setCsucsok(f);
         Kontroller.getInstance().vizLeptet();
     }
