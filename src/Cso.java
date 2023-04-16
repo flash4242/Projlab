@@ -3,6 +3,8 @@ import java.util.List;
 
 /**
  * A játékban lévő Csöveket reprezentáló osztály.
+ * Egy cső két csúcsot köt össze és nincs rajta elágazás.
+ * Ha lyukas kifolyik rajta a víz ezzel a szabotőrök pontjait növeli.
  */
 public class Cso extends Mezo {
     /**
@@ -46,16 +48,14 @@ public class Cso extends Mezo {
      */
     @Override
     public void targyLerakas(Pumpa p) {
-        //csucs amirol lecsatoljuk a csovet
         Csucs szCsucs = this.szomszedosCsucs.get(0);
-        //az eredetit átkötjük
+
         szCsucs.lecsatol(this);
         p.felcsatol(this);
-        //az uj csőrész
+
         Cso fele = new Cso();
         szCsucs.felcsatol(fele);
         p.felcsatol(fele);
-
     }
 
     /**
@@ -64,8 +64,8 @@ public class Cso extends Mezo {
      * @return Igazat ad vissza, ha eltávolítottuk a listából, egyébként hamisat.
      */
     public boolean setCsucsToNull(Mezo m) {
+        szomszedosCsucs.remove(m);
         if(!Skeleton.kerdes("Szabad a masik csoveg?")){
-            szomszedosCsucs.remove(m);
             return true;
         }
         return false;

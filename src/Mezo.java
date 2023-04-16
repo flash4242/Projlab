@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  * A játékban lévő Mezőket reprezentáló absztrakt osztály.
+ * A játékosok mezőkön állnak és ezeknek a szomszédaira mozoghatnak.
  */
 public abstract class Mezo {
 	/**
@@ -10,7 +11,7 @@ public abstract class Mezo {
 	protected List<Jatekos> jatekosRajta;
 
 	/**
-	 * Létrehoz egy mezőt, és inicializálja a jatekoRajta listát.
+	 * Létrehoz egy mezőt, és inicializálja a jatekosRajta listát.
 	 */
 	public Mezo(){
 		jatekosRajta = new ArrayList<Jatekos>();
