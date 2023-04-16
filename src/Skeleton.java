@@ -4,14 +4,18 @@ import java.util.Scanner;
 
 public class Skeleton {
     private static int indent=0;
+    private static boolean init;
     static void startMethod(Object object, String method){
-        ++indent;
-        for(int i =0; i<indent;++i)
-            System.out.print("\t");
-        System.out.println(object.getClass().getName()+"."+method);
+        if(!init) {
+            ++indent;
+            for (int i = 0; i < indent; ++i)
+                System.out.print("\t");
+            System.out.println(object.getClass().getName() + "." + method);
+        }
     }
     static void endMethod(){
-        --indent;
+        if(!init)
+            --indent;
     }
     static boolean kerdes(String szoveg){ //TODO Megvaltoztattam staticra ez igy oki?
         System.out.println(szoveg);
