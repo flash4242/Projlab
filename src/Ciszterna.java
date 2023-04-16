@@ -21,6 +21,7 @@ public class Ciszterna extends Csucs{
      */
     @Override
     public void csoLetrehozasa(){
+        Skeleton.startMethod(getClass().getName(), "csoLetrehozasa()");
         if(!vanHurok()){
             Cso cs = new Cso();
             List<Csucs> csucsok = new ArrayList<>();
@@ -28,6 +29,7 @@ public class Ciszterna extends Csucs{
             csucsok.add(this);
             cs.setSzomszedosCsucs(csucsok);
         }
+        Skeleton.endMethod();
     }
 
     /**
@@ -35,11 +37,14 @@ public class Ciszterna extends Csucs{
      * @return Igazat ad vissza, ha van hurok, egyébként hamisat.
      */
     private boolean vanHurok(){
+        Skeleton.startMethod(getClass().getName(), "vanHurok()");
         for (Cso c : getSzomszedosCso()){
             if(c.getNeighbours().get(0) == this && c.getNeighbours().get(1) == this){
+                Skeleton.endMethod();
                 return true;
             }
         }
+        Skeleton.endMethod();
         return false;
     }
 
@@ -49,6 +54,8 @@ public class Ciszterna extends Csucs{
      */
     @Override
     public Pumpa pumpaLetrehozasa(){
+        Skeleton.startMethod(getClass().getName(), "pumpaLetrehozasa()");
+        Skeleton.endMethod();
         return new Pumpa();
     }
 
@@ -58,11 +65,13 @@ public class Ciszterna extends Csucs{
      */
     @Override
     public void vizetPumpal() {
+        Skeleton.startMethod(getClass().getName(), "vizetPumpal()");
         for (Cso c : getSzomszedosCso()){
             boolean teli = c.vizetVeszit();
             if (teli){
                 Kontroller.getInstance().pontNovel("szerelo");
             }
         }
+        Skeleton.endMethod();
     }
 }
