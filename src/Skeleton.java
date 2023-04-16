@@ -26,28 +26,29 @@ public class Skeleton {
         return input==0 ? false : true;
     }
     void tesztesetValaszto(int input){
-        switch(input){
-            case 1: teszt(); break;
-            case 2: teszt2(); break;
-            case 3: teszt3(); break;
-            case 4: teszt4(); break;
-            //case 5: teszt5(); break;
-            //case 6: teszt6(); break;
-            //case 7: teszt7(); break;
-            //case 8: teszt8(); break;
-            //case 9: teszt9(); break;
-            case 10: teszt10(); break;
-            case 11: teszt11(); break;
-            case 12: teszt12(); break;
-            case 13: teszt13(); break;
-            case 14: teszt14(); break;
-            case 15: teszt15(); break;
-            case 16: teszt16(); break;
-            case 17: teszt17(); break;
-            case 18: teszt18(); break;
-            //case 19: teszt19(); break;
-            case 20: teszt20(); break;
-            default: break;
+        switch (input) {
+            case 1 -> teszt1();
+            case 2 -> teszt2();
+            case 3 -> teszt3();
+            case 4 -> teszt4();
+            case 5 -> teszt5();
+            case 6 -> teszt6();
+            case 7 -> teszt7();
+            case 8 -> teszt8();
+            case 9 -> teszt9();
+            case 10 -> teszt10();
+            case 11 -> teszt11();
+            case 12 -> teszt12();
+            case 13 -> teszt13();
+            case 14 -> teszt14();
+            case 15 -> teszt15();
+            case 16 -> teszt16();
+            case 17 -> teszt17();
+            case 18 -> teszt18();
+            case 19 -> teszt19();
+            case 20 -> teszt20();
+            default -> {
+            }
         }
     }
 
@@ -152,6 +153,41 @@ public class Skeleton {
         cs.setSzomszedosCsucs(csucsok);
 
         sz.csovegFelvetele(0);
+    }
+
+    /**
+     * Teszt:
+     */
+    void teszt5(){
+        //TODO: megcsinálni
+    }
+
+    /**
+     * Teszt:
+     */
+    void teszt6(){
+
+    }
+
+    /**
+     * Teszt:
+     */
+    void teszt7(){
+
+    }
+
+    /**
+     * Teszt:
+     */
+    void teszt8(){
+
+    }
+
+    /**
+     * Teszt:
+     */
+    void teszt9(){
+
     }
 
     /**
@@ -317,6 +353,13 @@ public class Skeleton {
 
         Kontroller.getInstance().setCsucsok(p);
         Kontroller.getInstance().vizLeptet();
+    }
+
+    /**
+     * Teszt:
+     */
+    void teszt19(){
+        //TODO. megcsinálni
     }
 
     /**
