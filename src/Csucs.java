@@ -35,8 +35,7 @@ public abstract class Csucs extends Mezo{
      */
     @Override
     public void targyLerakas(Cso cs){
-        cs.setSzomszedosCsucs(this);
-        szomszedosCso.add(cs);
+        felcsatol(cs);
     }
 
     /**
@@ -87,7 +86,7 @@ public abstract class Csucs extends Mezo{
      */
     public void lecsatol(Cso cs){
         szomszedosCso.remove(cs);
-        cs.getSzomszedosCsucs().remove(this);
+        cs.setSzomszedosCsucs(this);
     }
 
     /**
