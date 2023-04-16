@@ -52,7 +52,7 @@ public abstract class Csucs extends Mezo{
     }
 
     /**
-     * Szólunk a csőnek hogy szeretnénk a cs-edik csövét megkapni.
+     * Szólunk a csúcsnak hogy szeretnénk a cs-edik csövét megkapni.
      * Ha a csúcsnak csak egy szomszédos csöve van és nincs rajta senki, akkor visszaadja és lecsatolja a csövet.
      * Különben null-t ad vissza.
      * @param cs A szomszédos csövek közül melyiket szeretnénk megkapni.

@@ -29,7 +29,9 @@ public abstract class Mezo {
 	 * @param j A játékos, akit el akarunk távolítani a listaból.
 	 */
 	public void jatekostEltavolit(Jatekos j){
+		Skeleton.startMethod(getClass().getName(), "jatekostEltavolit()");
 		jatekosRajta.remove(j);
+		Skeleton.endMethod();
 	}
 
 	/**
@@ -43,20 +45,6 @@ public abstract class Mezo {
 	 * @param p A kapott pumpa
 	 */
 	public void targyLerakas(Pumpa p){}
-
-	/**
-	 * A paraméterként kapott mezőt eltávolítja a mező szomszédai közül. Absztrakt.
-	 * @param m A paraméterként kapott Mező, amit eltávolítunk.
-	 * @return Igazat ad vissza, ha eltávolítottuk, egyébként hamisat.
-	 */
-	public abstract boolean setCsucsToNull(Mezo m);
-
-	/**
-	 * A paraméterként kapott mezőt eltávolítja a mező szomszédai közül. Absztrakt.
-	 * @param m A paraméterként kapott Mező, amit eltávolítunk.
-	 * @return Igazat ad vissza, ha eltávolítottuk, egyébként hamisat.
-	 */
-	public abstract boolean setCsoToNull(Mezo m);
 
 	/**
 	 * A szerelő megjavít egy mezőt. Üres függvény, mivel a Mezo nem tud megjavulni.

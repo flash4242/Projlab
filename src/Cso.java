@@ -32,12 +32,16 @@ public class Cso extends Mezo {
      * @return Igazat ad vissza ha elfogadja a játékost.
      */
     public boolean jatekostElfogad(Jatekos j) {
+        Skeleton.startMethod(getClass().getName(), "jatekostElfogad()");
         if (Skeleton.kerdes("Allnak az adott csovon?")) {
+            Skeleton.endMethod();
             return false;
         } else if (Skeleton.kerdes("Szabad-e valamelyik csoveg?")) {
+            Skeleton.endMethod();
             return false;
         } else {
             jatekosRajta.add(j);
+            Skeleton.endMethod();
             return true;
         }
     }
@@ -48,6 +52,7 @@ public class Cso extends Mezo {
      */
     @Override
     public void targyLerakas(Pumpa p) {
+        Skeleton.startMethod(getClass().getName(), "targyLerakas()");
         Csucs szCsucs = this.szomszedosCsucs.get(0);
 
         szCsucs.lecsatol(this);
@@ -56,29 +61,7 @@ public class Cso extends Mezo {
         Cso fele = new Cso();
         szCsucs.felcsatol(fele);
         p.felcsatol(fele);
-    }
-
-    /**
-     * A paraméterként kapott Mezőt eltávolítja a szomszedosCsucs listából, amennyiben a szomszedosCsucs lista 2 elemű.
-     * @param m A paraméterként kapott Mező, amit eltávolítunk a listából.
-     * @return Igazat ad vissza, ha eltávolítottuk a listából, egyébként hamisat.
-     */
-    public boolean setCsucsToNull(Mezo m) {
-        szomszedosCsucs.remove(m);
-        if(!Skeleton.kerdes("Szabad a masik csoveg?")){
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * A paraméterként kapott mezőt nem lehet kivenni a Cso listájából.
-     * A hívót tájokoztattjuk azzal, hogy hamisat adunk vissza.
-     * @param m A paraméterként kapott Mező, amit eltávolítunk.
-     * @return Mindig hamisat ad vissza.
-     */
-    public boolean setCsoToNull(Mezo m) {
-        return false;
+        Skeleton.endMethod();
     }
 
     /**
@@ -87,6 +70,8 @@ public class Cso extends Mezo {
      */
     @Override
     public List<? extends Mezo> getNeighbours() {
+        Skeleton.startMethod(getClass().getName(), "getNeighbours()");
+        Skeleton.endMethod();
         return szomszedosCsucs;
     }
 
@@ -95,7 +80,9 @@ public class Cso extends Mezo {
      */
     @Override
     public void szabotorElront() {
+        Skeleton.startMethod(getClass().getName(), "szabotorElront()");
         setRossz(true);
+        Skeleton.endMethod();
     }
 
     /**
@@ -103,7 +90,9 @@ public class Cso extends Mezo {
      */
     @Override
     public void szereloJavit() {
+        Skeleton.startMethod(getClass().getName(), "szereloJavit()");
         setRossz(false);
+        Skeleton.endMethod();
     }
 
     /**
@@ -111,11 +100,14 @@ public class Cso extends Mezo {
      * @return Igazat ad vissza, ha elfogadta a vizet.
      */
     public boolean vizetKap() {
+        Skeleton.startMethod(getClass().getName(), "vizetKap()");
         if (Skeleton.kerdes("Van a kimeneti csoben viz?")) {
+            Skeleton.endMethod();
             return false;
         } else if (Skeleton.kerdes("Lyukas a kimeneti cso, vagy szabad a masik vege?")) {
             Kontroller.getInstance().pontNovel("szabotor");
         }
+        Skeleton.endMethod();
         return true;
     }
 
@@ -124,9 +116,12 @@ public class Cso extends Mezo {
      * @return Igazat ad vissza, ha volt benne víz.
      */
     public boolean vizetVeszit() {
+        Skeleton.startMethod(getClass().getName(), "vizetVeszit()");
         if(Skeleton.kerdes("Van a bemeneti csoben viz?")){
+            Skeleton.endMethod();
             return true;
         }
+        Skeleton.endMethod();
         return false;
     }
 
@@ -135,6 +130,8 @@ public class Cso extends Mezo {
      * @return A szomszédos csúcsok listája.
      */
     public List<Csucs> getSzomszedosCsucs() {
+        Skeleton.startMethod(getClass().getName(), "getSzomszedosCsucs()");
+        Skeleton.endMethod();
         return szomszedosCsucs;
     }
 
@@ -143,7 +140,9 @@ public class Cso extends Mezo {
      * @param cs A csúcs, ami bekerül a szomszédok listájába
      */
     public void setSzomszedosCsucs(Csucs cs){
+        Skeleton.startMethod(getClass().getName(), "setSzomszedosCsucs()");
         szomszedosCsucs.add(cs);
+        Skeleton.endMethod();
     }
 
     /**
@@ -151,7 +150,9 @@ public class Cso extends Mezo {
      * @param csucsok A beállítandó szomszédos csúcsok listája.
      */
     public void setSzomszedosCsucs(List<Csucs> csucsok){
+        Skeleton.startMethod(getClass().getName(), "setSzomszedosCsucs()");
         szomszedosCsucs = csucsok;
+        Skeleton.endMethod();
     }
 
     /** /**
@@ -159,7 +160,9 @@ public class Cso extends Mezo {
      * @param r A cső állapota.
      */
     public void setRossz(boolean r){
+        Skeleton.startMethod(getClass().getName(), "setRossz()");
         rossz = r;
+        Skeleton.endMethod();
     }
 
 }
