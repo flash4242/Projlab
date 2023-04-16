@@ -224,7 +224,7 @@ public class Skeleton {
      * A szabotőr aktuális mezője: p
      * A kapcsolatok felallítása után leteszteljük, hogy ki tudunk-e helyesen pumpát javítani.
      */
-    void test9(){
+    void test91(){
         Pumpa p = new Pumpa();
         Szerelo sz = new Szerelo();
         sz.setAktMezo(p);
