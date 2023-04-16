@@ -21,10 +21,12 @@ public abstract class Jatekos {
      * @param hova hova lép át
      */
     public void mozgas(int hova){
-        if(getAktMezo().getNeighbours().get(hova).jatekostElfogad(this)){
-            getAktMezo().getNeighbours().get(hova).jatekostEltavolit(this);
-            setAktMezo(getAktMezo().getNeighbours().get(hova));
-        }
+        Skeleton.startMethod(getClass().getName(), "mozgas()");
+
+        getAktMezo().getNeighbours().get(hova).jatekosElfogad
+        setAktMezo(getAktMezo().getNeighbours().get(hova));
+
+        Skeleton.endMethod();
     }
 
     /**
@@ -34,6 +36,8 @@ public abstract class Jatekos {
      * @param kimeneti kimeneti cső
      */
     public void pumpaAtallitasa(int bemeneti, int kimeneti){
+        Skeleton.startMethod(getClass().getName(), "pumpaAtallitasa()");
         getAktMezo().atallit(bemeneti, kimeneti);
+        Skeleton.endMethod();
     }
 }
