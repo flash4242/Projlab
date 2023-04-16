@@ -38,32 +38,56 @@ public abstract class Mezo {
 	 * Az adott mezőre lerakja a csövet, leszármazottak felülírják.
 	 * @param cs A kapott cső
 	 */
-	public void targyLerakas(Cso cs){}
+	public void targyLerakas(Cso cs){
+		Skeleton.startMethod(getClass().getName(), "targyLerakas()");
+		Skeleton.endMethod();
+	}
 
 	/**
 	 * Az adott mezőre lerakja a pumpát, leszármazottak felülírják.
 	 * @param p A kapott pumpa
 	 */
-	public void targyLerakas(Pumpa p){}
+	public void targyLerakas(Pumpa p){
+		Skeleton.startMethod(getClass().getName(), "targyLerakas()");
+		Skeleton.endMethod();
+	}
 
 	/**
 	 * A szerelő megjavít egy mezőt. Üres függvény, mivel a Mezo nem tud megjavulni.
 	 * Azon leszármazottakban amiket meg lehet javítani meg kell valósítani.
 	 */
-	public void szereloJavit(){}
+	public void szereloJavit(){
+		Skeleton.startMethod(getClass().getName(), "szereloJavit()");
+		Skeleton.endMethod();
+	}
 
 	/**
 	 * A szerelő megjavít egy mezőt. Üres függvény, mivel a Mezo nem tud elromlani.
 	 * Azon leszármazottakban amiket el tud rontani meg kell valósítani.
 	 */
-	public void szabotorElront(){}
+	public void szabotorElront(){
+		Skeleton.startMethod(getClass().getName(), "szabotorElront()");
+		Skeleton.endMethod();
+	}
 
 	/**
 	 * A mező létrehoz egy pumpát. Üres függvény, mivel a Mezo nem hozhat létre pumpát.
 	 * Azon leszármazottakban amik létrehoznak, meg kell valósítani.
 	 * @return A létrejött pumpa
 	 */
-	public Pumpa pumpaLetrehozasa(){return null;}
+	public Pumpa pumpaLetrehozasa(){
+		Skeleton.startMethod(getClass().getName(), "pumpaLetrehozasa()");
+		Skeleton.endMethod();
+		return null;
+	}
+
+	/**
+	 * Jelezzük a mezőnek, hogy szeretnénk a hozzá kapcsolódó cs-edik csövet megkapni.
+	 * Minden leszármazott implementálja
+	 * @param cs A szomszédos csövek közül melyiket szeretnénk megkapni.
+	 * @return A mező által visszaadott cső, vagy null.
+	 */
+	public abstract Cso adjCsovet(int cs);
 
 	/**
 	 * Visszaadja a mezővel szomszédos mezők listáját.
@@ -77,9 +101,14 @@ public abstract class Mezo {
 	 * @param kimeneti bemeneti cső index a szomszédos mezőkhöz
 	 * @param bemeneti kimeneti cső index a szomszédos mezőkhöz
 	 */
-	public void atallit(int kimeneti, int bemeneti){}
+	public void atallit(int kimeneti, int bemeneti){
+		Skeleton.startMethod(getClass().getName(), "atallit()");
+		Skeleton.endMethod();
+	}
 
 	public void setJatekosRajta(Jatekos j){
+		Skeleton.startMethod(getClass().getName(), "setJatekosRajta()");
 		jatekosRajta.add(j);
+		Skeleton.endMethod();
 	}
 }

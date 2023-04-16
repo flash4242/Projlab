@@ -58,6 +58,7 @@ public abstract class Csucs extends Mezo{
      * @param cs A szomszédos csövek közül melyiket szeretnénk megkapni.
      * @return A csúcs által visszaadott cső, amennyiben volt ilyen, egyébként null.
      */
+    @Override
     public Cso adjCsovet(int cs){
         Skeleton.startMethod(getClass().getName(), "adjCsovet()");
         if(Skeleton.kerdes("Több mint egy szomszédos csöve van a csúcsnak?") && Skeleton.kerdes("Nem áll senki a szomszédos csövön?")){

@@ -65,6 +65,19 @@ public class Cso extends Mezo {
     }
 
     /**
+     * Jelezzük a csőnek, hogy szeretnénk a hozzá kapcsolódó cs-edik csövet megkapni.
+     * Mivel csőhöz nem kapcsolódnak csövek, minden esetben null-al tér vissza.
+     * @param cs A szomszédos csövek közül melyiket szeretnénk megkapni.
+     * @return Null, mivel nincsenek cső szomszédai.
+     */
+    @Override
+    public Cso adjCsovet(int cs){
+        Skeleton.startMethod(getClass().getName(), "adjCsovet()");
+        Skeleton.endMethod();
+        return null;
+    }
+
+    /**
      * Visszaadja a csővel szomszédos csúcsok listáját, Mezo típusú listaként.
      * @return A szomszédos csúcsok listája.
      */
