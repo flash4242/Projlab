@@ -9,10 +9,14 @@ public abstract class Jatekos {
     private Mezo atkmezo;
 
     public void setAktMezo(Mezo m){
+        Skeleton.startMethod(getClass().getName(), "setAktMezo()");
         atkmezo=m;
+        Skeleton.endMethod();
     }
 
     public Mezo getAktMezo(){
+        Skeleton.startMethod(getClass().getName(), "getAktMezo()");
+        Skeleton.endMethod();
         return atkmezo;
     }
 
@@ -21,10 +25,13 @@ public abstract class Jatekos {
      * @param hova hova lép át
      */
     public void mozgas(int hova){
+        Skeleton.startMethod(getClass().getName(), "mozgas()");
         if(getAktMezo().getNeighbours().get(hova).jatekostElfogad(this)){
             getAktMezo().getNeighbours().get(hova).jatekostEltavolit(this);
             setAktMezo(getAktMezo().getNeighbours().get(hova));
         }
+        Skeleton.endMethod();
+
     }
 
     /**

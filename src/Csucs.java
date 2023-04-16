@@ -25,7 +25,9 @@ public abstract class Csucs extends Mezo{
      */
     @Override
     public boolean jatekostElfogad(Jatekos j) {
+        Skeleton.startMethod(getClass().getName(), "jatekostElfogad()");
         jatekosRajta.add(j);
+        Skeleton.endMethod();
         return true;
     }
 

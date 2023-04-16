@@ -1,8 +1,23 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Skeleton {
+    private static int indent = 0;
+    private static boolean init;
+    public static void startMethod(String class_, String method){
+        if(!init) {
+            ++indent;
+            for (int i = 0; i < indent; ++i)
+                System.out.print("\t");
+            System.out.println(class_ + "." + method);
+        }
+    }
+    public static void endMethod(){
+        if(!init)
+            --indent;
+    }
     static boolean kerdes(String szoveg){ //TODO Megvaltoztattam staticra ez igy oki?
         System.out.println(szoveg);
         Scanner scan = new Scanner(System.in);
@@ -13,23 +28,17 @@ public class Skeleton {
     }
     void tesztesetValaszto(int input){
         switch(input){
-            case 1: teszt(); break;
+            case 1: teszt1(); break;
             default: break;
         }
     }
-    void teszt(){
+    void teszt0(){
         System.out.println("\t"+"1-es teszteset\n");
     }
 
-    /**
-     * Teszt: Pumpára mozgás
-     * Létrehoz egy pumpát, egy csövet és egy szerelőt és beállítja a kapcsolatokat.
-     * A pumpa szomszédos csöve: cs
-     * A cs szomszédos csúcsa: p
-     * cs-n álló játékos: sz
-     * A kapcsolatok felállítása után teszteljük, hogy helyesen mozog-e a szerelő a pumpára.
-     */
+    //TODO rename
     void teszt1(){
+        init = true;
         Szerelo sz = new Szerelo();
         Cso cs = new Cso();
         Pumpa p = new Pumpa();
@@ -40,17 +49,10 @@ public class Skeleton {
         sz.setAktMezo(cs);
         cs.setJatekosRajta(sz);
 
-        sz.mozgas(2);
+        init = false;
+        sz.mozgas(0);
     }
 
-    /**
-     * Teszt: Csőre mozgás
-     * Létrehoz egy pumpát, egy csövet és egy szerelőt és beállítja a kapcsolatokat.
-     * A pumpa szomszédos csöve: cs
-     * A cs szomszédos csúcsa: p
-     * p-n álló játékos: sz
-     * A kapcsolatok felállítása után teszteljük, hogy helyesen mozog-e a szerelő a csőre.
-     */
     void teszt2(){
         Szerelo sz = new Szerelo();
         Cso cs = new Cso();
@@ -340,12 +342,6 @@ public class Skeleton {
         sz.pumpatLerak();
     }
 
-    /**
-     * Teszt: Pumpa vizet pumpál
-     * Létrehoz egy pumpát és két hozzá kapcsolódó csövet: cs1, cs2.
-     * A pumpán beállítjuk a bemeneti és kimeneti csöveket, majd a kontroller meghívja a pumpa
-     * vizetPumpal függvényét és leteszteljük, hogy helyesen működik-e a víztovábbítás.
-     */
     void teszt18(){
         Cso cs1 = new Cso();
         Cso cs2 = new Cso();
@@ -359,16 +355,10 @@ public class Skeleton {
         p.setBemenetiCso(0);
         p.setKimenetiCso(1);
 
-        Kontroller.getInstance().setCsucsok(p);
-        Kontroller.getInstance().vizLeptet();
+        //TODO ide kell kontroller ami meghívja a pumpán a továbbítot?
+        p.vizetPumpal();
     }
 
-    /**
-     * Teszt: Forrás vizet pumpál
-     * Létrehoz egy forrást és két hozzá kapcsolódó csövet: cs1, cs2.
-     * A kontroller meghívja a forrás vizetPumpal függvényét és leteszteljük,
-     * hogy helyesen működik-e a víztovábbítás.
-     */
     void teszt20(){
         Cso cs1 = new Cso();
         Cso cs2 = new Cso();
@@ -380,7 +370,7 @@ public class Skeleton {
         cs1.setSzomszedosCsucs(f);
         cs2.setSzomszedosCsucs(f);
 
-        Kontroller.getInstance().setCsucsok(f);
-        Kontroller.getInstance().vizLeptet();
+        //TODO teszt18-hoz hasonlóan.
+        f.vizetPumpal();
     }
 }

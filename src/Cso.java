@@ -135,6 +135,8 @@ public class Cso extends Mezo {
      * @return A szomszédos csúcsok listája.
      */
     public List<Csucs> getSzomszedosCsucs() {
+        Skeleton.startMethod(getClass().getName(), "getSzomszedosCsucs()");
+        Skeleton.endMethod();
         return szomszedosCsucs;
     }
 
