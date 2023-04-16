@@ -3,26 +3,41 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Skeleton {
-    static boolean kerdes(String szoveg){ //TODO Megvaltoztattam staticra ez igy oki?
-        System.out.println(szoveg);
+    static boolean kerdes(String szoveg){
+        System.out.println(szoveg+"\n0: nem  1: igen");
         Scanner scan = new Scanner(System.in);
         int input;
         input = scan.nextInt();
-        scan.close(); //TODO Bezartam a scannert.
+        scan.close();
         return input==0 ? false : true;
     }
     void tesztesetValaszto(int input){
         switch(input){
             case 1: teszt1(); break;
+            case 2: teszt2(); break;
+            case 3: teszt3(); break;
+            case 4: teszt4(); break;
+            //case 5: teszt5(); break;
+            //case 6: teszt6(); break;
+            //case 7: teszt7(); break;
+            //case 8: teszt8(); break;
+            //case 9: teszt9(); break;
+            case 10: teszt10(); break;
+            case 11: teszt11(); break;
+            case 12: teszt12(); break;
+            case 13: teszt13(); break;
+            case 14: teszt14(); break;
+            case 15: teszt15(); break;
+            case 16: teszt16(); break;
+            case 17: teszt17(); break;
+            case 18: teszt18(); break;
+            //case 19: teszt19(); break;
+            case 20: teszt20(); break;
             default: break;
         }
     }
-    void teszt1(){
-        System.out.println("\t"+"1-es teszteset\n");
-    }
 
-    //TODO rename
-    void teszt11(){
+    void teszt1(){
         Szerelo sz = new Szerelo();
         Cso cs = new Cso();
         Pumpa p = new Pumpa();
@@ -167,6 +182,25 @@ public class Skeleton {
     }
 
     /**
+     * Teszt: Csővég Lerakása Csőre
+     * Létrehoz egy szerelőt, két csövet, beállítja a kapcsolatokat.
+     * A szerelő, aki lerakja a kezében lévő csövet: sz
+     * A szerelő aktuális mezője: cs1
+     * A szerelő kezében lévő cső: cs2
+     * A kapcsolatok felallítása után leteszteljük, hogy, ha egy csövön állva szeretnénk letenni egy csővéget, akkor helyesen nem történik-e semmi.
+     */
+    void teszt13(){
+        Szerelo sz = new Szerelo();
+        Cso cs1 = new Cso();
+        Cso cs2 = new Cso();
+        sz.setAktMezo(cs1);
+        sz.setCsoveg(cs2);
+        cs1.setJatekosRajta(sz);
+
+        sz.csovegetLerak();
+    }
+
+    /**
      * Teszt: Pumpa felvétele nem ciszternáról
      * Létrehoz egy szerelőt, meg egy csövet, és mindkettőben beállítja, hogy a szerelő a csövön áll
      * Meghívja a szerelő pumpafelvétel függvényét, tesztelve, hogy valóban nem tud-e felvenni pumpát
@@ -197,6 +231,38 @@ public class Skeleton {
         sz.setPumpa(p);
 
         sz.pumpatLerak();
+    }
+
+    /**
+     * Teszt: Pumpa Kilyukasztása
+     * Létrehoz egy szabotőrt, egy pumpát és a kapcsolatokat.
+     * A szabotőr aki pumpát akar lyukasztani: sz
+     * A lyukasztani kívánt pumpa: p
+     * Az sz szabotőr a p pumpán áll
+     * A kapcsolatok felallítása után leteszteljük, hogy, ha egy pumpán állva szeretnénk szabotőrként azt kilyukasztani, akkor helyesen nem történik-e semmi.
+     */
+    void teszt16(){
+        Szabotor sz = new Szabotor();
+        Pumpa p = new Pumpa();
+        sz.setAktMezo(p);
+        p.setJatekosRajta(sz);
+
+        sz.csoKilyukasztasa();
+    }
+
+    /**
+     * Teszt: Kontroller Csúcsot Elront
+     * Létrehozz egy kontrollert (k), egy ciszternát (c), egy pumpát (c) és a kapcsolataikat.
+     * Leteszteljük, hogy a kontroller általi pumpaelrontások során a ciszterna valóban nem romlik-e el soha és a pumpa elromlik-e véletlenszerűen
+     */
+    void teszt17(){
+        Kontroller k = new Kontroller();
+        Ciszterna c = new Ciszterna();
+        Pumpa p = new Pumpa();
+        k.setCsucsok(c);
+        k.setCsucsok(p);
+
+        k.veletlenPumpaElrontas();
     }
 
     void teszt18(){
