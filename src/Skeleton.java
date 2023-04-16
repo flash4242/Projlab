@@ -13,16 +13,23 @@ public class Skeleton {
     }
     void tesztesetValaszto(int input){
         switch(input){
-            case 1: teszt1(); break;
+            case 1: teszt(); break;
             default: break;
         }
     }
-    void teszt1(){
+    void teszt(){
         System.out.println("\t"+"1-es teszteset\n");
     }
 
-    //TODO rename
-    void teszt11(){
+    /**
+     * Teszt: Pumpára mozgás
+     * Létrehoz egy pumpát, egy csövet és egy szerelőt és beállítja a kapcsolatokat.
+     * A pumpa szomszédos csöve: cs
+     * A cs szomszédos csúcsa: p
+     * cs-n álló játékos: sz
+     * A kapcsolatok felállítása után teszteljük, hogy helyesen mozog-e a szerelő a pumpára.
+     */
+    void teszt1(){
         Szerelo sz = new Szerelo();
         Cso cs = new Cso();
         Pumpa p = new Pumpa();
@@ -36,6 +43,14 @@ public class Skeleton {
         sz.mozgas(2);
     }
 
+    /**
+     * Teszt: Csőre mozgás
+     * Létrehoz egy pumpát, egy csövet és egy szerelőt és beállítja a kapcsolatokat.
+     * A pumpa szomszédos csöve: cs
+     * A cs szomszédos csúcsa: p
+     * p-n álló játékos: sz
+     * A kapcsolatok felállítása után teszteljük, hogy helyesen mozog-e a szerelő a csőre.
+     */
     void teszt2(){
         Szerelo sz = new Szerelo();
         Cso cs = new Cso();
@@ -199,6 +214,12 @@ public class Skeleton {
         sz.pumpatLerak();
     }
 
+    /**
+     * Teszt: Pumpa vizet pumpál
+     * Létrehoz egy pumpát és két hozzá kapcsolódó csövet: cs1, cs2.
+     * A pumpán beállítjuk a bemeneti és kimeneti csöveket, majd a kontroller meghívja a pumpa
+     * vizetPumpal függvényét és leteszteljük, hogy helyesen működik-e a víztovábbítás.
+     */
     void teszt18(){
         Cso cs1 = new Cso();
         Cso cs2 = new Cso();
@@ -212,10 +233,16 @@ public class Skeleton {
         p.setBemenetiCso(0);
         p.setKimenetiCso(1);
 
-        //TODO ide kell kontroller ami meghívja a pumpán a továbbítot?
-        p.vizetPumpal();
+        Kontroller.getInstance().setCsucsok(p);
+        Kontroller.getInstance().vizLeptet();
     }
 
+    /**
+     * Teszt: Forrás vizet pumpál
+     * Létrehoz egy forrást és két hozzá kapcsolódó csövet: cs1, cs2.
+     * A kontroller meghívja a forrás vizetPumpal függvényét és leteszteljük,
+     * hogy helyesen működik-e a víztovábbítás.
+     */
     void teszt20(){
         Cso cs1 = new Cso();
         Cso cs2 = new Cso();
@@ -227,7 +254,7 @@ public class Skeleton {
         cs1.setSzomszedosCsucs(f);
         cs2.setSzomszedosCsucs(f);
 
-        //TODO teszt18-hoz hasonlóan.
-        f.vizetPumpal();
+        Kontroller.getInstance().setCsucsok(f);
+        Kontroller.getInstance().vizLeptet();
     }
 }
