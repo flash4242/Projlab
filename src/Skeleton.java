@@ -166,6 +166,39 @@ public class Skeleton {
         sz.csovegFelvetele(0);
     }
 
+    /**
+     * Teszt: Pumpa felvétele nem ciszternáról
+     * Létrehoz egy szerelőt, meg egy csövet, és mindkettőben beállítja, hogy a szerelő a csövön áll
+     * Meghívja a szerelő pumpafelvétel függvényét, tesztelve, hogy valóban nem tud-e felvenni pumpát
+     * a szerelő
+     */
+    void teszt14(){
+        Szerelo sz = new Szerelo();
+        Cso cs = new Cso();
+        sz.setAktMezo(cs);
+        cs.setJatekosRajta(sz);
+
+        sz.pumpaFelvetele();
+    }
+
+    /**
+     * Teszt: Pumpa lerakása pumpára
+     * Létrehoz egy szerelőt, illetve két pumpát, beállítja rajtuk, hogy
+     * a szerelő az egyik pumpán áll, és a másikat hordozza
+     * Ezután meghívja a szerelő pumpaLerak() függvényét, tesztelve, hogy valóban nem
+     * történik-e meg a lerakás
+     */
+    void teszt15(){
+        Szerelo sz = new Szerelo();
+        Pumpa aktmezo = new Pumpa();
+        Pumpa p = new Pumpa();
+        sz.setAktMezo(aktmezo);
+        aktmezo.setJatekosRajta(sz);
+        sz.setPumpa(p);
+
+        sz.pumpatLerak();
+    }
+
     void teszt18(){
         Cso cs1 = new Cso();
         Cso cs2 = new Cso();
