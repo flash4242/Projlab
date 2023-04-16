@@ -50,14 +50,16 @@ public class Szerelo extends Jatekos{
      */
     public void csovegFelvetele(int cs){
         Skeleton.startMethod(getClass().getName(), "csovegFelvetele()");
-        if(cs>=0 && cs<getAktMezo().getNeighbours().size()
-                && getAktMezo().getNeighbours().get(cs).jatekosRajta.isEmpty()
-                && getAktMezo().getNeighbours().get(cs).setCsucsToNull(getAktMezo())
-                && getAktMezo().getNeighbours().get(cs).setCsoToNull(getAktMezo().getNeighbours().get(cs))){
-            setCsoveg((Cso) getAktMezo().getNeighbours().get(cs));
-        }
-        else{
-            getAktMezo().targyLerakas((Cso) getAktMezo().getNeighbours().get(cs));
+        Cso kapottCso;
+        if(!Skeleton.kerdes("Van nála cső vagy pumpa?")) {
+            if(cs>=0 && cs<getAktMezo().getNeighbours().size()
+                    && getAktMezo().getNeighbours().get(cs).jatekosRajta.isEmpty()){
+                kapottCso=getAktMezo().adjCsovet(cs);
+            }
+            else{
+                kapottCso=null;
+            }
+            setCsoveg(kapottCso);
         }
         Skeleton.endMethod();
     }

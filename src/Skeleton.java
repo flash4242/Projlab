@@ -35,7 +35,8 @@ public class Skeleton {
             case 6 -> teszt6();
             case 7 -> teszt7();
             case 8 -> teszt8();
-            case 9 -> teszt9();
+            case 91 -> teszt91();
+            case 92 -> teszt92();
             case 10 -> teszt10();
             case 11 -> teszt11();
             case 12 -> teszt12();
@@ -164,39 +165,130 @@ public class Skeleton {
     }
 
     /**
-     * Teszt:
+     * Teszt: Csővég felvétele ciszternáról
+     * Létrehoz egy csövet, egy ciszternát és egy szerelőt, és beállítja a kapcsolatokat.
+     * A cs szomszédos csúcsai: c és c
+     * A ciszternán lévő játékos: sz
+     * A sz aktuális mezője: c
+     * A kapcsolatok felallítása után leteszteljük, hogy tudunk-e helyesen felvenni csővégét a ciszternáról.
      */
     void teszt5(){
-        //TODO: megcsinálni
+        Cso cs = new Cso();
+        Szerelo sz = new Szerelo();
+        Ciszterna c = new Ciszterna();
+        sz.setAktMezo(c);
+        c.setJatekosRajta(sz);
+        List<Cso> csok = new ArrayList<Cso>();
+        csok.add(cs);
+        c.setSzomszedosCso(csok);
+        List<Csucs> csucsok = new ArrayList<Csucs>();
+        csucsok.add(c);
+        csucsok.add(c);
+        cs.setSzomszedosCsucs(csucsok);
+
+        sz.csovegFelvetele(1);
     }
 
     /**
-     * Teszt:
+     * Teszt: Csővég lerakása
+     * Létrehoz egy csövet, egy pumpát és egy szerelőt, és beállítja a kapcsolatokat.
+     * A cs szomszédos csúcsa: p
+     * A pumpán lévő játékos: sz
+     * A sz aktuális mezője: p
+     * A kapcsolatok felallítása után leteszteljük, hogy tudunk-e helyesen letenni egy csővégét pumpára.
      */
     void teszt6(){
+        Cso cs = new Cso();
+        Szerelo sz = new Szerelo();
+        Pumpa p = new Pumpa();
+        sz.setAktMezo(p);
+        p.setJatekosRajta(sz);
+        List<Cso> csok = new ArrayList<Cso>();
+        csok.add(cs);
+        p.setSzomszedosCso(csok);
+        List<Csucs> csucsok = new ArrayList<Csucs>();
+        csucsok.add(p);
+        csucsok.add(p);
+        cs.setSzomszedosCsucs(csucsok);
 
+        sz.csovegetLerak();
     }
 
     /**
-     * Teszt:
+     * Teszt: Pumpa felvétele ciszternáról
+     * Létrehoz egy pumpát, egy ciszternát és egy szerelőt, és beállítja a kapcsolatokat.
+     * A p szomszédos csövei:
+     * A ciszternán lévő játékos: sz
+     * A sz aktuális mezője: c
+     * A kapcsolatok felallítása után leteszteljük, hogy tudunk-e helyesen felvenni pumpát a ciszternáról.
      */
     void teszt7(){
+        Szerelo sz = new Szerelo();
+        Ciszterna c = new Ciszterna();
+        sz.setAktMezo(c);
+        c.setJatekosRajta(sz);
 
+        sz.pumpaFelvetele();
     }
 
+
     /**
-     * Teszt:
+     * Teszt: Pumpa lerakása
+     * Létrehoz egy csövet, egy pumpát és egy szerelőt, és beállítja a kapcsolatokat.
+     * A cs szomszédos csúcsa: p és p
+     * A sz aktuális mezője: p
+     * A kapcsolatok felallítása után leteszteljük, hogy tudunk-e helyesen letenni egy pumpát csőre.
      */
     void teszt8(){
+        Cso cs = new Cso();
+        Szerelo sz = new Szerelo();
+        Pumpa p = new Pumpa();
+        sz.setAktMezo(p);
+        p.setJatekosRajta(sz);
+        List<Cso> csok = new ArrayList<Cso>();
+        csok.add(cs);
+        p.setSzomszedosCso(csok);
+        List<Csucs> csucsok = new ArrayList<Csucs>();
+        csucsok.add(p);
+        csucsok.add(p);
+        cs.setSzomszedosCsucs(csucsok);
 
+
+        sz.pumpatLerak();
     }
 
     /**
-     * Teszt:
+     * Teszt: Pumpa javítása
+     * Létrehoz egy pumpát és egy szabotőrt, és beállítja a kapcsolatokat.
+     * A pumpán lévő játékos: sz
+     * A szabotőr aktuális mezője: p
+     * A kapcsolatok felallítása után leteszteljük, hogy ki tudunk-e helyesen pumpát javítani.
      */
-    void teszt9(){
+    void teszt91(){
+        Pumpa p = new Pumpa();
+        Szerelo sz = new Szerelo();
+        sz.setAktMezo(p);
+        p.setJatekosRajta(sz);
 
+        sz.mezotJavit();
     }
+
+    /**
+     * Teszt: Cső javítása
+     * Létrehoz egy csövet és egy szabotőrt, és beállítja a kapcsolatokat.
+     * A csövön lévő játékos: sz
+     * A szabotőr aktuális mezője: cs
+     * A kapcsolatok felallítása után leteszteljük, hogy ki tud-e tudunk-e helyesen csövet javítani.
+     */
+    void teszt92(){
+        Cso cs = new Cso();
+        Szerelo sz = new Szerelo();
+        sz.setAktMezo(cs);
+        cs.setJatekosRajta(sz);
+
+        sz.mezotJavit();
+    }
+
 
     /**
      * Teszt: Cső kilyukasztása

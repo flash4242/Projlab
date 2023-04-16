@@ -6,9 +6,8 @@ public class Szabotor extends Jatekos {
     /**
      * Elrontja azt a csövet, amin éppen áll
      */
-
     public void csoKilyukasztasa(){
-        Skeleton.startMethod(getClass().getName(), "mozgas()");
+        Skeleton.startMethod(getClass().getName(), "csoKilyukasztasa()");
         getAktMezo().szabotorElront();
         Skeleton.endMethod();
     }

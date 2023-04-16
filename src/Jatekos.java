@@ -1,3 +1,4 @@
+import java.util.List;
 /**
  * A szerelő és szabotőr közös tulajdonságaiért és
  * viselkedéséért felelős absztrakt osztály.
@@ -22,9 +23,15 @@ public abstract class Jatekos {
      */
     public void mozgas(int hova){
         Skeleton.startMethod(getClass().getName(), "mozgas()");
+        List<? extends Mezo> szomszedok =getAktMezo().getNeighbours();
+        if(hova<szomszedok.size()){
+            Mezo hovamezo =szomszedok.get(hova);
+            if(hovamezo.jatekostElfogad(this)) {
+                getAktMezo().jatekostEltavolit(this);
+                setAktMezo(hovamezo);
+            }
+        }
 
-        getAktMezo().getNeighbours().get(hova).jatekosElfogad
-        setAktMezo(getAktMezo().getNeighbours().get(hova));
 
         Skeleton.endMethod();
     }

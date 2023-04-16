@@ -4,8 +4,15 @@ public class Main {
     public static void main(String args[])
     {
         System.out.println("0: Kilepes");
-        for(int i=1; i<21; i++)
-            System.out.println(i+": <"+i+". Teszteset>");
+        for(int i=1; i<21; i++){
+            if (i == 9) {
+                System.out.println("91: <91. Teszteset>");
+                System.out.println("92: <92. Teszteset>");
+            }
+            else {
+                System.out.println(i + ": <" + i + ". Teszteset>");
+            }
+        }
 
         Skeleton skeleton = new Skeleton();
         int input = 1;
