@@ -16,7 +16,6 @@ public class Main {
             System.out.println("START");
             skeleton.tesztesetValaszto(input);
             System.out.println("END");
-
         }
         scan.close();
     }
