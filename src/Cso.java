@@ -64,8 +64,8 @@ public class Cso extends Mezo {
      * @return Igazat ad vissza, ha eltávolítottuk a listából, egyébként hamisat.
      */
     public boolean setCsucsToNull(Mezo m) {
+        szomszedosCsucs.remove(m);
         if(!Skeleton.kerdes("Szabad a masik csoveg?")){
-            szomszedosCsucs.remove(m);
             return true;
         }
         return false;

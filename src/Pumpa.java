@@ -69,6 +69,22 @@ public class Pumpa extends Csucs{
     }
 
     /**
+     * A paraméterként kapott Mezőt eltávolítja a szomszedosCso listából, amennyiben ez nem az utolsó cső ami a csúcshoz van kötve.
+     * @param m A paraméterként kapott Mező, amit eltávolítunk a listából.
+     * @return Igazat ad vissza, ha eltávolítottuk a listából, egyébként hamisat.
+     */
+    @Override
+    public boolean setCsoToNull(Mezo m){
+        getSzomszedosCso().remove(m);
+        if(!Skeleton.kerdes("Ez az utolso cso ami a csucshoz hozza van kotve?")) {
+            if(!Skeleton.kerdes("Ez a cso bemeneti vagy kimeneti csove a pumpanak?")){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Beállítja a pumpa állapotát.
      * @param r A pumpa állapota.
      */
