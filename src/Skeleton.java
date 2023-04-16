@@ -1,8 +1,23 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Skeleton {
+    private static int indent = 0;
+    private static boolean init;
+    public static void startMethod(String class_, String method){
+        if(!init) {
+            ++indent;
+            for (int i = 0; i < indent; ++i)
+                System.out.print("\t");
+            System.out.println(class_ + "." + method);
+        }
+    }
+    public static void endMethod(){
+        if(!init)
+            --indent;
+    }
     static boolean kerdes(String szoveg){ //TODO Megvaltoztattam staticra ez igy oki?
         System.out.println(szoveg);
         Scanner scan = new Scanner(System.in);
@@ -17,12 +32,13 @@ public class Skeleton {
             default: break;
         }
     }
-    void teszt1(){
+    void teszt0(){
         System.out.println("\t"+"1-es teszteset\n");
     }
 
     //TODO rename
-    void teszt11(){
+    void teszt1(){
+        init = true;
         Szerelo sz = new Szerelo();
         Cso cs = new Cso();
         Pumpa p = new Pumpa();
@@ -33,7 +49,8 @@ public class Skeleton {
         sz.setAktMezo(cs);
         cs.setJatekosRajta(sz);
 
-        sz.mozgas(2);
+        init = false;
+        sz.mozgas(0);
     }
 
     void teszt2(){
