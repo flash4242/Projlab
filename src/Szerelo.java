@@ -45,15 +45,14 @@ public class Szerelo extends Jatekos{
     }
 
     /**
-     *
-     * @param cs
+     *  Felveszi a cs-edik csövet arról a mezőről, amin éppen áll, ha tudja
+     * @param cs a cső indexe
      */
     public void csovegFelvetele(int cs){
         Skeleton.startMethod(getClass().getName(), "csovegFelvetele()");
         Cso kapottCso;
         if(!Skeleton.kerdes("Van nála cső vagy pumpa?")) {
-            if(cs>=0 && cs<getAktMezo().getNeighbours().size()
-                    && getAktMezo().getNeighbours().get(cs).jatekosRajta.isEmpty()){
+            if(cs>=0){
                 kapottCso=getAktMezo().adjCsovet(cs);
             }
             else{
