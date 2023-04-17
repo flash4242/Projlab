@@ -23,9 +23,11 @@ public class Skeleton {
             --indent;
     }
     static boolean kerdes(String szoveg){
-        System.out.println(szoveg+"\n0: nem  1: igen");
-        int input= 0;
-        input = scan.nextInt();
+        int input= -1;
+        while(input !=0 && input!=1){
+            System.out.println(szoveg+"\n0: nem  1: igen");
+            input = scan.nextInt();
+        }
         return input==0 ? false : true;
     }
     String[] getMethodsName(){
@@ -486,9 +488,9 @@ public class Skeleton {
         cs2.setSzomszedosCsucs(p);
         p.setBemenetiCso(0);
         p.setKimenetiCso(1);
+        Kontroller.getInstance().setCsucsok(p);
 
         init = false;
-        Kontroller.getInstance().setCsucsok(p);
         Kontroller.getInstance().vizLeptet();
     }
 
@@ -508,9 +510,9 @@ public class Skeleton {
         c.setSzomszedosCso(cso_lista);
         cs1.setSzomszedosCsucs(c);
         cs2.setSzomszedosCsucs(c);
+        Kontroller.getInstance().setCsucsok(c);
         init = false;
 
-        Kontroller.getInstance().setCsucsok(c);
         Kontroller.getInstance().vizLeptet();
     }
 
@@ -531,9 +533,9 @@ public class Skeleton {
         f.setSzomszedosCso(csovek);
         cs1.setSzomszedosCsucs(f);
         cs2.setSzomszedosCsucs(f);
+        Kontroller.getInstance().setCsucsok(f);
 
         init = false;
-        Kontroller.getInstance().setCsucsok(f);
         Kontroller.getInstance().vizLeptet();
     }
 }

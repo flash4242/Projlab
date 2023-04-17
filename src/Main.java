@@ -21,7 +21,7 @@ public class Main {
         while (input != 0) {
             System.out.print("Valasszon egy parancsot: ");
             input = scan.nextInt();
-            if((input>0&&input<=20)||input==91||input==92) {
+            if(((input>0&&input<=20)||input==91||input==92)&&input !=9) {
                 System.out.print("START - ");
                 if(input == 91)
                     System.out.println(methodNames[9-1]);

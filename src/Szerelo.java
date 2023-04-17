@@ -38,9 +38,7 @@ public class Szerelo extends Jatekos{
      */
     public void mezotJavit(){
         Skeleton.startMethod(getClass().getName(), "mezotJavit()");
-        if(Skeleton.kerdes("Csövön vagy pumpán áll?")) {
-            getAktMezo().szereloJavit();
-        }
+        getAktMezo().szereloJavit();
         Skeleton.endMethod();
     }
 
@@ -62,8 +60,9 @@ public class Szerelo extends Jatekos{
      * Lerakja a nála lévő csövet
      */
     public void csovegetLerak(){
-        Skeleton.startMethod(getClass().getName(), "csovegFelvetele()");
+        Skeleton.startMethod(getClass().getName(), "csovegetLerak()");
         if(Skeleton.kerdes("Van a szerelőnél cső?")){
+            csoveg = new Cso();
             getAktMezo().targyLerakas(csoveg);
             csoveg=null;
         }
@@ -85,7 +84,7 @@ public class Szerelo extends Jatekos{
      * Lerakja a nála lévő pumpát
      */
     public void pumpatLerak(){
-        Skeleton.startMethod(getClass().getName(), "pumpaFelvetele()");
+        Skeleton.startMethod(getClass().getName(), "pumpatLerak()");
         if(Skeleton.kerdes("Van a szerelőnél pumpa?")){
             getAktMezo().targyLerakas(pumpa);
             pumpa=null;

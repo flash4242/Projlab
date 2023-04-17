@@ -42,8 +42,7 @@ public  class Kontroller {
         Random rand = new Random();
         for (Csucs csucs:csucsok
         ) {
-            int breakNumber = rand.nextInt(25);
-            if(breakNumber == 7)
+            if(Skeleton.kerdes("Elromoljon-e éppen a pumpa?"))
                 csucs.kontrollerElront();
         }
         Skeleton.endMethod();

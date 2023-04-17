@@ -46,7 +46,7 @@ public class Pumpa extends Csucs{
         if(!Skeleton.kerdes("El van romolva a pumpa?")){
             if(Skeleton.kerdes("Van viz a pumpaban?")){
                 if(getSzomszedosCso().get(kimenetiCso).vizetKap()){
-                    getSzomszedosCso().get(bemenetiCso).vizetVeszit();
+                    boolean b =getSzomszedosCso().get(bemenetiCso).vizetVeszit();
                 }
             }
             else{
@@ -66,7 +66,7 @@ public class Pumpa extends Csucs{
     @Override
     public Cso adjCsovet(int cs){
         Skeleton.startMethod(getClass().getName(), "adjCsovet()");
-        if(Skeleton.kerdes("Több mint egy szomszédos csöve van a csúcsnak?") && Skeleton.kerdes("Nem áll senki a szomszédos csövön?")) {
+        if(Skeleton.kerdes("Több mint egy szomszédos csöve van a csúcsnak?") && !Skeleton.kerdes("Áll valaki a szomszédos csövön?")) {
             if (!Skeleton.kerdes("Bemeneti vagy kimeneti csove a pumpanak?")) {
                 Cso temp = getSzomszedosCso().get(cs % getSzomszedosCso().size());
                 lecsatol(temp);

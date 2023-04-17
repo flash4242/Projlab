@@ -61,7 +61,7 @@ public abstract class Csucs extends Mezo{
     @Override
     public Cso adjCsovet(int cs){
         Skeleton.startMethod(getClass().getName(), "adjCsovet()");
-        if(Skeleton.kerdes("Több mint egy szomszédos csöve van a csúcsnak?") && Skeleton.kerdes("Nem áll senki a szomszédos csövön?")){
+        if(Skeleton.kerdes("Több mint egy szomszédos csöve van a csúcsnak?") && !Skeleton.kerdes("Áll valaki a szomszédos csövön?")){
             Cso temp = szomszedosCso.get(cs%szomszedosCso.size());
             lecsatol(temp);
             Skeleton.endMethod();
