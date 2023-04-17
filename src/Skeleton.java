@@ -3,6 +3,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Skeleton {
+    private String[] methodsName={"Mozgás Csúcsra","Mozgás Csőre","Pumpa Átállítása","Csővég Felvétele Pumpáról", "Csővég Felvétele Ciszternáról",
+            "Csővég lerakása","Pumpa Felvétele Ciszternáról","Pumpa lerakása","Pumpa javítása","Cső Kilyukasztása", "Cső Átállítása",
+            "Csővég Felvétele Csőről","Csővég lerakása csőre", "Pumpa felvétele nem ciszternáról", "Pumpa lerakása pumpára",
+            "Pumpa kilyukasztása","Kontroller csúcsot elront", "Pumpa Pumpál", "Ciszterna Pumpál", "Forrás Pumpál","Cső javítása"};
     private static int indent=0;
     private static boolean init;
     private static Scanner scan;
@@ -23,6 +27,9 @@ public class Skeleton {
         int input= 0;
         input = scan.nextInt();
         return input==0 ? false : true;
+    }
+    String[] getMethodsName(){
+        return methodsName;
     }
     void tesztesetValaszto(int input, Scanner scanner){
         scan = scanner;
@@ -173,6 +180,7 @@ public class Skeleton {
      * A kapcsolatok felallítása után leteszteljük, hogy tudunk-e helyesen felvenni csővégét a ciszternáról.
      */
     void teszt5(){
+        init = true;
         Cso cs = new Cso();
         Szerelo sz = new Szerelo();
         Ciszterna c = new Ciszterna();
@@ -185,6 +193,7 @@ public class Skeleton {
         csucsok.add(c);
         csucsok.add(c);
         cs.setSzomszedosCsucs(csucsok);
+        init = false;
 
         sz.csovegFelvetele(1);
     }
@@ -198,6 +207,7 @@ public class Skeleton {
      * A kapcsolatok felallítása után leteszteljük, hogy tudunk-e helyesen letenni egy csővégét pumpára.
      */
     void teszt6(){
+        init = true;
         Cso cs = new Cso();
         Szerelo sz = new Szerelo();
         Pumpa p = new Pumpa();
@@ -210,6 +220,7 @@ public class Skeleton {
         csucsok.add(p);
         csucsok.add(p);
         cs.setSzomszedosCsucs(csucsok);
+        init = false;
 
         sz.csovegetLerak();
     }
@@ -223,10 +234,12 @@ public class Skeleton {
      * A kapcsolatok felallítása után leteszteljük, hogy tudunk-e helyesen felvenni pumpát a ciszternáról.
      */
     void teszt7(){
+        init = true;
         Szerelo sz = new Szerelo();
         Ciszterna c = new Ciszterna();
         sz.setAktMezo(c);
         c.setJatekosRajta(sz);
+        init = false;
 
         sz.pumpaFelvetele();
     }
@@ -240,6 +253,7 @@ public class Skeleton {
      * A kapcsolatok felallítása után leteszteljük, hogy tudunk-e helyesen letenni egy pumpát csőre.
      */
     void teszt8(){
+        init = true;
         Cso cs = new Cso();
         Szerelo sz = new Szerelo();
         Pumpa p = new Pumpa();
@@ -252,6 +266,7 @@ public class Skeleton {
         csucsok.add(p);
         csucsok.add(p);
         cs.setSzomszedosCsucs(csucsok);
+        init = false;
 
 
         sz.pumpatLerak();
@@ -265,10 +280,12 @@ public class Skeleton {
      * A kapcsolatok felallítása után leteszteljük, hogy ki tudunk-e helyesen pumpát javítani.
      */
     void teszt91(){
+        init = true;
         Pumpa p = new Pumpa();
         Szerelo sz = new Szerelo();
         sz.setAktMezo(p);
         p.setJatekosRajta(sz);
+        init = false;
 
         sz.mezotJavit();
     }
@@ -281,10 +298,12 @@ public class Skeleton {
      * A kapcsolatok felallítása után leteszteljük, hogy ki tud-e tudunk-e helyesen csövet javítani.
      */
     void teszt92(){
+        init = true;
         Cso cs = new Cso();
         Szerelo sz = new Szerelo();
         sz.setAktMezo(cs);
         cs.setJatekosRajta(sz);
+        init = false;
 
         sz.mezotJavit();
     }
