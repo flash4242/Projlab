@@ -493,10 +493,25 @@ public class Skeleton {
     }
 
     /**
-     * Teszt:
+     * Teszt: Ciszterna Pumpál
+     * Létrehoz egy ciszternát (c), két csövet (cs1 és cs2) és beállítja kapcsolataikat.
+     * A kontroller meghívja a ciszterna vizetPumpal függvényét és leteszteljük, hogy helyesen működik-e a vízelnyelés
      */
     void teszt19(){
-        //TODO. megcsinálni
+        init = true;
+        Ciszterna c = new Ciszterna();
+        Cso cs1 = new Cso();
+        Cso cs2 = new Cso();
+        List<Cso> cso_lista = new ArrayList<>();
+        cso_lista.add(cs1);
+        cso_lista.add(cs2);
+        c.setSzomszedosCso(cso_lista);
+        cs1.setSzomszedosCsucs(c);
+        cs2.setSzomszedosCsucs(c);
+        init = false;
+
+        Kontroller.getInstance().setCsucsok(c);
+        Kontroller.getInstance().vizLeptet();
     }
 
     /**

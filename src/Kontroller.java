@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -5,7 +6,7 @@ public  class Kontroller {
     /**
      * A játékban lévő csúcsok listája
      */
-    private List<Csucs> csucsok;
+    private List<Csucs> csucsok = new ArrayList<>();
 
     /**
      * A singleton referenciája
@@ -28,13 +29,16 @@ public  class Kontroller {
      * @param csucs
      */
     public void setCsucsok(Csucs csucs){
+        Skeleton.startMethod(getClass().getName(), "setCsucsok()");
         csucsok.add(csucs);
+        Skeleton.endMethod();
     }
 
     /**
      * Véletlenszerűen elront véletlenszerű számú pumpát
      */
     public void veletlenPumpaElrontas(){
+        Skeleton.startMethod(getClass().getName(), "veletlenPumpaElrontas()");
         Random rand = new Random();
         for (Csucs csucs:csucsok
         ) {
@@ -42,6 +46,7 @@ public  class Kontroller {
             if(breakNumber == 7)
                 csucs.kontrollerElront();
         }
+        Skeleton.endMethod();
     }
 
     /**
@@ -49,17 +54,20 @@ public  class Kontroller {
      * @param csapat
      */
     public void pontNovel(String csapat){
-
+        Skeleton.startMethod(getClass().getName(), "pontNovel()");
+        Skeleton.endMethod();
     }
 
     /**
      * mindegyik csúcsban indít egy pumpálást
      */
     public void vizLeptet(){
+        Skeleton.startMethod(getClass().getName(), "vizLeptet()");
         for (Csucs csucs:csucsok
         ) {
             csucs.vizetPumpal();
         }
+        Skeleton.endMethod();
     }
 
 }
