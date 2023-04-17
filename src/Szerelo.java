@@ -52,12 +52,7 @@ public class Szerelo extends Jatekos{
         Skeleton.startMethod(getClass().getName(), "csovegFelvetele()");
         Cso kapottCso;
         if(!Skeleton.kerdes("Van nála cső vagy pumpa?")) {
-            if(cs>=0){
-                kapottCso=getAktMezo().adjCsovet(cs);
-            }
-            else{
-                kapottCso=null;
-            }
+            kapottCso=getAktMezo().adjCsovet(cs);
             setCsoveg(kapottCso);
         }
         Skeleton.endMethod();
