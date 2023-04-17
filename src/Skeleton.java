@@ -5,12 +5,13 @@ import java.util.Scanner;
 public class Skeleton {
     private static int indent=0;
     private static boolean init;
+    private static Scanner scan;
     static void startMethod(Object object, String method){
         if(!init) {
             ++indent;
             for (int i = 0; i < indent; ++i)
                 System.out.print("\t");
-            System.out.println(object.getClass().getName() + "." + method);
+            System.out.println(object.toString()+ "." + method);
         }
     }
     static void endMethod(){
@@ -19,13 +20,12 @@ public class Skeleton {
     }
     static boolean kerdes(String szoveg){
         System.out.println(szoveg+"\n0: nem  1: igen");
-        Scanner scan = new Scanner(System.in);
-        int input;
+        int input= 0;
         input = scan.nextInt();
-        scan.close();
         return input==0 ? false : true;
     }
-    void tesztesetValaszto(int input){
+    void tesztesetValaszto(int input, Scanner scanner){
+        scan = scanner;
         switch (input) {
             case 1 -> teszt1();
             case 2 -> teszt2();

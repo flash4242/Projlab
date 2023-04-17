@@ -21,7 +21,7 @@ public class Main {
             System.out.print("Valasszon egy parancsot: ");
             input = scan.nextInt();
             System.out.println("START");
-            skeleton.tesztesetValaszto(input);
+            skeleton.tesztesetValaszto(input, scan);
             System.out.println("END");
         }
         scan.close();
