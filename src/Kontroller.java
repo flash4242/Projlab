@@ -33,6 +33,9 @@ public  class Kontroller {
         csucsok.add(csucs);
         Skeleton.endMethod();
     }
+    public void reInitialize(){
+        csucsok = new ArrayList<>();
+    }
 
     /**
      * Véletlenszerűen elront véletlenszerű számú pumpát

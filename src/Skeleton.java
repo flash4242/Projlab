@@ -459,14 +459,14 @@ public class Skeleton {
      */
     void teszt17(){
         init = true;
-        Kontroller k = new Kontroller();
+        Kontroller.getInstance().reInitialize();
         Ciszterna c = new Ciszterna();
         Pumpa p = new Pumpa();
-        k.setCsucsok(c);
-        k.setCsucsok(p);
+        Kontroller.getInstance().setCsucsok(c);
+        Kontroller.getInstance().setCsucsok(p);
 
         init = false;
-        k.veletlenPumpaElrontas();
+        Kontroller.getInstance().veletlenPumpaElrontas();
     }
 
     /**
@@ -477,6 +477,7 @@ public class Skeleton {
      */
     void teszt18(){
         init = true;
+        Kontroller.getInstance().reInitialize();
         Cso cs1 = new Cso();
         Cso cs2 = new Cso();
         Pumpa p = new Pumpa();
@@ -501,6 +502,7 @@ public class Skeleton {
      */
     void teszt19(){
         init = true;
+        Kontroller.getInstance().reInitialize();
         Ciszterna c = new Ciszterna();
         Cso cs1 = new Cso();
         Cso cs2 = new Cso();
@@ -524,6 +526,7 @@ public class Skeleton {
      */
     void teszt20(){
         init = true;
+        Kontroller.getInstance().reInitialize();
         Cso cs1 = new Cso();
         Cso cs2 = new Cso();
         Forras f = new Forras();
