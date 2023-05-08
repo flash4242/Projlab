@@ -16,20 +16,18 @@ public class Ciszterna extends Csucs{
     }
 
     /**
-     * Létrehoz egy új Cso objektumot, és beállítja magát a cső mindkét végpontjának.
+     * Létrehoz egy új Cso objektumot, amit kétszer felcsatol.
      * Ezt akkor teszi meg, ha a Ciszterna szomszédos csövei között nincs hurok.
      */
     @Override
-    public void csoLetrehozasa(){
-        Skeleton.startMethod(getClass().getName(), "csoLetrehozasa()");
+    public Cso csoLetrehozasa(){
         if(!vanHurok()){
             Cso cs = new Cso();
-            List<Csucs> csucsok = new ArrayList<>();
-            csucsok.add(this);
-            csucsok.add(this);
-            cs.setSzomszedosCsucs(csucsok);
+            felcsatol(cs);
+            felcsatol(cs);
+            return cs;
         }
-        Skeleton.endMethod();
+        return null;
     }
 
     /**
@@ -37,14 +35,11 @@ public class Ciszterna extends Csucs{
      * @return Igazat ad vissza, ha van hurok, egyébként hamisat.
      */
     private boolean vanHurok(){
-        Skeleton.startMethod(getClass().getName(), "vanHurok()");
         for (Cso c : getSzomszedosCso()){
             if(c.getNeighbours().get(0) == this && c.getNeighbours().get(1) == this){
-                Skeleton.endMethod();
                 return true;
             }
         }
-        Skeleton.endMethod();
         return false;
     }
 
@@ -54,8 +49,6 @@ public class Ciszterna extends Csucs{
      */
     @Override
     public Pumpa pumpaLetrehozasa(){
-        Skeleton.startMethod(getClass().getName(), "pumpaLetrehozasa()");
-        Skeleton.endMethod();
         return new Pumpa();
     }
 
@@ -65,13 +58,10 @@ public class Ciszterna extends Csucs{
      */
     @Override
     public void vizetPumpal() {
-        Skeleton.startMethod(getClass().getName(), "vizetPumpal()");
-        for (Cso c : getSzomszedosCso()){
-            boolean teli = c.vizetVeszit();
-            if (teli){
+        for (Cso c : szomszedosCso){
+            if (c.vizetVeszit()){
                 Kontroller.getInstance().pontNovel("szerelo");
             }
         }
-        Skeleton.endMethod();
     }
 }
