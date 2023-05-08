@@ -43,13 +43,11 @@ public class Pumpa extends Csucs{
         if(!rossz){
             if(getVanViz()){
                 if(szomszedosCso.get(kimenetiCso).vizetKap()){
-                    boolean kapottVizet = szomszedosCso.get(bemenetiCso).vizetVeszit();
-                    setVanViz(kapottVizet);
+                    vanViz = szomszedosCso.get(bemenetiCso).vizetVeszit();
                 }
             }
             else{
-                boolean kapottVizet = szomszedosCso.get(bemenetiCso).vizetVeszit();
-                setVanViz(kapottVizet);
+                vanViz = szomszedosCso.get(bemenetiCso).vizetVeszit();
             }
         }
     }
@@ -66,7 +64,7 @@ public class Pumpa extends Csucs{
         int k = cs % szomszedosCso.size();
         if(kimenetiCso != k && bemenetiCso != k) {
             Cso temp = szomszedosCso.get(k);
-            if (temp.getJatekosRajta().Size() == 0) {
+            if (temp.getJatekosRajta().size() == 0) {
                 if(k<bemenetiCso) bemenetiCso--;
                 if(k<kimenetiCso) kimenetiCso--;
                 lecsatol(temp);

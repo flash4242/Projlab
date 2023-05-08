@@ -19,14 +19,6 @@ public abstract class Csucs extends Mezo{
     }
 
     /**
-     * Visszaadja, hogy van-e víz a csúcsban.
-     * @return Igazat ad vissza, ha van víz a csúcsban. TODO Kellez?
-     */
-    boolean getVanViz(){
-        return vanViz;
-    }
-
-    /**
      * Kap egy játékost és hozzáadja a jatekosRajta listához.
      * @param j A játékos, akit hozzáadunk a listához.
      * @return Igazat ad vissza minden esetben, hogy tájokoztassuk a hívót a hozzáadásról.
