@@ -17,7 +17,7 @@ public class Pumpa extends Csucs{
     /**
      * A pumpa állapota
      */
-    boolean rossz;
+    private boolean rossz;
 
     /**
      * Létrehoz egy Pumpa objektumot
@@ -31,10 +31,8 @@ public class Pumpa extends Csucs{
      */
     @Override
     public void atallit(int kimeneti, int bemeneti) {
-        Skeleton.startMethod(getClass().getName(), "atallit()");
-        bemenetiCso = bemeneti % getSzomszedosCso().size();
-        kimenetiCso = kimeneti % getSzomszedosCso().size();
-        Skeleton.endMethod();
+        bemenetiCso = bemeneti % szomszedosCso.size();
+        kimenetiCso = kimeneti % szomszedosCso.size();
     }
 
     /**
@@ -42,18 +40,18 @@ public class Pumpa extends Csucs{
      */
     @Override
     public void vizetPumpal() {
-        Skeleton.startMethod(getClass().getName(), "vizetPumpal()");
-        if(!Skeleton.kerdes("El van romolva a pumpa?")){
-            if(Skeleton.kerdes("Van viz a pumpaban?")){
-                if(getSzomszedosCso().get(kimenetiCso).vizetKap()){
-                    boolean b =getSzomszedosCso().get(bemenetiCso).vizetVeszit();
+        if(!rossz){
+            if(getVanViz()){
+                if(szomszedosCso.get(kimenetiCso).vizetKap()){
+                    boolean kapottVizet = szomszedosCso.get(bemenetiCso).vizetVeszit();
+                    setVanViz(kapottVizet);
                 }
             }
             else{
-                getSzomszedosCso().get(bemenetiCso).vizetVeszit();
+                boolean kapottVizet = szomszedosCso.get(bemenetiCso).vizetVeszit();
+                setVanViz(kapottVizet);
             }
         }
-        Skeleton.endMethod();
     }
 
     /**
@@ -65,17 +63,30 @@ public class Pumpa extends Csucs{
      */
     @Override
     public Cso adjCsovet(int cs){
-        Skeleton.startMethod(getClass().getName(), "adjCsovet()");
-        if(Skeleton.kerdes("Több mint egy szomszédos csöve van a csúcsnak?") && !Skeleton.kerdes("Áll valaki a szomszédos csövön?")) {
-            if (!Skeleton.kerdes("Bemeneti vagy kimeneti csove a pumpanak?")) {
-                Cso temp = getSzomszedosCso().get(cs % getSzomszedosCso().size());
+        int k = cs % szomszedosCso.size();
+        if(kimenetiCso != k && bemenetiCso != k) {
+            Cso temp = szomszedosCso.get(k);
+            if (temp.getJatekosRajta().Size() == 0) {
+                if(k<bemenetiCso) bemenetiCso--;
+                if(k<kimenetiCso) kimenetiCso--;
                 lecsatol(temp);
-                Skeleton.endMethod();
                 return temp;
             }
         }
-        Skeleton.endMethod();
         return null;
+    }
+
+    /**
+     * Kicseréli a cs1 csövet a cs2 csőre. Figyel arra, hogy ugyanoda rakja a cs2 csövet a listában, ahonnan a cs1-et kivette
+     * @param cs1 A lecsatolandó cső.
+     * @param cs2 A felcsatolandó cső.
+     */
+    @Override
+    public void csoCsere(Cso cs1, Cso cs2){
+        int hova = szomszedosCso.indexOf(cs1);
+        lecsatol(cs1);
+        szomszedosCso.add(hova, cs2);
+        cs2.addCsucs(this);
     }
 
     /**
@@ -83,9 +94,7 @@ public class Pumpa extends Csucs{
      */
     @Override
     public void kontrollerElront() {
-        Skeleton.startMethod(getClass().getName(), "kontrollerElront()");
         setRossz(true);
-        Skeleton.endMethod();
     }
 
     /**
@@ -93,9 +102,7 @@ public class Pumpa extends Csucs{
      */
     @Override
     public void szereloJavit() {
-        Skeleton.startMethod(getClass().getName(), "szereloJavit()");
         setRossz(false);
-        Skeleton.endMethod();
     }
 
     /**
@@ -103,9 +110,15 @@ public class Pumpa extends Csucs{
      * @param r A pumpa állapota.
      */
     public void setRossz(boolean r){
-        Skeleton.startMethod(getClass().getName(), "setRossz()");
         rossz = r;
-        Skeleton.endMethod();
+    }
+
+    /**
+     * Visszaadja, hogy rossz-e a pumpa.
+     * @return igaz, ha rossz a pumpa, hamis ha nem rossz.
+     */
+    public boolean getRossz(){
+        return rossz;
     }
 
     /**
@@ -113,9 +126,23 @@ public class Pumpa extends Csucs{
      * @param be bemeneti cső index a szomszédos csövekhez.
      */
     public void setBemenetiCso(int be){
-        Skeleton.startMethod(getClass().getName(), "setBemenetiCso()");
         bemenetiCso = be;
-        Skeleton.endMethod();
+    }
+
+    /**
+     * Visszaadja a pumpa bemeneti csövének indexét.
+     * @return A bemeneti cső indexe.
+     */
+    public int getBemenetiCso(){
+        return bemenetiCso;
+    }
+
+    /**
+     * Visszaadja a pumpa kimeneti csövének indexét.
+     * @return A kimeneti cső indexe.
+     */
+    public int getKimenetiCso(){
+        return kimenetiCso;
     }
 
     /**
@@ -123,8 +150,6 @@ public class Pumpa extends Csucs{
      * @param ki kimeneti cső index a szomszédos csövekhez.
      */
     public void setKimenetiCso(int ki){
-        Skeleton.startMethod(getClass().getName(), "setKimenetiCso()");
         kimenetiCso = ki;
-        Skeleton.endMethod();
     }
 }

@@ -60,6 +60,7 @@ public abstract class Csucs extends Mezo{
      * @return A csúcs által gyártott cső.
      */
     public Cso csoLetrehozasa(){
+        return null;
     }
 
     /**
@@ -71,14 +72,15 @@ public abstract class Csucs extends Mezo{
      */
     @Override
     public Cso adjCsovet(int cs){
-        if(Skeleton.kerdes("Több mint egy szomszédos csöve van a csúcsnak?") && !Skeleton.kerdes("Áll valaki a szomszédos csövön?")){
-            Cso temp = szomszedosCso.get(cs%szomszedosCso.size());
-            lecsatol(temp);
-            return temp;
+        if(szomszedosCso.size() > 1){ // TODO Kell ez? Lehet h buknak a tesztek ha van.
+            int k = cs % szomszedosCso.size();
+            Cso temp = szomszedosCso.get(k);
+            if(temp.getJatekosRajta().size() == 0){
+                lecsatol(temp);
+                return temp;
+            }
         }
-        else{
-            return null;
-        }
+        return null;
     }
 
     /**
