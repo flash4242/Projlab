@@ -1,21 +1,38 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
- * A játékban lévő Csöveket reprezentáló osztály.
- * Egy cső két csúcsot köt össze és nincs rajta elágazás.
- * Ha lyukas kifolyik rajta a víz ezzel a szabotőrök pontjait növeli.
+ * A csőrendszerben lévő csöveket reprezentáló osztály.
+ * Két csúcsot köthet össze, valamint azokról a csúcsokról le lehet csatolni és más csúcsra felcsatolni.
+ * Passzív elem tehát víz úgy folyhat rajta, ha egy aktív elem szivattyúz belőle vagy bele pumpál.
  */
 public class Cso extends Mezo {
+
     /**
      * A szomszédos csúcsok listája
      */
     private List<Csucs> szomszedosCsucs;
 
     /**
-     * A cső állapota.
+     * A cső működés szerinti állapota.
      */
-    boolean rossz;
+    private boolean rossz;
+
+    /**
+     * A cső ideiglenes állapotából hátralevő körök száma.
+     */
+    private int timeToNormal;
+
+    /**
+     * A cső ideiglenes állapota, ami a játékosok mozgását befolyásolhatja.
+     */
+    private Allapot allapot;
+
+    /**
+     * A cső nem lyukaszthatóságát jelzi körök számában mérve.
+     */
+    private int foltozasiGarancia;
 
     /**
      * Létrehoz egy Csövet, és inicializálja a szomszedosCsucs listát.
@@ -26,24 +43,28 @@ public class Cso extends Mezo {
     }
 
     /**
-     * Kap egy játékost és ha üres a jatekosRajta lista és kötöttek a csővégei, akkor hozzáadja a jatekosRajta listához.
-     *
+     * Kap egy játékost és jelzi, hogy a játékos a csőre tudott-e lépni.
      * @param j A játékos, aki érkezik.
-     * @return Igazat ad vissza ha elfogadja a játékost.
+     * @return Igazat ad vissza ha a játékos ezen a mezőn marad mozgása végén.
      */
     public boolean jatekostElfogad(Jatekos j) {
-        Skeleton.startMethod(getClass().getName(), "jatekostElfogad()");
-        if (Skeleton.kerdes("Allnak az adott csovon?")) {
-            Skeleton.endMethod();
-            return false;
-        } else if (Skeleton.kerdes("Szabad-e valamelyik csoveg?")) {
-            Skeleton.endMethod();
-            return false;
-        } else {
-            jatekosRajta.add(j);
-            Skeleton.endMethod();
-            return true;
+        if(jatekosRajta.size() == 0 && szomszedosCsucs.size() == 2){
+            if(allapot == Allapot.NORMALIS){
+                return true;
+            } else if (allapot == Allapot.RAGADOS) {
+                j.leragad(true);
+                return true;
+            } else if (allapot == Allapot.CSUSZOS) {
+                Mezo aktMezo = j.getAktMezo();
+                aktMezo.jatekostEltavolit(j);
+                Random random = new Random();
+                int irany = random.nextInt(2);
+                szomszedosCsucs.get(irany).jatekostElfogad(j);
+                j.setAktMezo(szomszedosCsucs.get(irany));
+                return false;
+            }
         }
+        return false;
     }
 
     /**
@@ -52,29 +73,14 @@ public class Cso extends Mezo {
      */
     @Override
     public void targyLerakas(Pumpa p) {
-        Skeleton.startMethod(getClass().getName(), "targyLerakas()");
-        Csucs szCsucs = this.szomszedosCsucs.get(0);
-
-        szCsucs.lecsatol(this);
-        p.felcsatol(this);
-
         Cso fele = new Cso();
+        Kontroller.getInstance().addCso(fele);
+        Kontroller.getInstance().addCsucs(p);
+
+        Csucs szCsucs = this.szomszedosCsucs.get(0);
+        szCsucs.csoCsere(this, fele);
         szCsucs.felcsatol(fele);
         p.felcsatol(fele);
-        Skeleton.endMethod();
-    }
-
-    /**
-     * Jelezzük a csőnek, hogy szeretnénk a hozzá kapcsolódó cs-edik csövet megkapni.
-     * Mivel csőhöz nem kapcsolódnak csövek, minden esetben null-al tér vissza.
-     * @param cs A szomszédos csövek közül melyiket szeretnénk megkapni.
-     * @return Null, mivel nincsenek cső szomszédai.
-     */
-    @Override
-    public Cso adjCsovet(int cs){
-        Skeleton.startMethod(getClass().getName(), "adjCsovet()");
-        Skeleton.endMethod();
-        return null;
     }
 
     /**
@@ -83,19 +89,16 @@ public class Cso extends Mezo {
      */
     @Override
     public List<? extends Mezo> getNeighbours() {
-        Skeleton.startMethod(getClass().getName(), "getNeighbours()");
-        Skeleton.endMethod();
         return szomszedosCsucs;
     }
 
     /**
-     * A szabotőr elrontja a csövet.
+     * Egy játékos elrontja a csövet.
      */
     @Override
-    public void szabotorElront() {
-        Skeleton.startMethod(getClass().getName(), "szabotorElront()");
-        setRossz(true);
-        Skeleton.endMethod();
+    public void jatekosElront() {
+        if(foltozasiGarancia == 0)
+            setRossz(true);
     }
 
     /**
@@ -103,9 +106,11 @@ public class Cso extends Mezo {
      */
     @Override
     public void szereloJavit() {
-        Skeleton.startMethod(getClass().getName(), "szereloJavit()");
-        setRossz(false);
-        Skeleton.endMethod();
+        if(rossz){
+            setRossz(false);
+            Random random = new Random();
+            foltozasiGarancia = random.nextInt(3) + 2;
+        }
     }
 
     /**
@@ -113,14 +118,13 @@ public class Cso extends Mezo {
      * @return Igazat ad vissza, ha elfogadta a vizet.
      */
     public boolean vizetKap() {
-        Skeleton.startMethod(getClass().getName(), "vizetKap()");
-        if (Skeleton.kerdes("Van a kimeneti csoben viz?")) {
-            Skeleton.endMethod();
+        if(vanViz)
             return false;
-        } else if (Skeleton.kerdes("Lyukas a kimeneti cso, vagy szabad a masik vege?")) {
+        if(szomszedosCsucs.size() != 2 || rossz){
             Kontroller.getInstance().pontNovel("szabotor");
+            return true;
         }
-        Skeleton.endMethod();
+        vanViz = true;
         return true;
     }
 
@@ -129,33 +133,62 @@ public class Cso extends Mezo {
      * @return Igazat ad vissza, ha volt benne víz.
      */
     public boolean vizetVeszit() {
-        Skeleton.startMethod(getClass().getName(), "vizetVeszit()");
-        if(Skeleton.kerdes("Van a bemeneti csoben viz?")){
-            Skeleton.endMethod();
+        if(vanViz){
+            vanViz = false;
             return true;
         }
-        Skeleton.endMethod();
         return false;
     }
 
     /**
-     * Visszaadja a szomszédos csúcsok listáját, Csucs típusú listaként.
-     * @return A szomszédos csúcsok listája.
+     * A csőnek megváltoztatják az állapotát. CSUSZOS vagy RAGADOS csak abban az esetben lehet, ha eddig NORMALIS volt.
+     * @param allapot az állapot, amire változik
      */
-    public List<Csucs> getSzomszedosCsucs() {
-        Skeleton.startMethod(getClass().getName(), "getSzomszedosCsucs()");
-        Skeleton.endMethod();
-        return szomszedosCsucs;
+    @Override
+    public void allapotValtozas(Allapot allapot) {
+        if(allapot == Allapot.NORMALIS) {
+            this.allapot = Allapot.NORMALIS;
+        } else if (this.allapot == Allapot.NORMALIS) {
+            if(allapot == Allapot.RAGADOS){
+                this.allapot = Allapot.RAGADOS;
+            }
+            else {
+                this.allapot = Allapot.CSUSZOS;
+            }
+            timeToNormal = 3;
+        }
+    }
+
+    /**
+     * Cső állapotaiból hátralévő idő csökken, ami állapot változást idézhet elő, vagy szabadon engedhet odaragadt játékost.
+     */
+    public void stepTime(){
+        if(timeToNormal == 1){
+            allapotValtozas(Allapot.NORMALIS);
+            if(jatekosRajta.size() != 0){
+                jatekosRajta.get(0).leragad(false);
+            }
+        }
+        if(timeToNormal > 0)
+            timeToNormal--;
+        if(foltozasiGarancia > 0)
+            foltozasiGarancia--;
     }
 
     /**
      * Beveszi a szomszédos csúcsok listájába a paraméterül kapott csúcsot
      * @param cs A csúcs, ami bekerül a szomszédok listájába
      */
-    public void setSzomszedosCsucs(Csucs cs){
-        Skeleton.startMethod(getClass().getName(), "setSzomszedosCsucs()");
+    public void addCsucs(Csucs cs){
         szomszedosCsucs.add(cs);
-        Skeleton.endMethod();
+    }
+
+    /**
+     * Eltávolítja a szomszédos csúcsok listájából a paraméterül kapott csúcsot
+     * @param cs A csúcs, amit eltávolít a szomszédok listájából
+     */
+    public void setCsucsToNull(Csucs cs){
+        szomszedosCsucs.remove(cs);
     }
 
     /**
@@ -163,12 +196,10 @@ public class Cso extends Mezo {
      * @param csucsok A beállítandó szomszédos csúcsok listája.
      */
     public void setSzomszedosCsucs(List<Csucs> csucsok){
-        Skeleton.startMethod(getClass().getName(), "setSzomszedosCsucs()");
         szomszedosCsucs = csucsok;
-        Skeleton.endMethod();
     }
 
-    /** /**
+    /**
      * Beállítja a cső állapotát
      * @param r A cső állapota.
      */
@@ -176,6 +207,31 @@ public class Cso extends Mezo {
         Skeleton.startMethod(getClass().getName(), "setRossz()");
         rossz = r;
         Skeleton.endMethod();
+    }
+
+    //TODO protohoz getterek??
+    public boolean getRossz(){
+        return rossz;
+    }
+
+    public Allapot getAllapot(){
+        return allapot;
+    }
+
+    public int getTimeToNormal(){
+        return timeToNormal;
+    }
+
+    public int getFoltozasiGarancia(){
+        return foltozasiGarancia;
+    }
+
+    /**
+     * Visszaadja a szomszédos csúcsok listáját, Csucs típusú listaként.
+     * @return A szomszédos csúcsok listája.
+     */
+    public List<Csucs> getSzomszedosCsucs() {
+        return szomszedosCsucs;
     }
 
 }

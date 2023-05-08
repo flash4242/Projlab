@@ -15,10 +15,8 @@ public class Forras extends Csucs{
      */
     @Override
     public void vizetPumpal(){
-        Skeleton.startMethod(getClass().getName(), "vizetPumpal()");
-        for(Cso c : getSzomszedosCso()){
+        for(Cso c : szomszedosCso){
             c.vizetKap();
         }
-        Skeleton.endMethod();
     }
 }
