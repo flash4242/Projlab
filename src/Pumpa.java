@@ -41,7 +41,7 @@ public class Pumpa extends Csucs{
     @Override
     public void vizetPumpal() {
         if(!rossz){
-            if(getVanViz()){
+            if(vanViz){
                 if(szomszedosCso.get(kimenetiCso).vizetKap()){
                     vanViz = szomszedosCso.get(bemenetiCso).vizetVeszit();
                 }
