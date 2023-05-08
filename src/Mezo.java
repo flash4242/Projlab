@@ -111,7 +111,7 @@ public abstract class Mezo {
 		return jatekosRajta;
 	}
 
-	public boolean getvanViz(){
+	public boolean getVanViz(){
 		return vanViz;
 	}
 }
