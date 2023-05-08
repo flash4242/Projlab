@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  * A játékban lévő Mezőket reprezentáló absztrakt osztály.
+ * A csöveket és csúcsokat kezeli egy egységben a játékosok mozgása szempontjából.
  * A játékosok mezőkön állnak és ezeknek a szomszédaira mozoghatnak.
  */
 public abstract class Mezo {
@@ -9,6 +10,11 @@ public abstract class Mezo {
 	 * A rajta álló játékosok listája.
 	 */
 	protected List<Jatekos> jatekosRajta;
+
+	/**
+	 * Azt jelzi, hogy az adott elem tartalmaz-e vizet
+	 */
+	protected boolean vanViz;
 
 	/**
 	 * Létrehoz egy mezőt, és inicializálja a jatekosRajta listát.
@@ -29,65 +35,51 @@ public abstract class Mezo {
 	 * @param j A játékos, akit el akarunk távolítani a listaból.
 	 */
 	public void jatekostEltavolit(Jatekos j){
-		Skeleton.startMethod(getClass().getName(), "jatekostEltavolit()");
 		jatekosRajta.remove(j);
-		Skeleton.endMethod();
 	}
 
 	/**
-	 * Az adott mezőre lerakja a csövet, leszármazottak felülírják.
+	 * Az adott mezőre lerakja a csövet, leszármazottak felülírhatják.
 	 * @param cs A kapott cső
 	 */
-	public void targyLerakas(Cso cs){
-		Skeleton.startMethod(getClass().getName(), "targyLerakas()");
-		Skeleton.endMethod();
-	}
+	public void targyLerakas(Cso cs){}
 
 	/**
-	 * Az adott mezőre lerakja a pumpát, leszármazottak felülírják.
+	 * Az adott mezőre lerakja a pumpát, leszármazottak felülírhatják.
 	 * @param p A kapott pumpa
 	 */
-	public void targyLerakas(Pumpa p){
-		Skeleton.startMethod(getClass().getName(), "targyLerakas()");
-		Skeleton.endMethod();
-	}
+	public void targyLerakas(Pumpa p){}
 
 	/**
 	 * A szerelő megjavít egy mezőt. Üres függvény, mivel a Mezo nem tud megjavulni.
-	 * Azon leszármazottakban amiket meg lehet javítani meg kell valósítani.
+	 * Azon leszármazottakban, amiket meg lehet javítani meg kell valósítani.
 	 */
-	public void szereloJavit(){
-		Skeleton.startMethod(getClass().getName(), "szereloJavit()");
-		Skeleton.endMethod();
-	}
+	public void szereloJavit(){}
 
 	/**
-	 * A szerelő megjavít egy mezőt. Üres függvény, mivel a Mezo nem tud elromlani.
-	 * Azon leszármazottakban amiket el tud rontani meg kell valósítani.
+	 * Egy játékos elrontja a mezőt. Üres függvény, mivel a Mezo nem tud elromlani.
+	 * Azon leszármazottakban, amiket el lehet rontani meg kell valósítani.
 	 */
-	public void szabotorElront(){
-		Skeleton.startMethod(getClass().getName(), "szabotorElront()");
-		Skeleton.endMethod();
-	}
+	public void jatekosElront(){}
 
 	/**
-	 * A mező létrehoz egy pumpát. Üres függvény, mivel a Mezo nem hozhat létre pumpát.
+	 * A mező létrehoz egy pumpát. Null-al tér vissza alapesetben, mivel a Mezo nem hozhat létre pumpát.
 	 * Azon leszármazottakban amik létrehoznak, meg kell valósítani.
 	 * @return A létrejött pumpa
 	 */
 	public Pumpa pumpaLetrehozasa(){
-		Skeleton.startMethod(getClass().getName(), "pumpaLetrehozasa()");
-		Skeleton.endMethod();
 		return null;
 	}
 
 	/**
 	 * Jelezzük a mezőnek, hogy szeretnénk a hozzá kapcsolódó cs-edik csövet megkapni.
-	 * Minden leszármazott implementálja
+	 * Mivel nem minden Mezo-nek vannak szomszédos csövei, alapesetben Null-al tér vissza.
 	 * @param cs A szomszédos csövek közül melyiket szeretnénk megkapni.
 	 * @return A mező által visszaadott cső, vagy null.
 	 */
-	public abstract Cso adjCsovet(int cs);
+	public Cso adjCsovet(int cs){
+		return null;
+	}
 
 	/**
 	 * Visszaadja a mezővel szomszédos mezők listáját.
@@ -101,14 +93,25 @@ public abstract class Mezo {
 	 * @param kimeneti bemeneti cső index a szomszédos mezőkhöz
 	 * @param bemeneti kimeneti cső index a szomszédos mezőkhöz
 	 */
-	public void atallit(int kimeneti, int bemeneti){
-		Skeleton.startMethod(getClass().getName(), "atallit()");
-		Skeleton.endMethod();
+	public void atallit(int kimeneti, int bemeneti){}
+
+	/**
+	 * Megváltoztatják a mező állapotát.
+	 * Üres függvény, azon leszármazottakban, amik állapota változtatható meg kell valósítani.
+	 * @param allapot az állapot, amire változik
+	 */
+	public void allapotValtozas(Allapot allapot){}
+
+	//TODO komment
+	public void setJatekosRajta(Jatekos j){
+		jatekosRajta.add(j);
 	}
 
-	public void setJatekosRajta(Jatekos j){
-		Skeleton.startMethod(getClass().getName(), "setJatekosRajta()");
-		jatekosRajta.add(j);
-		Skeleton.endMethod();
+	public List<Jatekos> getJatekosRajta(){
+		return jatekosRajta;
+	}
+
+	public boolean getvanViz(){
+		return vanViz;
 	}
 }
