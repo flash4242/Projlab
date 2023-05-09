@@ -18,6 +18,17 @@ public abstract class Csucs extends Mezo{
         szomszedosCso = new ArrayList<Cso>();
     }
 
+    public void addCso(Cso cso){
+
+    }
+
+    public void setRossz(boolean r){
+
+    }
+
+    public void removeNeighbour(Cso cso){
+        szomszedosCso.remove(cso);
+    }
     /**
      * Kap egy játékost és hozzáadja a jatekosRajta listához.
      * @param j A játékos, akit hozzáadunk a listához.

@@ -30,6 +30,10 @@ public abstract class Mezo {
 	 */
 	public abstract boolean jatekostElfogad(Jatekos j);
 
+	public void setVanViz(boolean viz){
+		vanViz = viz;
+	}
+
 	/**
 	 * Eltávolítja a paramétkent kapott játekost a játekosRajta listából.
 	 * @param j A játékos, akit el akarunk távolítani a listaból.

@@ -24,6 +24,16 @@ public  class Kontroller {
 
         return single_instance;
     }
+
+    public void addCso(Cso cso){
+
+    }
+    public void addCsucs(Csucs csucs){
+
+    }
+    public void removeJatekos(Jatekos jatekos){
+
+    }
     /**
      * hozzáad egy csúcsot a csúcsok listájához
      * @param csucs

@@ -42,6 +42,10 @@ public class Cso extends Mezo {
         szomszedosCsucs = new ArrayList<>();
     }
 
+    public void removeNeighbour(Csucs csucs){
+        szomszedosCsucs.remove(csucs);
+    }
+
     /**
      * Kap egy játékost és jelzi, hogy a játékos a csőre tudott-e lépni.
      * @param j A játékos, aki érkezik.
