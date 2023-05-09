@@ -335,7 +335,7 @@ public class Proto {
         }
     }
     void MezokSzetkapcsolasa(String[] parancs){
-        if(checkParamCount(2,parancs)&& checkIdentifier(parancs[1],"Mezo")&&checkIdentifier(parancs[2],"Mezo")) {
+        if(checkParamCount(2,parancs)&& checkIdentifier(parancs[1],"mezo")&&checkIdentifier(parancs[2],"mezo")) {
             if(mezoIds.get(parancs[1]).getNeighbours().contains(mezoIds.get(parancs[2]))&&
                     mezoIds.get(parancs[2]).getNeighbours().contains(mezoIds.get(parancs[1]))){
                 if(csoIds.containsKey(parancs[1])&&csucsIds.containsKey(parancs[2])){
@@ -350,7 +350,7 @@ public class Proto {
         }
     }
     void VizAllit(String[] parancs){
-        if(checkParamCount(2,parancs)&& checkIdentifier(parancs[1],"Mezo")){
+        if(checkParamCount(2,parancs)&& checkIdentifier(parancs[1],"mezo")){
             switch (parancs[2]){
                 case "true":
                     mezoIds.get(parancs[1]).setVanViz(true);
@@ -364,7 +364,7 @@ public class Proto {
         }
     }
     void HibasAllit(String[] parancs){
-        if(checkParamCount(2,parancs)&& checkIdentifier(parancs[1],"Mezo")) {
+        if(checkParamCount(2,parancs)&& checkIdentifier(parancs[1],"mezo")) {
             if(csoIds.containsKey(parancs[1])){
                 if(parancs[2].equals("true"))
                     csoIds.get(parancs[1]).setRossz(false);
@@ -380,28 +380,80 @@ public class Proto {
         }
     }
     void TargyAllit(String[] parancs){
-
+        if(checkParamCount(1,parancs,true)&& checkIdentifier(parancs[1],"szerelo")) {
+            if(parancs.length == 2){
+                if(szereloIds.get(parancs[1]).getCsoveg() != null)
+                    kontroller.removeCso(szereloIds.get(parancs[1]).getCsoveg());
+                if(szereloIds.get(parancs[1]).getPumpa() != null)
+                    kontroller.removeCsucs(szereloIds.get(parancs[1]).getPumpa());
+                szereloIds.get(parancs[1]).setCsoveg(null);
+                szereloIds.get(parancs[1]).setPumpa(null);
+            }
+            if(parancs.length == 4){
+                if(parancs[2].equals("Pumpa")) {
+                    Pumpa pumpa = new Pumpa();
+                    kontroller.addCsucs(pumpa);
+                    csucsIds.put(parancs[3], pumpa);
+                    mezoIds.put(parancs[3], pumpa);
+                    szereloIds.get(parancs[1]).setPumpa(pumpa);
+                }
+                if(parancs[2].equals("Cso")) {
+                    Cso cso = new Cso();
+                    kontroller.addCso(cso);
+                    csoIds.put(parancs[3], cso);
+                    mezoIds.put(parancs[3], cso);
+                    szereloIds.get(parancs[1]).setCsoveg(cso);
+                }
+            }
+        }
     }
     void PumpaBemenetAllit(String[] parancs){
-
+        if(checkParamCount(1,parancs,true)&& checkIdentifier(parancs[1],"csucs")) {
+            if(parancs.length == 2){
+                csucsIds.get(parancs[1]).setBemenetiCso(null);
+            }
+            if(parancs.length == 3 && csucsIds.get(parancs[1]).getNeighbours().contains(csoIds.get(parancs[2]))){
+                csucsIds.get(parancs[1]).setBemenetiCso(csoIds.get(parancs[2]));
+            }
+        }
     }
     void PumpaKimenetAllit(String[] parancs){
-
+        if(checkParamCount(1,parancs,true)&& checkIdentifier(parancs[1],"csucs")) {
+            if(parancs.length == 2){
+                csucsIds.get(parancs[1]).setKimenetiCso(null);
+            }
+            if(parancs.length == 3 && csucsIds.get(parancs[1]).getNeighbours().contains(csoIds.get(parancs[2]))){
+                csucsIds.get(parancs[1]).setKimenetiCso(csoIds.get(parancs[2]));
+            }
+        }
     }
     void Mozgas(String[] parancs){
-
+        if(checkParamCount(2,parancs)&& checkIdentifier(parancs[1],"jatekos")&&
+                checkIdentifier(parancs[2],"mezo")) {
+            jatekosIds.get(parancs[1]).mozgas(
+                    jatekosIds.get(parancs[1]).getAktMezo().getNeighbours().indexOf(mezoIds.get(parancs[2]))
+            );
+        }
     }
     void Lyukaszt(String[] parancs){
-
+        if(checkParamCount(1,parancs)&& checkIdentifier(parancs[1],"jatekos")) {
+            jatekosIds.get(parancs[1]).csoKilyukasztasa();
+        }
     }
     void Foltoz(String[] parancs){
-
+        if(checkParamCount(1,parancs)&& checkIdentifier(parancs[1],"szerelo")) {
+            szereloIds.get(parancs[1]).mezotJavit();
+        }
     }
     void Ragasztoz(String[] parancs){
-
+        if(checkParamCount(1,parancs)&& checkIdentifier(parancs[1],"jatekos")) {
+            jatekosIds.get(parancs[1]).beragasztoz();
+        }
     }
     void Csuszosit(String[] parancs){
-
+        if(checkParamCount(1,parancs)&& checkIdentifier(parancs[1],"szabotor")) {
+            szabotorIds.get(parancs[1]).csuszosit();
+        }
     }
     void PumpaAllit(String[] parancs){
 

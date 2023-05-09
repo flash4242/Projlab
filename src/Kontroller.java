@@ -34,6 +34,12 @@ public  class Kontroller {
     public void removeJatekos(Jatekos jatekos){
 
     }
+    public void removeCso(Cso cso){
+
+    }
+    public void removeCsucs(Csucs csucs){
+
+    }
     /**
      * hozzáad egy csúcsot a csúcsok listájához
      * @param csucs

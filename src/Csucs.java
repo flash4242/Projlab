@@ -25,6 +25,12 @@ public abstract class Csucs extends Mezo{
     public void setRossz(boolean r){
 
     }
+    public void setBemenetiCso(Cso cso){
+
+    }
+    public void setKimenetiCso(Cso cso){
+
+    }
 
     public void removeNeighbour(Cso cso){
         szomszedosCso.remove(cso);

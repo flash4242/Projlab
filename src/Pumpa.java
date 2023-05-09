@@ -110,7 +110,16 @@ public class Pumpa extends Csucs{
     public void setRossz(boolean r){
         rossz = r;
     }
-
+    public void setBemenetiCso(Cso cso){
+        if(cso == null)
+            bemenetiCso = -1;
+        bemenetiCso = szomszedosCso.indexOf(cso);
+    }
+    public void setKimenetiCso(Cso cso){
+        if(cso == null)
+            kimenetiCso = -1;
+        kimenetiCso = szomszedosCso.indexOf(cso);
+    }
     /**
      * Visszaadja, hogy rossz-e a pumpa.
      * @return igaz, ha rossz a pumpa, hamis ha nem rossz.
