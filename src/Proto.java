@@ -10,14 +10,20 @@ public class Proto {
     List<String[]> parancsok;
     Kontroller kontroller;
     Map<String, Jatekos> jatekosIds;
+    Map<String, Szerelo> szereloIds;
+    Map<String, Szabotor> szabotorIds;
     Map<String, Mezo> mezoIds;
+    Map<String, Cso> csoIds;
+    Map<String, Csucs> csucsIds;
 
     public Proto(String in, String out){
         inputFile = new File(in);
         outputFile = new File(out);
         kontroller = Kontroller.getInstance();
-        jatekosIds = new HashMap<>();
-        mezoIds = new HashMap<>();
+        szereloIds = new HashMap<>();
+        szabotorIds = new HashMap<>();
+        csoIds = new HashMap<>();
+        csucsIds = new HashMap<>();
         try {
             outputFile.createNewFile();
         } catch (IOException e) {
@@ -64,7 +70,15 @@ public class Proto {
         if(tipus.equals("mezo"))
             helyes= mezoIds.containsKey(id);
         if(tipus.equals("jatekos"))
-            helyes = jatekosIds.containsKey(id);
+            helyes= jatekosIds.containsKey(id);
+        if(tipus.equals("cso"))
+            helyes= csoIds.containsKey(id);
+        if(tipus.equals("csucs"))
+            helyes= csucsIds.containsKey(id);
+        if(tipus.equals("szerelo"))
+            helyes = szereloIds.containsKey(id);
+        if(tipus.equals("szabotor"))
+            helyes = szabotorIds.containsKey(id);
         if(!helyes)
             kiir("hibas_azonosito");
         return helyes;
@@ -89,7 +103,7 @@ public class Proto {
 
     void vegrehajt(){
         for (String[] parancs:parancsok
-             ) {
+        ) {
             switch (parancs[0]){
                 case "TesztVege":
                     TesztVege(parancs);
@@ -213,27 +227,101 @@ public class Proto {
     }
     void PumpaFelvetel(String[] parancs){
         if(checkParamCount(1,parancs,true)){
-            if(checkIdentifier(parancs[1],"jatekos")){
-                jatekosIds.get(parancs[1]).pumpaFelvetele();
-                mezoIds.put(parancs.length==3?parancs[2]:"d", jatekosIds.get(parancs[1]).getPumpa());
+            if(checkIdentifier(parancs[1],"szerelo")){
+                szereloIds.get(parancs[1]).pumpaFelvetele();
+                mezoIds.put(parancs.length==3?parancs[2]:"p", szereloIds.get(parancs[1]).getPumpa());
             }
         }
     }
     void TargyLerakasa(String[] parancs){
-        if(checkParamCount(0,parancs,false)){
-
+        if(checkParamCount(1,parancs,true)&&checkIdentifier(parancs[1],"szerelo")){
+            if(szereloIds.get(parancs[1]).getPumpa() !=null&&parancs.length == 3){
+                szereloIds.get(parancs[1]).pumpatLerak();
+                for (Cso cs:kontroller.getCsovek()
+                ) {
+                    if(!mezoIds.containsValue(cs)) {
+                        mezoIds.put(parancs[2], cs);
+                        csoIds.put(parancs[2], cs);
+                    }
+                }
+            } else if (szereloIds.get(parancs[1]).getCsoveg() !=null) {
+                szereloIds.get(parancs[1]).csovegetLerak();
+            }
         }
     }
     void PumpaJavitasa(String[] parancs){
-        if(checkParamCount(0,parancs,false)){
-
+        if(checkParamCount(1,parancs)&&checkIdentifier(parancs[1],"szerelo")){
+            szereloIds.get(parancs[1]).mezotJavit();
         }
     }
     void MezoHozzaadasa(String[] parancs){
-
+        if(checkParamCount(2,parancs,true)){
+            switch (parancs[2]){
+                case "Cso":
+                    Cso cso = new Cso();
+                    mezoIds.put(parancs[1], cso);
+                    csoIds.put(parancs[1], cso);
+                    if(parancs.length == 4 && checkIdentifier(parancs[3], "csucs")){
+                        cso.addCsucs(csucsIds.get(parancs[3]));
+                        csucsIds.get(parancs[3]).addCso(cso);
+                    }
+                    break;
+                case"Pumpa":
+                    Pumpa pumpa = new Pumpa();
+                    mezoIds.put(parancs[1], pumpa);
+                    csucsIds.put(parancs[1], pumpa);
+                    if(parancs.length == 4 && checkIdentifier(parancs[3], "cso")){
+                        pumpa.addCso(csoIds.get(parancs[3]));
+                        csoIds.get(parancs[3]).addCsucs(pumpa);
+                    }
+                    break;
+                case"Ciszterna":
+                    Ciszterna ciszterna = new Ciszterna();
+                    mezoIds.put(parancs[1], ciszterna);
+                    csucsIds.put(parancs[1], ciszterna);
+                    if(parancs.length == 4 && checkIdentifier(parancs[3], "cso")){
+                        ciszterna.addCso(csoIds.get(parancs[3]));
+                        csoIds.get(parancs[3]).addCsucs(ciszterna);
+                    }
+                    break;
+                case"Forras":
+                    Forras forras = new Forras();
+                    mezoIds.put(parancs[1], forras);
+                    csucsIds.put(parancs[1], forras);
+                    if(parancs.length == 4 && checkIdentifier(parancs[3], "cso")){
+                        forras.addCso(csoIds.get(parancs[3]));
+                        csoIds.get(parancs[3]).addCsucs(forras);
+                    }
+                    break;
+                default:
+                    kiir("hibas_parameter");
+                    break;
+            }
+        }
     }
     void JatekosHozzaadasa(String[] parancs){
-
+        if(checkParamCount(3,parancs)){
+            if(parancs[2].equals("Szerelo")){
+                Szerelo szerelo = new Szerelo();
+                jatekosIds.put(parancs[1], szerelo);
+                szereloIds.put(parancs[1], szerelo);
+                if(checkIdentifier(parancs[3], "mezo")){
+                    szerelo.setAktMezo(mezoIds.get(parancs[3]));
+                    mezoIds.get(parancs[3]).setJatekosRajta(szerelo);
+                }
+            }
+            if(parancs[2].equals("Szabotor")){
+                Szabotor szabotor = new Szabotor();
+                jatekosIds.put(parancs[1], szabotor);
+                szabotorIds.put(parancs[1], szabotor);
+                if(checkIdentifier(parancs[3], "mezo")){
+                    szabotor.setAktMezo(mezoIds.get(parancs[3]));
+                    mezoIds.get(parancs[3]).setJatekosRajta(szabotor);
+                }
+            }
+            else
+                kiir("hibas_parameter");
+        }
     }
     void JatekosEltavolitasa(String[] parancs){
 
