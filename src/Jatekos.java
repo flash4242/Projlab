@@ -1,5 +1,4 @@
 import java.util.List;
-
 /**
  * A játékban lévő játékosokat reprezentálja. A Szerelő és Szabotőr közös
  * tulajdonságaiért és viselkedéséért felelős absztrakt osztály. A felhasználó
@@ -10,15 +9,22 @@ public abstract class Jatekos {
     /**
      * A Játékos aktuális mezője, amin éppen tartózkodik.
      */
-    private Mezo atkMezo;
+    private Mezo atkMezo=null;
 
     /**
      * Az igaz értéke jelzi, hogy az adott Játékos hozzá van ragadva ahhoz
      * a mezőhöz, amin áll, így onnan elmozogni nem képes. Hamis érték esetén
      * a Játékos elmozoghat arról a mezőről, amin áll.
      */
-    private boolean ragados;
+    private boolean ragados=false;
 
+    /**
+     * Konstruktor
+     */
+    Jatekos(){
+        setAktMezo(null);
+        leragad(false);
+    }
     /**
      * Beállítja a paraméterül adott m-et az aktMezo-nek.
      * @param m ami az aktMezo értéke lesz
@@ -79,7 +85,6 @@ public abstract class Jatekos {
      * @param hova hanyadik mezőre lép a játékos az aktMezo szomszédlistában
      */
     public void mozgas(int hova){
-        Skeleton.startMethod(getClass().getName(), "mozgas()");
         if(!getRagados()){
             List<? extends Mezo> neighbours = getAktMezo().getNeighbours();
             Mezo hovamezo=neighbours.get(hova);
@@ -88,7 +93,6 @@ public abstract class Jatekos {
                 setAktMezo(hovamezo);
             }
         }
-        Skeleton.endMethod();
     }
 
     /**
@@ -98,8 +102,6 @@ public abstract class Jatekos {
      * @param kimeneti melyik csőbe folyjon a víz
      */
     public void pumpaAtallitasa(int bemeneti, int kimeneti){
-        Skeleton.startMethod(getClass().getName(), "pumpaAtallitasa()");
         getAktMezo().atallit(bemeneti, kimeneti);
-        Skeleton.endMethod();
     }
 }

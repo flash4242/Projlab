@@ -7,7 +7,7 @@ public class Szabotor extends Jatekos {
      * A csövet, amin áll csúszóssá teszi.
      * A szerelő az aktMezo-nek meghívja az allapotValtozas() metódusát CSUSZOS paraméterrel.
      */
-    void csuszosit(){
+    public void csuszosit(){
         getAktMezo().allapotValtozas(Allapot.CSUSZOS);
     }
 }
