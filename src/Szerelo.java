@@ -91,5 +91,4 @@ public class Szerelo extends Jatekos{
         }
         Skeleton.endMethod();
     }
-
 }
