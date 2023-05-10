@@ -21,7 +21,7 @@ public abstract class Jatekos {
 
     /**
      * Beállítja a paraméterül adott m-et az aktMezo-nek.
-     * @param m
+     * @param m ami az aktMezo értéke lesz
      */
     public void setAktMezo(Mezo m){
         atkMezo=m;
@@ -29,7 +29,7 @@ public abstract class Jatekos {
 
     /**
      * Visszater a játékos aktMezo-jével.
-     * @return
+     * @return játekos aktMezo-je
      */
     public Mezo getAktMezo(){
         return atkMezo;
@@ -37,7 +37,7 @@ public abstract class Jatekos {
 
     /**
      * A játékos ragados attribútumát lehet állítani a paraméterként megadott értékre.
-     * @param b
+     * @param b ragados új értéke
      */
     void leragad(boolean b){
         ragados=b;
@@ -45,7 +45,7 @@ public abstract class Jatekos {
 
     /**
      * A játékos ragados attribútumát lehet állítani a paraméterként megadott értékre.
-     * @return
+     * @return ragados értéke
      */
     boolean getRagados(){
         return ragados;
@@ -76,7 +76,7 @@ public abstract class Jatekos {
      * aktMezo szomszédjainak a listáját. Amennyiben annak a mezőnek, ahová a játékos lép a jatekosElfogad() metódusa
      * igaz értékkel tér vissza, akkor ráléphet az új mezőre a játékos. Ekkor az aktMezo jatekosEltavolit() eltávolítja
      * a játékost az aktuális mezőről és az új mezőt pedig beállítja az aktMezo-nek a setAktMezo() metódus segítségével.
-     * @param hova
+     * @param hova hanyadik mezőre lép a játékos az aktMezo szomszédlistában
      */
     public void mozgas(int hova){
         Skeleton.startMethod(getClass().getName(), "mozgas()");
@@ -94,8 +94,8 @@ public abstract class Jatekos {
     /**
      * A játékos úgy állít át egy pumpát, hogy megadja, melyik csőből (bemeneti) melyik csőbe (kimeneti) folyjon a víz.
      * A játékos az aktMezo-re meghívja annak az atallit() metódusát a bemeneti és kimeneti paraméterekkel.
-     * @param bemeneti
-     * @param kimeneti
+     * @param bemeneti melyik csőből folyjon a víz
+     * @param kimeneti melyik csőbe folyjon a víz
      */
     public void pumpaAtallitasa(int bemeneti, int kimeneti){
         Skeleton.startMethod(getClass().getName(), "pumpaAtallitasa()");
