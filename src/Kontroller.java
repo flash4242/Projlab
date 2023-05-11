@@ -42,8 +42,17 @@ public  class Kontroller {
     public void removeCsucs(Csucs csucs){
 
     }
+    public void stepTime(){
+
+    }
     public List<Cso> getCsovek(){
         return csovek;
+    }
+    public int getSzabotorPontok(){
+        return 0;
+    }
+    public int getSzereloPontok(){
+        return 0;
     }
 
     /**

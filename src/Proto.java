@@ -5,16 +5,16 @@ import java.io.IOException;
 import java.util.*;
 
 public class Proto {
-    File inputFile;
-    File outputFile;
-    List<String[]> parancsok;
-    Kontroller kontroller;
-    Map<String, Jatekos> jatekosIds;
-    Map<String, Szerelo> szereloIds;
-    Map<String, Szabotor> szabotorIds;
-    Map<String, Mezo> mezoIds;
-    Map<String, Cso> csoIds;
-    Map<String, Csucs> csucsIds;
+    private File inputFile;
+    private File outputFile;
+    private List<String[]> parancsok;
+    private Kontroller kontroller;
+    private Map<String, Jatekos> jatekosIds;
+    private Map<String, Szerelo> szereloIds;
+    private Map<String, Szabotor> szabotorIds;
+    private Map<String, Mezo> mezoIds;
+    private Map<String, Cso> csoIds;
+    private Map<String, Csucs> csucsIds;
 
     public Proto(String in, String out){
         inputFile = new File(in);
@@ -22,8 +22,10 @@ public class Proto {
         kontroller = Kontroller.getInstance();
         szereloIds = new HashMap<>();
         szabotorIds = new HashMap<>();
+        jatekosIds = new HashMap<>();
         csoIds = new HashMap<>();
         csucsIds = new HashMap<>();
+        mezoIds = new HashMap<>();
         try {
             outputFile.createNewFile();
         } catch (IOException e) {
@@ -39,8 +41,8 @@ public class Proto {
             throw new RuntimeException(e);
         }
         parancsok = new ArrayList<>();
-        while(scanner.hasNext()){
-            String akt = scanner.next();
+        while(scanner.hasNextLine()){
+            String akt = scanner.nextLine();
             if(!akt.startsWith("#")) {
                 parancsok.add(akt.split(" "));
             }
