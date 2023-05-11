@@ -8,7 +8,7 @@ public abstract class Csucs extends Mezo{
     /**
      * A szomszédos csövek listája.
      */
-    protected List<Cso> szomszedosCso;
+    private List<Cso> szomszedosCso;
 
     /**
      * Létrehoz egy Csucsot, és inicializálja a szomszedosCso listát.
@@ -19,7 +19,7 @@ public abstract class Csucs extends Mezo{
     }
 
     public void addCso(Cso cso){
-
+        szomszedosCso.add(cso);
     }
 
     public void setRossz(boolean r){
@@ -42,7 +42,7 @@ public abstract class Csucs extends Mezo{
      */
     @Override
     public boolean jatekostElfogad(Jatekos j) {
-        jatekosRajta.add(j);
+        getJatekosRajta().add(j);
         return true;
     }
 
@@ -51,7 +51,7 @@ public abstract class Csucs extends Mezo{
      * @param j A játékos, akit el akarunk távolítani a listaból.
      */
     public void jatekostEltavolit(Jatekos j){
-        jatekosRajta.remove(j);
+        getJatekosRajta().remove(j);
     }
 
     /**
@@ -81,7 +81,7 @@ public abstract class Csucs extends Mezo{
      */
     @Override
     public Cso adjCsovet(int cs){
-        if(szomszedosCso.size() > 1){ // TODO Kell ez? Lehet h buknak a tesztek ha van.
+        if(szomszedosCso.size() > 1){
             int k = cs % szomszedosCso.size();
             Cso temp = szomszedosCso.get(k);
             if(temp.getJatekosRajta().size() == 0){

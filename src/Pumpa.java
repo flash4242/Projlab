@@ -7,12 +7,12 @@ public class Pumpa extends Csucs{
     /**
      * Index a szomszedosCso listához. A bemeneti csövet jelzi.
      */
-    private int bemenetiCso;
+    private int bemenetiCso = -1;
 
     /**
      * Index a szomszedosCso listához. A kimeneti csövet jelzi.
      */
-    private int kimenetiCso;
+    private int kimenetiCso = -1;
 
     /**
      * A pumpa állapota
@@ -31,8 +31,8 @@ public class Pumpa extends Csucs{
      */
     @Override
     public void atallit(int kimeneti, int bemeneti) {
-        bemenetiCso = bemeneti % szomszedosCso.size();
-        kimenetiCso = kimeneti % szomszedosCso.size();
+        bemenetiCso = bemeneti % getSzomszedosCso().size();
+        kimenetiCso = kimeneti % getSzomszedosCso().size();
     }
 
     /**
@@ -41,13 +41,13 @@ public class Pumpa extends Csucs{
     @Override
     public void vizetPumpal() {
         if(!rossz){
-            if(vanViz){
-                if(szomszedosCso.get(kimenetiCso).vizetKap()){
-                    vanViz = szomszedosCso.get(bemenetiCso).vizetVeszit();
+            if(getVanViz()){
+                if(getSzomszedosCso().get(kimenetiCso).vizetKap()){
+                    setVanViz(getSzomszedosCso().get(bemenetiCso).vizetVeszit());
                 }
             }
             else{
-                vanViz = szomszedosCso.get(bemenetiCso).vizetVeszit();
+                setVanViz(getSzomszedosCso().get(bemenetiCso).vizetVeszit());
             }
         }
     }
@@ -61,9 +61,9 @@ public class Pumpa extends Csucs{
      */
     @Override
     public Cso adjCsovet(int cs){
-        int k = cs % szomszedosCso.size();
+        int k = cs % getSzomszedosCso().size();
         if(kimenetiCso != k && bemenetiCso != k) {
-            Cso temp = szomszedosCso.get(k);
+            Cso temp = getSzomszedosCso().get(k);
             if (temp.getJatekosRajta().size() == 0) {
                 if(k<bemenetiCso) bemenetiCso--;
                 if(k<kimenetiCso) kimenetiCso--;
@@ -81,9 +81,9 @@ public class Pumpa extends Csucs{
      */
     @Override
     public void csoCsere(Cso cs1, Cso cs2){
-        int hova = szomszedosCso.indexOf(cs1);
+        int hova = getSzomszedosCso().indexOf(cs1);
         lecsatol(cs1);
-        szomszedosCso.add(hova, cs2);
+        getSzomszedosCso().add(hova, cs2);
         cs2.addCsucs(this);
     }
 
@@ -113,12 +113,12 @@ public class Pumpa extends Csucs{
     public void setBemenetiCso(Cso cso){
         if(cso == null)
             bemenetiCso = -1;
-        bemenetiCso = szomszedosCso.indexOf(cso);
+        bemenetiCso = getSzomszedosCso().indexOf(cso);
     }
     public void setKimenetiCso(Cso cso){
         if(cso == null)
             kimenetiCso = -1;
-        kimenetiCso = szomszedosCso.indexOf(cso);
+        kimenetiCso = getSzomszedosCso().indexOf(cso);
     }
     /**
      * Visszaadja, hogy rossz-e a pumpa.

@@ -58,7 +58,7 @@ public class Ciszterna extends Csucs{
      */
     @Override
     public void vizetPumpal() {
-        for (Cso c : szomszedosCso){
+        for (Cso c : getSzomszedosCso()){
             if (c.vizetVeszit()){
                 Kontroller.getInstance().pontNovel("szerelo");
             }
