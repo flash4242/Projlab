@@ -27,7 +27,7 @@ public class Cso extends Mezo {
     /**
      * A cső ideiglenes állapota, ami a játékosok mozgását befolyásolhatja.
      */
-    private Allapot allapot;
+    private Allapot allapot = Allapot.NORMALIS;
 
     /**
      * A cső nem lyukaszthatóságát jelzi körök számában mérve.

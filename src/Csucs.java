@@ -19,7 +19,7 @@ public abstract class Csucs extends Mezo{
     }
 
     public void addCso(Cso cso){
-
+        szomszedosCso.add(cso);
     }
 
     public void setRossz(boolean r){
