@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * A játék menetét kontrollálja, számolja a két csapat pontjait, számolja a köröket, az akciók után áramoltatja a vizet.
+ */
 public  class Kontroller {
     private int szereloPontok;
     private int szabotorPontok;
@@ -29,6 +32,11 @@ public  class Kontroller {
 
         return single_instance;
     }
+
+    /**
+     * Getterek
+     * @return
+     */
     public int getSzereloPontok(){return szereloPontok;}
     public int getSzabotorPontok(){return szabotorPontok;}
     public int getAktualisKor(){return aktualisKor;}
@@ -39,6 +47,17 @@ public  class Kontroller {
     public List<Cso> getCsovek(){return csovek;}
     public List<Jatekos> getJatekosok(){return jatekosok;}
 
+    /**
+     * Setterek
+     * @param p
+     * @return
+     */
+    public void setSzereloPontok(int p){szereloPontok=p;}
+    public void setSzabotorPontok(int p){szabotorPontok=p;}
+    public void setAktJatekos(int j){aktualisJatekos=j;}
+    public void setSzerelokSzama(int sz){szerelokSzama=sz;}
+    public void setSzabotorokSzama(int sz){szabotorokSzama=sz;}
+    public void setAktKor(int k){aktualisKor=k;}
 
 
 
@@ -49,19 +68,45 @@ public  class Kontroller {
         for (Csucs csucs:csucsok)
             csucs.vizetPumpal();
     }
+
+    /**
+     * Létrehozza a játék elemeit, felépítését. Hívja az initPalya(), majd az initJatekosok(int, int) függvényt.
+     */
     public void initJatek(){
         initPalya();
-        initJatekosok();
+        initJatekosok(szerelokSzama, szabotorokSzama);
     }
-    public void initPalya(){
 
+    /**
+     * A játék pályáját hozza létre: a ciszternákat, forrásokat, csöveket, pumpákat és az ezek közötti kapcsolatokat is beállítja.
+     */
+    public void initPalya(){
+        for(int i=0; i<5; i++){
+            Ciszterna c = new Ciszterna();
+            csucsok.add(c);
+        }
+        for(int i=0; i<12; i++){
+            Pumpa p = new Pumpa();
+            csucsok.add(p);
+        }
+        for(int i=0; i<5; i++){
+            Forras f = new Forras();
+            csucsok.add(f);
+        }
+        for(int i=0; i<30; i++){
+            Cso cs = new Cso();
+            for(Csucs csucs: csucsok){
+                //TODO: ezután mi van?
+            }
+            csovek.add(cs);
+        }
     }
-    public void initJatekosok(){
+    public void initJatekosok(int szerelokSz, int szabotorokSz){
 
     }
 
     /**
-     * megnöveli a paraméterben átadott csapat pontjait eggyel
+     * Megnöveli a paraméterben átadott csapat pontjait eggyel
      * @param csapat
      */
     public void pontNovel(String csapat){
@@ -70,36 +115,54 @@ public  class Kontroller {
             case "szabotorok" -> szabotorPontok++;
         }
     }
+
     /**
-     * Véletlenszerűen elront véletlenszerű számú pumpát
+     * Véletlenszerűen elront pumpákat. Választ egy véletlen számot a csucsok tömb elemszámának 20%-a és 50%-a között
+     * és ennyiszer elront egy véletlenszerűen választott (azaz egy indexet választ véletlenszerűen a tömb elemszámának minimuma és maximuma között) pumpát.
      */
     public void veletlenPumpaElrontas(){
-        Skeleton.startMethod(getClass().getName(), "veletlenPumpaElrontas()");
-        Random rand = new Random();
-        for (Csucs csucs:csucsok){
-            if(Skeleton.kerdes("Elromoljon-e éppen a pumpa?"))
-                csucs.kontrollerElront();
+        Random r = new Random();
+        int alsohatar = (int)(csucsok.size()*0.2);
+        int felsohatar = (int)(csucsok.size()*0.5);
+        int mennyit_rontsak_el = r.nextInt(felsohatar-alsohatar) + alsohatar;
+
+        while(mennyit_rontsak_el>0) {
+            int melyiket = r.nextInt(csucsok.size()-1);
+            csucsok.get(melyiket).kontrollerElront();
+            mennyit_rontsak_el--;
         }
-        Skeleton.endMethod();
     }
 
+    /**
+     * A csövek normálissá  változásáig hátralévő időt csökkenti.
+     * Minden, a csovek listában lévő, csövön meghívja az adott cső stepTime() függvényét.
+     */
     public void stepTime(){
         for(Cso cs: csovek){
             cs.stepTime();
         }
     }
 
+    /**
+     * Hozzáad egy csövet a csovek listához. A paramétert berakja a lista végére.
+     * @param cso
+     */
     public void addCso(Cso cso){
         csovek.add(cso);
     }
 
     /**
-     * hozzáad egy csúcsot a csúcsok listájához
+     * Hozzáad egy csúcsot a csucsok listájához. A paramétert berakja a lista végére.
      * @param csucs
      */
     public void addCsucs(Csucs csucs){
         csucsok.add(csucs);
     }
+
+    /**
+     * Eltávolítja a paraméterként kapott Jatekos-t a jatekosok listából.
+     * @param jatekos
+     */
     public void removeJatekos(Jatekos jatekos){
         for(int i=0; i<jatekosok.size(); i++){
             if(jatekosok.get(i).equals(jatekos)) {
@@ -108,6 +171,11 @@ public  class Kontroller {
             }
         }
     }
+
+    /**
+     * Eltávolítja a paraméterként kapott Cso-t a csovek listából.
+     * @param cso
+     */
     public void removeCso(Cso cso){
         for(int i=0; i<csovek.size(); i++){
             if(csovek.get(i).equals(cso)) {
@@ -116,6 +184,11 @@ public  class Kontroller {
             }
         }
     }
+
+    /**
+     * Eltávolítja a paraméterként kapott Csucs-ot a csucsok listából.
+     * @param csucs
+     */
     public void removeCsucs(Csucs csucs){
         for(int i=0; i<csucsok.size(); i++){
             if(csucsok.get(i).equals(csucs)) {
@@ -126,6 +199,9 @@ public  class Kontroller {
     }
 
 
+    /**
+     * Kiüríti a csúcsok, csövek és játékosok listáját, visszaállítja a kört, a pontokat és a játékosok számát 0-ra.
+     */
     public void reset(){
         csucsok.clear();
         csovek.clear();
