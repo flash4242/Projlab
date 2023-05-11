@@ -141,12 +141,10 @@ public  class Kontroller {
             jatekosok.add(szerelo);
         }
 
-        for(int i=0; i<jatekosok.size(); i++){
-            csucsok.get(i%forrasokszama).setJatekosRajta(jatekosok.get(i));
+        for(int i=0; i<jatekosok.size(); i++) {
+            csucsok.get(i % forrasokszama).setJatekosRajta(jatekosok.get(i));
+            jatekosok.get(i).setAktMezo(csucsok.get(i % forrasokszama));
         }
-
-
-
     }
 
     /**
