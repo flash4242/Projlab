@@ -10,7 +10,4 @@ public class Szabotor extends Jatekos {
     public void csuszosit(){
         getAktMezo().allapotValtozas(Allapot.CSUSZOS);
     }
-    public void csuszosit(){
-
-    }
 }

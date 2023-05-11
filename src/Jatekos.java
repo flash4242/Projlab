@@ -33,13 +33,6 @@ public abstract class Jatekos {
         atkMezo=m;
     }
 
-    public void csoKilyukasztasa(){
-
-    }
-    public void beragasztoz(){
-
-    }
-
     /**
      * Visszater a játékos aktMezo-jével.
      * @return játekos aktMezo-je
