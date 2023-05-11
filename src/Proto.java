@@ -218,7 +218,7 @@ public class Proto {
     }
     public void TesztVege(String[] parancs){
         if(checkParamCount(0,parancs)){
-            Kontroller.getInstance().reInitialize();
+            Kontroller.getInstance().reSet();
         }
     }
     public void AllapotAllit(String[] parancs){
