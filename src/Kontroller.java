@@ -100,15 +100,34 @@ public  class Kontroller {
             Pumpa p = new Pumpa();
             //először a forrásokból kilógó csövek lekötése
             if(i<forrasokszama){
+                //forrasbol kijövő csövek felcsatolása
                 csovek.get(i).addCsucs(p);
                 p.felcsatol(csovek.get(i));
+
+                //ezekbe a pumpákba új csövek (amik a fentebbiekbe csatlakoznak majd), mindbe 2
+                Cso cs1=new Cso(), cs2= new Cso();
+                cs1.addCsucs(p);
+                cs2.addCsucs(p);
+                p.felcsatol(cs1);
+                p.felcsatol(cs2);
+                csovek.add(cs1);
+                csovek.add(cs2);
             }
-            //ha már nincs forrásból lógó cső, akkor jöhetnek az éppen létrejött pumpákhoz új csövek, mindhez pont 1
+            //ha már nincs forrásból lógó cső, akkor jöhetnek az éppen létrejött pumpákhoz új csövek és a forrásokhoz csatlakozó pumpákból a szabad végek lerögzítése
             else{
                 Cso cs = new Cso();
                 cs.addCsucs(p);
                 p.felcsatol(cs);
                 csovek.add(cs);
+
+                //itt a lógó csövek rögzítése. Minden pumpához csak 1 lógó csővéget, hogy a többinek is maradjon, ezért kell a break.
+                for(Cso csoo: csovek){
+                    if(csoo.getNeighbours().size()==1) {
+                        csoo.addCsucs(p);
+                        p.felcsatol(csoo);
+                        break;
+                    }
+                }
             }
             csucsok.add(p);
         }
