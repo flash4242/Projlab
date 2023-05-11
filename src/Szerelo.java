@@ -1,95 +1,107 @@
 /**
- * Szereli a pumpákat és csöveket, célja, hogy minél több víz jusson a ciszternákba, a szerelőt
- * reprezentálja a játékban.
+ * A játékban lévő szerelőket reprezentálja. Képes pumpát és csövet szerelni,
+ * csövet kilyukasztani valamint ragadóssá tenni. Célja, hogy minél több víz folyjon a ciszternákba.
  */
 public class Szerelo extends Jatekos{
     /**
-     * Szerekőnél lévő csővég
+     * A szerelőnél lévő csővég, amennyiben nincsen nála csővég, értéke null.
      */
-    Cso csoveg;
+    private Cso csoveg=null;
 
+    /**
+     * A szerelőnél lévő pumpa, amennyiben nincs nála pumpa, értéke null.
+     */
+    private Pumpa pumpa=null;
+
+    /**
+     * Visszatér a csoveg attribútum értékével.
+     * @return csoveg értéke
+     */
     public Cso getCsoveg(){
         return csoveg;
     }
 
+    /**
+     *  Beállítja a paraméterül adott cs-t a csoveg-nek.
+     * @param cs csoveg új értéke
+     */
     public void setCsoveg(Cso cs) {
         csoveg = cs;
     }
 
     /**
-     * Szerelőnél lévő pupma
+     * Visszatér a pumpa attribútum értékével.
+     * @return pumpa értéke
      */
-    Pumpa pumpa;
-
-    public Szerelo(){
-        csoveg=null;
-        pumpa=null;
-    }
     public Pumpa getPumpa(){
         return pumpa;
     }
 
+    /**
+     * Beállítja a paraméterül adott p-t a pumpa-nak.
+     * @param p pumpa új értéke
+     */
     public void setPumpa(Pumpa p){
         pumpa=p;
     }
 
     /**
-     * Megjavitja a mezőt, amin éppen áll
+     * Megjavítja azt a mezőt, amin a szerelő éppen áll.
+     * A játékos meghívja az aktMezo-re a szereloJavit() függvényét, ami megjavítja az aktMezo-t.
      */
     public void mezotJavit(){
-        Skeleton.startMethod(getClass().getName(), "mezotJavit()");
         getAktMezo().szereloJavit();
-        Skeleton.endMethod();
     }
 
     /**
-     *  Felveszi a cs-edik csövet arról a mezőről, amin éppen áll, ha tudja
-     * @param cs a cső indexe
+     * A szerelő egy csövet vesz magához.
+     * Amennyiben a szerelőnél nincsen pumpa vagy csővég (a pumpa és a csoveg attribútumok értéke null),
+     * akkor a szerelő az aktMezo-nek meghívja az adjCsovet() metódusát egy int paraméterrel,
+     * ami azt jelenti, hogy a mezőhöz kapcsolódó csövek közül melyiket akarja felvenni, majd a
+     * visszatérési értékét beállítja a csoveg attribútum értékének.
+     * @param cs cső indexe
      */
     public void csovegFelvetele(int cs){
-        Skeleton.startMethod(getClass().getName(), "csovegFelvetele()");
-        Cso kapottCso;
-        if(!Skeleton.kerdes("Van nála cső vagy pumpa?")) {
-            kapottCso=getAktMezo().adjCsovet(cs);
+        if(getCsoveg()==null && getPumpa()==null) {
+            Cso kapottCso = getAktMezo().adjCsovet(cs);
             setCsoveg(kapottCso);
         }
-        Skeleton.endMethod();
     }
 
     /**
-     * Lerakja a nála lévő csövet
+     * A szerelő lerakja a nála lévő csővéget.
+     * Amennyiben a szerelőnél van csővég (a csoveg attribútum értéke nem null), akkor azt a
+     * szerelő az aktMezo-re rakja úgy, hogy meghívja az aktMezo targylerakas() metodusát a csoveg paraméterrel.
      */
     public void csovegetLerak(){
-        Skeleton.startMethod(getClass().getName(), "csovegetLerak()");
-        if(Skeleton.kerdes("Van a szerelőnél cső?")){
-            csoveg = new Cso();
+        if(getCsoveg()!=null){
             getAktMezo().targyLerakas(csoveg);
-            csoveg=null;
+            setCsoveg(null);
         }
-        Skeleton.endMethod();
     }
 
     /**
-     * Felveszi a pumpát a mezőről, amin áll
+     * A szerelő pumpát vesz magához.
+     * Amennyiben a szerelőnél nincsen pumpa vagy csővég (a pumpa és a csoveg attribútumok értéke null),
+     * akkor a szerelő az aktMezo-nek meghívja a pumpaLetrehozasa() metódusát, melynek a visszatérési
+     * értékét beállítja a pumpa attribútum értékének.
      */
     public void pumpaFelvetele(){
-        Skeleton.startMethod(getClass().getName(), "pumpaFelvetele()");
-        if(!Skeleton.kerdes("Van a szerelőnél pumpa vagy csővég?")) {
-            setPumpa(getAktMezo().pumpaLetrehozasa());
+        if(getCsoveg()==null && getPumpa()==null){
+            Pumpa kapottPumpa= getAktMezo().pumpaLetrehozasa();
+            setPumpa(kapottPumpa);
         }
-        Skeleton.endMethod();
     }
 
     /**
-     * Lerakja a nála lévő pumpát
+     * A szerelő lerakja a nála lévő pumpát.
+     * Amennyiben a szerelőnél van pumpa (a pumpa attribútum értéke nem null), akkor azt a szerelő
+     * az aktMezo-re rakja úgy, hogy meghívja az aktMezo targylerakas() metodusát a pumpa paraméterrel.
      */
     public void pumpatLerak(){
-        Skeleton.startMethod(getClass().getName(), "pumpatLerak()");
-        if(Skeleton.kerdes("Van a szerelőnél pumpa?")){
+        if(getPumpa()!=null){
             getAktMezo().targyLerakas(pumpa);
-            pumpa=null;
+            setPumpa(null);
         }
-        Skeleton.endMethod();
     }
-
 }

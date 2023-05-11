@@ -1,15 +1,14 @@
 /**
- * Kilyukasztja a csöveket. Célja, hogy minél több víz folyjon el a
- * lyukakon, a szabotőrt reprezentálja a játékban.
+ * A játékban lévő szabotőröket reprezentálja. Képes csövet kilyukasztani valamint ragadóssá
+ * és csúszóssá tenni. Célja, hogy minél több víz elfolyjon a lyukas csöveken keresztül.
  */
 public class Szabotor extends Jatekos {
     /**
-     * Elrontja azt a csövet, amin éppen áll
+     * A csövet, amin áll csúszóssá teszi.
+     * A szerelő az aktMezo-nek meghívja az allapotValtozas() metódusát CSUSZOS paraméterrel.
      */
-    public void csoKilyukasztasa(){
-        Skeleton.startMethod(getClass().getName(), "csoKilyukasztasa()");
-        getAktMezo().szabotorElront();
-        Skeleton.endMethod();
+    public void csuszosit(){
+        getAktMezo().allapotValtozas(Allapot.CSUSZOS);
     }
     public void csuszosit(){
 
