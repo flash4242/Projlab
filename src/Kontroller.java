@@ -81,24 +81,44 @@ public  class Kontroller {
      * A játék pályáját hozza létre: a ciszternákat, forrásokat, csöveket, pumpákat és az ezek közötti kapcsolatokat is beállítja.
      */
     public void initPalya(){
-        for(int i=0; i<5; i++){
-            Ciszterna c = new Ciszterna();
-            csucsok.add(c);
+        int forrasokszama=6;
+        int pumpakszama = 25;
+        int ciszternakszama = forrasokszama;
+
+        //források létreozása csövekkel: minden forráshoz egyből kapcsolunk egy csövet is; pontosan annyi cső jön létre mint forrás
+        for(int i=0; i<forrasokszama; i++){
+            Forras f = new Forras();
+            Cso cs = new Cso();
+            f.felcsatol(cs);
+            cs.addCsucs(f);
+            csucsok.add(f);
+            csovek.add(cs);
         }
-        for(int i=0; i<12; i++){
+
+        //pumpák létrehozása, köztük csövekkel
+        for(int i=0; i<pumpakszama; i++){
             Pumpa p = new Pumpa();
+            //először a forrásokból kilógó csövek lekötése
+            if(i<forrasokszama){
+                csovek.get(i).addCsucs(p);
+                p.felcsatol(csovek.get(i));
+            }
+            //ha már nincs forrásból lógó cső, akkor jöhetnek az éppen létrejött pumpákhoz új csövek, mindhez pont 1
+            else{
+                Cso cs = new Cso();
+                cs.addCsucs(p);
+                p.felcsatol(cs);
+                csovek.add(cs);
+            }
             csucsok.add(p);
         }
-        for(int i=0; i<5; i++){
-            Forras f = new Forras();
-            csucsok.add(f);
-        }
-        for(int i=0; i<30; i++){
-            Cso cs = new Cso();
-            for(Csucs csucs: csucsok){
-                //TODO: ezután mi van?
-            }
-            csovek.add(cs);
+
+        //végül ciszternák létrehozása
+        for(int i=0; i<ciszternakszama; i++){
+            Ciszterna c = new Ciszterna();
+            csovek.get(forrasokszama+i).addCsucs(c);
+            c.felcsatol(csovek.get(forrasokszama+i));
+            csucsok.add(c);
         }
     }
     public void initJatekosok(int szerelokSz, int szabotorokSz){
