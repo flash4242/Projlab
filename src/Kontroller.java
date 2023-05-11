@@ -13,9 +13,6 @@ public  class Kontroller {
     private List<Cso> csovek = new ArrayList<>();
     private List<Jatekos> jatekosok = new ArrayList<>();
 
-
-    private List<Cso> csovek = new ArrayList<>();
-
     /**
      * A singleton referenciája
      */
@@ -61,18 +58,6 @@ public  class Kontroller {
     }
     public void initJatekosok(){
 
-    }
-    public void stepTime(){
-
-    }
-    public List<Cso> getCsovek(){
-        return csovek;
-    }
-    public int getSzabotorPontok(){
-        return 0;
-    }
-    public int getSzereloPontok(){
-        return 0;
     }
 
     /**
