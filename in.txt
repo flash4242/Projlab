@@ -1,0 +1,6 @@
+MezoHozzaadasa cs Cso
+JatekosHozzaadasa sz Szabotor cs
+AllapotAllit cs ragados
+Csuszosit sz
+MezoInfo cs
+TesztVege
