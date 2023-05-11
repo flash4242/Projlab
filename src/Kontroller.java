@@ -121,7 +121,31 @@ public  class Kontroller {
             csucsok.add(c);
         }
     }
+
+    /**
+     * Játékosokat hoz létre és elhelyezi őket a megfelelő forrásokon
+     * @param szerelokSz szerelők száma
+     * @param szabotorokSz szabotőrök száma
+     */
     public void initJatekosok(int szerelokSz, int szabotorokSz){
+        szerelokSzama=szerelokSz;
+        szabotorokSzama=szabotorokSz;
+        int forrasokszama=6;
+
+        for(int i=0; i<szabotorokSz; i++){
+            Jatekos szabotor= new Szerelo();
+            jatekosok.add(szabotor);
+        }
+        for(int i=0; i<szerelokSz; i++){
+            Jatekos szerelo= new Szerelo();
+            jatekosok.add(szerelo);
+        }
+
+        for(int i=0; i<jatekosok.size(); i++){
+            csucsok.get(i%forrasokszama).setJatekosRajta(jatekosok.get(i));
+        }
+
+
 
     }
 
