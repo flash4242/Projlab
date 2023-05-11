@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Tester {
-    private File input;
+    private File elvart;
     private File output;
+    private int hibaSzam = 0;
 
-    public Tester(String in, String out){
-        input = new File(in);
+    public Tester(String vart, String out){
+        elvart = new File(vart);
         output = new File(out);
     }
     public List<String[]> beolvas(File file){
@@ -30,10 +31,30 @@ public class Tester {
         return szoveg;
     }
     public void Test(){
-        List<String[]> bemenet = beolvas(input);
+        List<String[]> elvartSzoveg = beolvas(elvart);
         List<String[]> kimenet = beolvas(output);
-        for(int i = 0; i< bemenet.size();++i){
-
+        if(elvartSzoveg.size()!=kimenet.size()) {
+            System.out.println("Eltero hosszu a ket kimenet");
+            ++hibaSzam;
+        }
+        else {
+            for (int i = 0; i < elvartSzoveg.size(); ++i) {
+                if(elvartSzoveg.get(i).length!=kimenet.get(i).length) {
+                    System.out.println("A(z) " + (i + 1) + ". sor eltero hosszu");
+                    ++hibaSzam;
+                }
+                else {
+                    for (int j = 0; j < elvartSzoveg.get(i).length; ++j) {
+                        if (!elvartSzoveg.get(i)[j].equals(kimenet.get(i)[j])) {
+                            System.out.println("Hiba a(z) " + (i + 1) + ". sor " + (j + 1) + ". szavaban");
+                            ++hibaSzam;
+                        }
+                    }
+                }
+            }
+        }
+        if(hibaSzam == 0){
+            System.out.println("A tesztek hiba nelkul lefutottak");
         }
     }
 }
