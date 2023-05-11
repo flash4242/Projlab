@@ -35,6 +35,11 @@ public class Cso extends Mezo {
     private int foltozasiGarancia;
 
     /**
+     * Determinisztikus csúszáskor erre a csúcsra mozog a játékos.
+     */
+    private Csucs det;
+
+    /**
      * Létrehoz egy Csövet, és inicializálja a szomszedosCsucs listát.
      */
     public Cso() {
@@ -52,7 +57,7 @@ public class Cso extends Mezo {
      * @return Igazat ad vissza ha a játékos ezen a mezőn marad mozgása végén.
      */
     public boolean jatekostElfogad(Jatekos j) {
-        if(jatekosRajta.size() == 0 && szomszedosCsucs.size() == 2){
+        if(getJatekosRajta().size() == 0 && szomszedosCsucs.size() == 2){
             if(allapot == Allapot.NORMALIS){
                 return true;
             } else if (allapot == Allapot.RAGADOS) {
@@ -61,10 +66,16 @@ public class Cso extends Mezo {
             } else if (allapot == Allapot.CSUSZOS) {
                 Mezo aktMezo = j.getAktMezo();
                 aktMezo.jatekostEltavolit(j);
-                Random random = new Random();
-                int irany = random.nextInt(2);
-                szomszedosCsucs.get(irany).jatekostElfogad(j);
-                j.setAktMezo(szomszedosCsucs.get(irany));
+                if(det != null){
+                    det.jatekostElfogad(j);
+                    j.setAktMezo(det);
+                }
+                else {
+                    Random random = new Random();
+                    int irany = random.nextInt(2);
+                    szomszedosCsucs.get(irany).jatekostElfogad(j);
+                    j.setAktMezo(szomszedosCsucs.get(irany));
+                }
                 return false;
             }
         }
@@ -122,13 +133,13 @@ public class Cso extends Mezo {
      * @return Igazat ad vissza, ha elfogadta a vizet.
      */
     public boolean vizetKap() {
-        if(vanViz)
+        if(getVanViz())
             return false;
         if(szomszedosCsucs.size() != 2 || rossz){
             Kontroller.getInstance().pontNovel("szabotor");
             return true;
         }
-        vanViz = true;
+        setVanViz(true);
         return true;
     }
 
@@ -137,8 +148,8 @@ public class Cso extends Mezo {
      * @return Igazat ad vissza, ha volt benne víz.
      */
     public boolean vizetVeszit() {
-        if(vanViz){
-            vanViz = false;
+        if(getVanViz()){
+            setVanViz(false);
             return true;
         }
         return false;
@@ -169,8 +180,8 @@ public class Cso extends Mezo {
     public void stepTime(){
         if(timeToNormal == 1){
             allapotValtozas(Allapot.NORMALIS);
-            if(jatekosRajta.size() != 0){
-                jatekosRajta.get(0).leragad(false);
+            if(getJatekosRajta().size() != 0){
+                getJatekosRajta().get(0).leragad(false);
             }
         }
         if(timeToNormal > 0)
@@ -236,6 +247,14 @@ public class Cso extends Mezo {
      */
     public List<Csucs> getSzomszedosCsucs() {
         return szomszedosCsucs;
+    }
+
+    /**
+     * Beallitja a determinisztikus mukodeshez a csucsot amire a jatekos csuszik
+     * @param csucs A csucs, amire csuszhat.
+     */
+    public void setDet(Csucs csucs){
+        det = csucs;
     }
 
 }

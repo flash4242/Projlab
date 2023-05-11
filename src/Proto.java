@@ -592,7 +592,7 @@ public class Proto {
         if(checkParamCount(0,parancs,1)) {
             if(parancs.length == 1){
                 mezoIds.forEach((key, value)->{
-                    String vanViz = value.vanViz?"true":"false";
+                    String vanViz = value.getVanViz()?"true":"false";
                     StringBuilder csoSzomszedok = new StringBuilder();
                     if(value.getNeighbours().size()==2){
                         csoSzomszedok.append(" ").append(getID(mezoIds, value.getNeighbours().get(0)));
@@ -656,7 +656,7 @@ public class Proto {
 
             }
             else if(checkIdentifier(parancs[1], "mezo")){
-                String vanViz = mezoIds.get(parancs[1]).vanViz?"true":"false";
+                String vanViz = mezoIds.get(parancs[1]).getVanViz()?"true":"false";
                 StringBuilder csoSzomszedok = new StringBuilder();
                 if(mezoIds.get(parancs[1]).getNeighbours().size()==2){
                     csoSzomszedok.append(" ").append(getID(mezoIds, mezoIds.get(parancs[1]).getNeighbours().get(0)));

@@ -9,12 +9,12 @@ public abstract class Mezo {
 	/**
 	 * A rajta álló játékosok listája.
 	 */
-	protected List<Jatekos> jatekosRajta;
+	private List<Jatekos> jatekosRajta;
 
 	/**
 	 * Azt jelzi, hogy az adott elem tartalmaz-e vizet
 	 */
-	protected boolean vanViz;
+	private boolean vanViz;
 
 	/**
 	 * Létrehoz egy mezőt, és inicializálja a jatekosRajta listát.

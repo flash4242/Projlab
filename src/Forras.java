@@ -15,7 +15,7 @@ public class Forras extends Csucs{
      */
     @Override
     public void vizetPumpal(){
-        for(Cso c : szomszedosCso){
+        for(Cso c : getSzomszedosCso()){
             c.vizetKap();
         }
     }
