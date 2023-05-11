@@ -561,7 +561,7 @@ public class Proto {
         }
     }
     void JatekosInfo(String[] parancs){
-        if(checkParamCount(0,parancs,1)&&checkIdentifier(parancs[1], "jatekos")) {
+        if(checkParamCount(0,parancs,1)) {
             if(parancs.length == 1){
                 jatekosIds.forEach((key, value)->{
                     String aktmezo = getID(mezoIds, value.getAktMezo());
@@ -583,7 +583,7 @@ public class Proto {
                 });
 
             }
-            else{
+            else if(checkIdentifier(parancs[1], "jatekos")){
                 String aktmezo = getID(mezoIds, jatekosIds.get(parancs[1]).getAktMezo());
                 String ragados = jatekosIds.get(parancs[1]).getRagados()?"true":"false";
                 if(szereloIds.containsKey(parancs[1])){
@@ -601,6 +601,8 @@ public class Proto {
                     kiir(parancs[1]+" "+"Szabotor"+" "+aktmezo+" "+ragados);
                 }
             }
+            else
+                kiir("hibas_parameter");
         }
     }
     void MezoInfo(String[] parancs){
