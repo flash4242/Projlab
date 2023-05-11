@@ -229,17 +229,29 @@ public class Proto {
         }
     }
     public void AllapotAllit(String[] parancs){
-        if(checkParamCount(2,parancs, 3)){
-            //TODO ide allapot allitast
-            //mezoIds.get(parancs[1]).
-            if(parancs[2].equals("csuszos")&&parancs.length == 4){
-                if(mezoIds.containsKey(parancs[3])){
-                    //TODO ide hova csússzont beallitani
-                }
-                else
-                    kiir("hibas_azonosito");
+        if(checkParamCount(2,parancs, 3)&&csoIds.containsKey(parancs[1])){
+            switch (parancs[2]){
+                case "normalis":
+                    csoIds.get(parancs[1]).allapotValtozas(Allapot.NORMALIS);
+                    break;
+                case "ragados":
+                    csoIds.get(parancs[1]).allapotValtozas(Allapot.RAGADOS);
+                    break;
+                case "csuszos":
+                    csoIds.get(parancs[1]).allapotValtozas(Allapot.CSUSZOS);
+                    if(parancs.length == 4){
+                        if(csucsIds.containsKey(parancs[3])){
+                            csoIds.get(parancs[1]).setDet(csucsIds.get(parancs[3]));
+                        }
+                        else
+                            kiir("hibas_azonosito");
+                    }
+                    break;
             }
+
         }
+        else
+            kiir("hibas_azonosito");
     }
     public void PumpaFelvetel(String[] parancs){
         if(checkParamCount(1,parancs,2)){
@@ -471,8 +483,11 @@ public class Proto {
         }
     }
     void Csuszosit(String[] parancs){
-        if(checkParamCount(1,parancs)&& checkIdentifier(parancs[1],"szabotor")) {
+        if(checkParamCount(1,parancs, 2)&& checkIdentifier(parancs[1],"szabotor")) {
             szabotorIds.get(parancs[1]).csuszosit();
+            if(parancs.length == 3 && csucsIds.containsKey(parancs[2])){
+                szabotorIds.get(parancs[1]).getAktMezo().setDet(csucsIds.get(parancs[2]));
+            }
         }
     }
     void PumpaAllit(String[] parancs){
@@ -633,9 +648,14 @@ public class Proto {
                         kiir(key+" "+"Cso"+" "+jatekos+" "+vanViz+" "+rossz+" "+foltGar+" "+allapot+" "+tTNormal+csSz);
                     }
                     if(csucsIds.containsKey(key)){
+                        StringBuilder csucsonJatekos = new StringBuilder();
+                        for (Jatekos j:value.getJatekosRajta()
+                        ) {
+                            csucsonJatekos.append(" ").append(getID(jatekosIds, j));
+                        }
+                        String jatekos = String.valueOf(csucsonJatekos);
                         if(value.getClass()==Pumpa.class){
                             Pumpa p = (Pumpa) value;
-                            String jatekos = getID(jatekosIds, p.getJatekosRajta().get(0));
                             String rossz = p.getRossz()?"true":"false";
                             String be = getID(mezoIds, p.getNeighbours().get(p.getBemenetiCso()));
                             String ki = getID(mezoIds, p.getNeighbours().get(p.getKimenetiCso()));
@@ -643,12 +663,10 @@ public class Proto {
                         }
                         if(value.getClass()==Ciszterna.class){
                             Ciszterna c = (Ciszterna) value;
-                            String jatekos = getID(jatekosIds, c.getJatekosRajta().get(0));
                             kiir(key+" "+"Ciszterna"+" "+jatekos+sz);
                         }
                         if(value.getClass()==Forras.class){
                             Forras forras = (Forras) value;
-                            String jatekos = getID(jatekosIds, forras.getJatekosRajta().get(0));
                             kiir(key+" "+"Forras"+" "+jatekos+sz);
                         }
                     }
@@ -698,9 +716,14 @@ public class Proto {
                     kiir(parancs[1]+" "+"Cso"+" "+jatekos+" "+vanViz+" "+rossz+" "+foltGar+" "+allapot+" "+tTNormal+csSz);
                 }
                 if(csucsIds.containsKey(parancs[1])){
+                    StringBuilder csucsonJatekos = new StringBuilder();
+                    for (Jatekos j:mezoIds.get(parancs[1]).getJatekosRajta()
+                    ) {
+                        csucsonJatekos.append(" ").append(getID(jatekosIds, j));
+                    }
+                    String jatekos = String.valueOf(csucsonJatekos);
                     if(mezoIds.get(parancs[1]).getClass()==Pumpa.class){
                         Pumpa p = (Pumpa) mezoIds.get(parancs[1]);
-                        String jatekos = getID(jatekosIds, p.getJatekosRajta().get(0));
                         String rossz = p.getRossz()?"true":"false";
                         String be;
                         if(p.getBemenetiCso() == -1)
@@ -712,17 +735,15 @@ public class Proto {
                             ki = "null";
                         else
                             ki = getID(mezoIds, p.getNeighbours().get(p.getKimenetiCso()));
-                        kiir(parancs[1]+" "+"Pumpa"+" "+jatekos+" "+vanViz+" "+rossz+" "+be+" "+ki+sz);
+                        kiir(parancs[1]+" "+"Pumpa"+jatekos+" "+vanViz+" "+rossz+" "+be+" "+ki+sz);
                     }
                     if(mezoIds.get(parancs[1]).getClass()==Ciszterna.class){
                         Ciszterna c = (Ciszterna) mezoIds.get(parancs[1]);
-                        String jatekos = getID(jatekosIds, c.getJatekosRajta().get(0));
-                        kiir(parancs[1]+" "+"Ciszterna"+" "+jatekos+sz);
+                        kiir(parancs[1]+" "+"Ciszterna"+jatekos+sz);
                     }
                     if(mezoIds.get(parancs[1]).getClass()==Forras.class){
                         Forras forras = (Forras) mezoIds.get(parancs[1]);
-                        String jatekos = getID(jatekosIds, forras.getJatekosRajta().get(0));
-                        kiir(parancs[1]+" "+"Forras"+" "+jatekos+sz);
+                        kiir(parancs[1]+" "+"Forras"+jatekos+sz);
                     }
                 }
             }

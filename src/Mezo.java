@@ -118,4 +118,8 @@ public abstract class Mezo {
 	public boolean getVanViz(){
 		return vanViz;
 	}
+	public void setDet(Csucs csucs){
+
+	}
+
 }
