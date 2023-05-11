@@ -17,6 +17,13 @@ public abstract class Jatekos {
         return atkmezo;
     }
 
+    public void csoKilyukasztasa(){
+
+    }
+    public void beragasztoz(){
+
+    }
+
     /**
      * Egy mezőről egy másik mezőre lép át
      * @param hova hova lép át

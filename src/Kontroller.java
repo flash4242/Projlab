@@ -8,6 +8,8 @@ public  class Kontroller {
      */
     private List<Csucs> csucsok = new ArrayList<>();
 
+    private List<Cso> csovek = new ArrayList<>();
+
     /**
      * A singleton referenciája
      */
@@ -40,6 +42,10 @@ public  class Kontroller {
     public void removeCsucs(Csucs csucs){
 
     }
+    public List<Cso> getCsovek(){
+        return csovek;
+    }
+
     /**
      * hozzáad egy csúcsot a csúcsok listájához
      * @param csucs

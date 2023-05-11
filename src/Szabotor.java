@@ -11,4 +11,7 @@ public class Szabotor extends Jatekos {
         getAktMezo().szabotorElront();
         Skeleton.endMethod();
     }
+    public void csuszosit(){
+
+    }
 }
