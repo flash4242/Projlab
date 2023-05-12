@@ -30,26 +30,34 @@ public class Tester {
         scanner.close();
         return szoveg;
     }
-    public void Test(){
+    public void Test(String args[]){
         List<String[]> elvartSzoveg = beolvas(elvart);
         List<String[]> kimenet = beolvas(output);
+        int csillag = 0;
         if(elvartSzoveg.size()!=kimenet.size()) {
             System.out.println("Eltero hosszu a ket kimenet");
             ++hibaSzam;
         }
         else {
             for (int i = 0; i < elvartSzoveg.size(); ++i) {
-                if(elvartSzoveg.get(i).length!=kimenet.get(i).length) {
-                    System.out.println("A(z) " + (i + 1) + ". sor eltero hosszu");
-                    ++hibaSzam;
+                if(args.length == 1 && csillag != Integer.parseInt(args[0])-1){
+                    if(elvartSzoveg.get(i)[0].equals("*"))
+                        ++csillag;
                 }
                 else {
-                    for (int j = 0; j < elvartSzoveg.get(i).length; ++j) {
-                        if (!elvartSzoveg.get(i)[j].equals(kimenet.get(i)[j])) {
-                            System.out.println("Hiba a(z) " + (i + 1) + ". sor " + (j + 1) + ". szavaban");
-                            ++hibaSzam;
+                    if (elvartSzoveg.get(i).length != kimenet.get(i).length) {
+                        System.out.println("A(z) " + (i + 1) + ". sor eltero hosszu");
+                        ++hibaSzam;
+                    } else {
+                        for (int j = 0; j < elvartSzoveg.get(i).length; ++j) {
+                            if (!elvartSzoveg.get(i)[j].equals(kimenet.get(i)[j])) {
+                                System.out.println("Hiba a(z) " + (i + 1) + ". sor " + (j + 1) + ". szavaban");
+                                ++hibaSzam;
+                            }
                         }
                     }
+                    if(args.length == 1&&elvartSzoveg.get(i)[0].equals("*"))
+                        break;
                 }
             }
         }

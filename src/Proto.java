@@ -7,6 +7,7 @@ import java.util.*;
 public class Proto {
     private File inputFile;
     private File outputFile;
+    private List<List<String[]>> tesztek;
     private List<String[]> parancsok;
     private Kontroller kontroller;
     private Map<String, Jatekos> jatekosIds;
@@ -15,6 +16,30 @@ public class Proto {
     private Map<String, Mezo> mezoIds;
     private Map<String, Cso> csoIds;
     private Map<String, Csucs> csucsIds;
+//    private List<String> tesztNevek = List.of("Szerelő üres pumpára mozog", "Szerelő üres ciszternára mozog", "Szerelő üres forrásra mozog", "Szabotőr üres pumpára mozog",
+//            "Szabotőr üres ciszternára mozog", "Szabotőr üres forrásra mozog", "Szerelő üres csőre mozog", "Szabotőr üres csőre mozog", "Szerelő foglalt pumpára mozog",
+//            "Szerelő foglalt ciszternára mozog", "Szerelő foglalt forrásra mozog", "Szabotőr foglalt pumpára mozog", "Szabotőr foglalt ciszternára mozog",
+//            "Szabotőr foglalt forrásra mozog", "Szerelő foglalt csőre mozog", "Szabotőr foglalt csőre mozog", "Szerelő csőre ragad", "Szabotőr csőre ragad",
+//            "Szerelő csövön csúszik", "Szabotőr csövön csúszik", "Felvett csőre mozogás", "Szerelő pumpát átállít", "Szabotőr pumpát átállít",
+//            "Szabotőr csövet átállít", "Szabotőr ciszternát átállít", "Szabotőr forrást átállít", "Szerelő csövet átállít", "Szerelő ciszternát átállít",
+//            "Szerelő forrást átállít", "Szerelő csövet lyukaszt", "Szabotőr csövet lyukaszt", "Szerelő ciszternát lyukaszt",
+//            "Szerelő forrást lyukaszt", "Szerelő pumpát lyukaszt", "Szabotőr ciszternát lyukaszt", "Szabotőr forrást lyukaszt", "Szabotőr pumpát lyukaszt",
+//            "Szerelő csövet ragadóssá tesz", "Szabotőr csövet ragadóssá tesz", "Szerelő pumpát ragadóssá tesz", "Szerelő ciszternát ragadóssá tesz",
+//            "Szerelő forrást ragadóssá tesz", "Szabotőr pumpát ragadóssá tesz", "Szabotőr ciszternát ragadóssá tesz", "Szabotőr forrást ragadóssá tesz",
+//            "Ragasztó szerelő ragasztott csőről lemozog", "Szabotőr csövet csúszóssá tesz", "Szabotőr pumpát csúszóssá tesz", "Szabotőr ciszternát csúszóssá tesz",
+//            "Szabotőr forrást csúszóssá tesz", "Szerelő forrást javít", "Szerelő ciszternát javít", "Szerelő pumpát javít", "Szerelő csövet javít",
+//            "Szerelő javított csövet lyukaszt", "Szerelő felvesz csővéget csőről", "Szerelő felvesz csővéget forrásról", "Szerelő felvesz csővéget ciszteráról",
+//            "Szerelő felvesz lekötött csővéget pumpáról", "Szerelő felvesz csővéget, de már pumpás a keze", "Szerelő felvesz csővéget, de már csöves a keze",
+//            "Szerelő felvesz szabad csővéget pumpáról", "Szerelő felvesz egy foglalt csőnek a csővégét", "Két szerelő felvesz egy csövet", "Szerelő lerak pumpát csőre",
+//            "Szerelő lerak pumpát forrásra", "Szerelő lerak pumpát cisztenára", "Szerelő lerak pumpát pumpára", "Szerelő lerak nem létező pumpát csőre",
+//            "Szerelő lerak csővéget csőre", "Szerelő lerak csővéget pumpára", "Szerelő lerak csővéget ciszternára", "Szerelő lerak csővéget forrásra",
+//            "Szerelő lerak nem létező csővéget pumpára", "Szerelő lerak nem létező csővéget ciszternára", "Szerelő lerak nem létező csővéget forrásra",
+//            "Szerelő felvesz pumpát ciszternáról", "Szerelő felvesz pumpát ciszternáról, de már pumpás a keze", "Szerelő felvesz pumpát ciszternáról, de már csöves a keze",
+//            "Szerelő felvesz pumpát csőről", "Szerelő felvesz pumpát pumpáról", "Szerelő felvesz pumpát forrásról", "Kontroller csúcsokat ront",
+//            "Kontroller csőnek visszaszámol", "Elrontott pumpa pumpál. (nincs, van, nincs)", "Pumpa pumpál. (nincs, nincs, nincs)", "Pumpa pumpál. (nincs, nincs, van)",
+//            "Pumpa pumpál. (nincs, van, nincs)", "Pumpa pumpál. (nincs, van, van)", "Pumpa pumpál. (van, nincs, nincs)", "Pumpa pumpál. (van, nincs, van)",
+//            "Pumpa pumpál. (van, van, nincs)", "Pumpa pumpál. (van, van, van)", "Pumpa pumpál lyukas csőbe. (nincs, van, nincs)", "Pumpa pumpál felvett csőbe. (nincs, van, nincs)",
+//            "Ciszterna pumpál", "Forrás pumpál", "Ciszterna csövet gyárt");
 
     public Proto(String in, String out){
         inputFile = new File(in);
@@ -33,9 +58,7 @@ public class Proto {
         csoIds = new HashMap<>();
         csucsIds = new HashMap<>();
         mezoIds = new HashMap<>();
-    }
-    public void delete(){
-        outputFile.delete();
+        tesztek = new ArrayList<>();
     }
 
     public void beolvas() {
@@ -45,12 +68,19 @@ public class Proto {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        parancsok = new ArrayList<>();
-        while(scanner.hasNextLine()){
-            String akt = scanner.nextLine();
-            if(!akt.startsWith("#")) {
-                parancsok.add(akt.split(" "));
+        while (scanner.hasNextLine()){
+            parancsok = new ArrayList<>();
+            boolean tesztVege = false;
+            while(!tesztVege) {
+                String akt = scanner.nextLine();
+                if (!akt.startsWith("#")) {
+                    parancsok.add(akt.split(" "));
+                }
+                if(akt.equals("TesztVege")){
+                    tesztVege = true;
+                }
             }
+            tesztek.add(parancsok);
         }
         scanner.close();
     }
@@ -116,110 +146,127 @@ public class Proto {
             kiir("hibas_parameter");
         return helyes;
     }
+    public void parancsValaszto(String[] parancs){
+        switch (parancs[0]){
+            case "TesztVege":
+                TesztVege(parancs);
+                break;
+            case "AllapotAllit":
+                AllapotAllit(parancs);
+                break;
+            case "PumpaFelvetel":
+                PumpaFelvetel(parancs);
+                break;
+            case "TargyLerakasa":
+                TargyLerakasa(parancs);
+                break;
+            case "PumpaJavitasa":
+                PumpaJavitasa(parancs);
+                break;
+            case "MezoHozzaadasa":
+                MezoHozzaadasa(parancs);
+                break;
+            case "JatekosHozzaadasa":
+                JatekosHozzaadasa(parancs);
+                break;
+            case "JatekosEltavolitasa":
+                JatekosEltavolitasa(parancs);
+                break;
+            case "MezokOsszekapcsolasa":
+                MezokOsszekapcsolasa(parancs);
+                break;
+            case "MezokSzetkapcsolasa":
+                MezokSzetkapcsolasa(parancs);
+                break;
+            case "VizAllit":
+                VizAllit(parancs);
+                break;
+            case "HibasAllit":
+                HibasAllit(parancs);
+                break;
+            case "TargyAllit":
+                TargyAllit(parancs);
+                break;
+            case "PumpaBemenetAllit":
+                PumpaBemenetAllit(parancs);
+                break;
+            case "PumpaKimenetAllit":
+                PumpaKimenetAllit(parancs);
+                break;
+            case "Mozgas":
+                Mozgas(parancs);
+                break;
+            case "Lyukaszt":
+                Lyukaszt(parancs);
+                break;
+            case "Foltoz":
+                Foltoz(parancs);
+                break;
+            case "Ragasztoz":
+                Ragasztoz(parancs);
+                break;
+            case "Csuszosit":
+                Csuszosit(parancs);
+                break;
+            case "PumpaAllit":
+                PumpaAllit(parancs);
+                break;
+            case "CsoFelvetel":
+                CsoFelvetel(parancs);
+                break;
+            case "VizLeptet":
+                VizLeptet(parancs);
+                break;
+            case "PontNovel":
+                PontNovel(parancs);
+                break;
+            case "VeletlenPumpaElrontas":
+                VeletlenPumpaElrontas(parancs);
+                break;
+            case "StepTime":
+                StepTime(parancs);
+                break;
+            case "KorLeptetese":
+                KorLeptetese(parancs);
+                break;
+            case "CsucsVizetPumpal":
+                CsucsVizetPumpal(parancs);
+                break;
+            case "JatekosInfo":
+                JatekosInfo(parancs);
+                break;
+            case "MezoInfo":
+                MezoInfo(parancs);
+                break;
+            case "CsapatInfo":
+                CsapatInfo(parancs);
+                break;
+            case "VizInfo":
+                VizInfo(parancs);
+                break;
+            default:
+                break;
 
-    public void vegrehajt(){
-        for (String[] parancs:parancsok
-        ) {
-            switch (parancs[0]){
-                case "TesztVege":
-                    TesztVege(parancs);
-                    break;
-                case "AllapotAllit":
-                    AllapotAllit(parancs);
-                    break;
-                case "PumpaFelvetel":
-                    PumpaFelvetel(parancs);
-                    break;
-                case "TargyLerakasa":
-                    TargyLerakasa(parancs);
-                    break;
-                case "PumpaJavitasa":
-                    PumpaJavitasa(parancs);
-                    break;
-                case "MezoHozzaadasa":
-                    MezoHozzaadasa(parancs);
-                    break;
-                case "JatekosHozzaadasa":
-                    JatekosHozzaadasa(parancs);
-                    break;
-                case "JatekosEltavolitasa":
-                    JatekosEltavolitasa(parancs);
-                    break;
-                case "MezokOsszekapcsolasa":
-                    MezokOsszekapcsolasa(parancs);
-                    break;
-                case "MezokSzetkapcsolasa":
-                    MezokSzetkapcsolasa(parancs);
-                    break;
-                case "VizAllit":
-                    VizAllit(parancs);
-                    break;
-                case "HibasAllit":
-                    HibasAllit(parancs);
-                    break;
-                case "TargyAllit":
-                    TargyAllit(parancs);
-                    break;
-                case "PumpaBemenetAllit":
-                    PumpaBemenetAllit(parancs);
-                    break;
-                case "PumpaKimenetAllit":
-                    PumpaKimenetAllit(parancs);
-                    break;
-                case "Mozgas":
-                    Mozgas(parancs);
-                    break;
-                case "Lyukaszt":
-                    Lyukaszt(parancs);
-                    break;
-                case "Foltoz":
-                    Foltoz(parancs);
-                    break;
-                case "Ragasztoz":
-                    Ragasztoz(parancs);
-                    break;
-                case "Csuszosit":
-                    Csuszosit(parancs);
-                    break;
-                case "PumpaAllit":
-                    PumpaAllit(parancs);
-                    break;
-                case "CsoFelvetel":
-                    CsoFelvetel(parancs);
-                    break;
-                case "VizLeptet":
-                    VizLeptet(parancs);
-                    break;
-                case "PontNovel":
-                    PontNovel(parancs);
-                    break;
-                case "VeletlenPumpaElrontas":
-                    VeletlenPumpaElrontas(parancs);
-                    break;
-                case "StepTime":
-                    StepTime(parancs);
-                    break;
-                case "KorLeptetese":
-                    KorLeptetese(parancs);
-                    break;
-                case "CsucsVizetPumpal":
-                    CsucsVizetPumpal(parancs);
-                    break;
-                case "JatekosInfo":
-                    JatekosInfo(parancs);
-                    break;
-                case "MezoInfo":
-                    MezoInfo(parancs);
-                    break;
-                case "CsapatInfo":
-                    CsapatInfo(parancs);
-                    break;
-                case "VizInfo":
-                    VizInfo(parancs);
-                    break;
-                default:
-                    break;
+        }
+    }
 
+    public void vegrehajt(String args[]){
+        if(args.length ==1) {
+            if(Integer.parseInt(args[0]) >99||Integer.parseInt(args[0]) <1)
+                System.out.println("nincs ilyen teszt!");
+            parancsok = tesztek.get(Integer.parseInt(args[0]));
+            for (String[] parancs : parancsok
+            ) {
+                parancsValaszto(parancs);
+            }
+        }
+        else if(args.length ==0){
+            for (List<String[]> teszt: tesztek
+                 ) {
+                for (String[] parancs : teszt
+                ) {
+                    parancsValaszto(parancs);
+                }
             }
         }
     }
@@ -227,6 +274,7 @@ public class Proto {
         if(checkParamCount(0,parancs)){
             Kontroller.getInstance().reset();
         }
+        kiir("*");
     }
     public void AllapotAllit(String[] parancs){
         if(checkParamCount(2,parancs, 3)&&csoIds.containsKey(parancs[1])){
@@ -651,6 +699,8 @@ public class Proto {
                     }
                     if(csucsIds.containsKey(key)){
                         StringBuilder csucsonJatekos = new StringBuilder();
+                        if(value.getJatekosRajta().size() == 0)
+                            csucsonJatekos.append(" ").append("null");
                         for (Jatekos j:value.getJatekosRajta()
                         ) {
                             csucsonJatekos.append(" ").append(getID(jatekosIds, j));
@@ -719,6 +769,8 @@ public class Proto {
                 }
                 if(csucsIds.containsKey(parancs[1])){
                     StringBuilder csucsonJatekos = new StringBuilder();
+                    if(mezoIds.get(parancs[1]).getJatekosRajta().size() == 0)
+                        csucsonJatekos.append(" ").append("null");
                     for (Jatekos j:mezoIds.get(parancs[1]).getJatekosRajta()
                     ) {
                         csucsonJatekos.append(" ").append(getID(jatekosIds, j));

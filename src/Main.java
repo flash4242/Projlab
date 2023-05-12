@@ -3,8 +3,8 @@ public class Main {
     {
         Proto proto = new Proto("in.txt", "out.txt");
         proto.beolvas();
-        proto.vegrehajt();
+        proto.vegrehajt(args);
         Tester tester = new Tester("vart.txt", "out.txt");
-        tester.Test();
+        tester.Test(args);
     }
 }

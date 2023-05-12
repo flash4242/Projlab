@@ -1,6 +1,11 @@
-MezoHozzaadasa cs Cso
-JatekosHozzaadasa sz Szabotor cs
-AllapotAllit cs ragados
-Csuszosit sz
-MezoInfo cs
+MezoHozzaadasa p1 Pumpa
+MezoHozzaadasa cs1 Cso p1
+MezoHozzaadasa p2 Pumpa cs1
+AllapotAllit cs1 csuszos p2
+JatekosHozzaadasa sz1 Szabotor p1
+Mozgas sz1 cs1
+MezoInfo p1
+MezoInfo cs1
+MezoInfo p2
+JatekosInfo sz1
 TesztVege
