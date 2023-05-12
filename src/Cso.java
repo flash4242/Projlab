@@ -219,9 +219,7 @@ public class Cso extends Mezo {
      * @param r A cső állapota.
      */
     public void setRossz(boolean r){
-        Skeleton.startMethod(getClass().getName(), "setRossz()");
         rossz = r;
-        Skeleton.endMethod();
     }
 
     //TODO protohoz getterek??
