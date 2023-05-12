@@ -1,5 +1,12 @@
-p1 Pumpa null false false null null cs1
-cs1 Cso null false false 0 csuszos 3 p1 p2
-p2 Pumpa sz1 false false null null cs1
-sz1 Szabotor p2 false
+c1 Ciszterna sz1 cs1
+cs1 Cso null false false 0 normalis 0 c1 null
+sz1 Szerelo c1 false null
+*
+f1 Forras sz1 cs1
+cs1 Cso null false false 0 normalis 0 f1 null
+sz1 Szerelo f1 false null
+*
+p1 Pumpa sz1 false false null null cs1
+cs1 Cso null false false 0 normalis 0 p1 null
+sz1 Szabotor p1 false
 *

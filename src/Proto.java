@@ -271,6 +271,12 @@ public class Proto {
         }
     }
     public void TesztVege(String[] parancs){
+        szereloIds = new HashMap<>();
+        szabotorIds = new HashMap<>();
+        jatekosIds = new HashMap<>();
+        csoIds = new HashMap<>();
+        csucsIds = new HashMap<>();
+        mezoIds = new HashMap<>();
         if(checkParamCount(0,parancs)){
             Kontroller.getInstance().reset();
         }
