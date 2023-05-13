@@ -310,8 +310,11 @@ public class Proto {
     public void PumpaFelvetel(String[] parancs){
         if(checkParamCount(1,parancs,2)){
             if(checkIdentifier(parancs[1],"szerelo")){
-                szereloIds.get(parancs[1]).pumpaFelvetele();
-                mezoIds.put(parancs.length==3?parancs[2]:"p", szereloIds.get(parancs[1]).getPumpa());
+                if(szereloIds.get(parancs[1]).getPumpa()==null) {
+                    szereloIds.get(parancs[1]).pumpaFelvetele();
+                    if (szereloIds.get(parancs[1]).getPumpa() != null)
+                        mezoIds.put(parancs.length == 3 ? parancs[2] : "p", szereloIds.get(parancs[1]).getPumpa());
+                }
             }
         }
     }
