@@ -10,12 +10,12 @@ public class Proto {
     private List<List<String[]>> tesztek;
     private List<String[]> parancsok;
     private Kontroller kontroller;
-    private Map<String, Jatekos> jatekosIds;
-    private Map<String, Szerelo> szereloIds;
-    private Map<String, Szabotor> szabotorIds;
-    private Map<String, Mezo> mezoIds;
-    private Map<String, Cso> csoIds;
-    private Map<String, Csucs> csucsIds;
+    private TreeMap<String, Jatekos> jatekosIds;
+    private TreeMap<String, Szerelo> szereloIds;
+    private TreeMap<String, Szabotor> szabotorIds;
+    private TreeMap<String, Mezo> mezoIds;
+    private TreeMap<String, Cso> csoIds;
+    private TreeMap<String, Csucs> csucsIds;
 //    private List<String> tesztNevek = List.of("Szerelő üres pumpára mozog", "Szerelő üres ciszternára mozog", "Szerelő üres forrásra mozog", "Szabotőr üres pumpára mozog",
 //            "Szabotőr üres ciszternára mozog", "Szabotőr üres forrásra mozog", "Szerelő üres csőre mozog", "Szabotőr üres csőre mozog", "Szerelő foglalt pumpára mozog",
 //            "Szerelő foglalt ciszternára mozog", "Szerelő foglalt forrásra mozog", "Szabotőr foglalt pumpára mozog", "Szabotőr foglalt ciszternára mozog",
@@ -52,12 +52,12 @@ public class Proto {
             throw new RuntimeException(e);
         }
         kontroller = Kontroller.getInstance();
-        szereloIds = new HashMap<>();
-        szabotorIds = new HashMap<>();
-        jatekosIds = new HashMap<>();
-        csoIds = new HashMap<>();
-        csucsIds = new HashMap<>();
-        mezoIds = new HashMap<>();
+        szereloIds = new TreeMap<>();
+        szabotorIds = new TreeMap<>();
+        jatekosIds = new TreeMap<>();
+        csoIds = new TreeMap<>();
+        csucsIds = new TreeMap<>();
+        mezoIds = new TreeMap<>();
         tesztek = new ArrayList<>();
     }
 
@@ -271,12 +271,12 @@ public class Proto {
         }
     }
     public void TesztVege(String[] parancs){
-        szereloIds = new HashMap<>();
-        szabotorIds = new HashMap<>();
-        jatekosIds = new HashMap<>();
-        csoIds = new HashMap<>();
-        csucsIds = new HashMap<>();
-        mezoIds = new HashMap<>();
+        szereloIds = new TreeMap<>();
+        szabotorIds = new TreeMap<>();
+        jatekosIds = new TreeMap<>();
+        csoIds = new TreeMap<>();
+        csucsIds = new TreeMap<>();
+        mezoIds = new TreeMap<>();
         if(checkParamCount(0,parancs)){
             Kontroller.getInstance().reset();
         }
@@ -678,175 +678,120 @@ public class Proto {
                 kiir("hibas_parameter");
         }
     }
+    public void infotKiir(String nev){
+        String vanViz = mezoIds.get(nev).getVanViz()?"true":"false";
+        StringBuilder csoSzomszedok = new StringBuilder();
+        if(mezoIds.get(nev).getNeighbours().size()==2){
+            csoSzomszedok.append(" ").append(getID(mezoIds, mezoIds.get(nev).getNeighbours().get(0)));
+            csoSzomszedok.append(" ").append(getID(mezoIds, mezoIds.get(nev).getNeighbours().get(1)));
+        }
+        else if(mezoIds.get(nev).getNeighbours().size()==1) {
+            csoSzomszedok.append(" ").append(getID(mezoIds, mezoIds.get(nev).getNeighbours().get(0))).append(" null");
+        }
+        else
+            csoSzomszedok.append(" null null");
+        String csSz = String.valueOf(csoSzomszedok);
+        StringBuilder csucsSzomszedok = new StringBuilder();
+        if(mezoIds.get(nev).getNeighbours().size()==0)
+            csucsSzomszedok.append(" null");
+        else {
+            for (Mezo m : mezoIds.get(nev).getNeighbours()
+            ) {
+                csucsSzomszedok.append(" ").append(getID(mezoIds, m));
+            }
+        }
+        String sz = String.valueOf(csucsSzomszedok);
+
+        if(csoIds.containsKey(nev)){
+            Cso cso = (Cso)mezoIds.get(nev);
+            String jatekos = getID(jatekosIds, cso.getJatekosRajta().size()==0?null:cso.getJatekosRajta().get(0));
+            String rossz = cso.getRossz()?"true":"false";
+            String foltGar = Integer.toString(cso.getFoltozasiGarancia());
+            String allapot = "";
+            switch (cso.getAllapot()){
+                case NORMALIS:
+                    allapot = "normalis";
+                    break;
+                case CSUSZOS:
+                    allapot = "csuszos";
+                    break;
+                case RAGADOS:
+                    allapot = "ragados";
+                    break;
+                default:
+                    break;
+            }
+            String tTNormal = Integer.toString(cso.getTimeToNormal());
+            kiir(nev+" "+"Cso"+" "+jatekos+" "+vanViz+" "+rossz+" "+foltGar+" "+allapot+" "+tTNormal+csSz);
+        }
+        if(csucsIds.containsKey(nev)){
+            StringBuilder csucsonJatekos = new StringBuilder();
+            if(mezoIds.get(nev).getJatekosRajta().size() == 0)
+                csucsonJatekos.append(" ").append("null");
+            for (Jatekos j:mezoIds.get(nev).getJatekosRajta()
+            ) {
+                csucsonJatekos.append(" ").append(getID(jatekosIds, j));
+            }
+            String jatekos = String.valueOf(csucsonJatekos);
+            if(mezoIds.get(nev).getClass()==Pumpa.class){
+                Pumpa p = (Pumpa) mezoIds.get(nev);
+                String rossz = p.getRossz()?"true":"false";
+                String be;
+                if(p.getBemenetiCso() == -1)
+                    be = "null";
+                else
+                    be= getID(mezoIds, p.getNeighbours().get(p.getBemenetiCso()));
+                String ki;
+                if(p.getKimenetiCso() == -1)
+                    ki = "null";
+                else
+                    ki = getID(mezoIds, p.getNeighbours().get(p.getKimenetiCso()));
+                kiir(nev+" "+"Pumpa"+jatekos+" "+vanViz+" "+rossz+" "+be+" "+ki+sz);
+            }
+            if(mezoIds.get(nev).getClass()==Ciszterna.class){
+                Ciszterna c = (Ciszterna) mezoIds.get(nev);
+                kiir(nev+" "+"Ciszterna"+jatekos+sz);
+            }
+            if(mezoIds.get(nev).getClass()==Forras.class){
+                Forras forras = (Forras) mezoIds.get(nev);
+                kiir(nev+" "+"Forras"+jatekos+sz);
+            }
+        }
+    }
+//    public void sort(){
+//        mezoIds = sortTreeMap(mezoIds);
+//        jatekosIds = sortTreeMap(jatekosIds);
+//        csucsIds = sortTreeMap(csucsIds);
+//        csoIds = sortTreeMap(csoIds);
+//        szereloIds = sortTreeMap(szereloIds);
+//        szabotorIds = sortTreeMap(szabotorIds);
+//    }
+//    public <T> TreeMap<String, T> sortTreeMap(TreeMap<String, T> map){
+//        TreeMap<String, T> sortedMap = new TreeMap<>(map);
+//        return new TreeMap<>(sortedMap);
+//    }
     void MezoInfo(String[] parancs){
         if(checkParamCount(0,parancs,1)) {
-            if(parancs.length == 1){
-                mezoIds.forEach((key, value)->{
-                    String vanViz = value.getVanViz()?"true":"false";
-                    StringBuilder csoSzomszedok = new StringBuilder();
-                    if(value.getNeighbours().size()==2){
-                        csoSzomszedok.append(" ").append(getID(mezoIds, value.getNeighbours().get(0)));
-                        csoSzomszedok.append(" ").append(getID(mezoIds, value.getNeighbours().get(1)));
-                    }
-                    else if(value.getNeighbours().size()==1) {
-                        csoSzomszedok.append(" ").append(getID(mezoIds, value.getNeighbours().get(0))).append(" null");
-                    }
-                    else
-                        csoSzomszedok.append(" null null");
-                    String csSz = String.valueOf(csoSzomszedok);
-                    StringBuilder csucsSzomszedok = new StringBuilder();
-                    if(value.getNeighbours().size()==0)
-                        csucsSzomszedok.append(" null");
-                    else {
-                        for (Mezo m : value.getNeighbours()
-                        ) {
-                            csucsSzomszedok.append(" ").append(getID(mezoIds, m));
-                        }
-                    }
-                    String sz = String.valueOf(csucsSzomszedok);
-                    if(csoIds.containsKey(key)){
-                        Cso cso = (Cso)value;
-                        String jatekos = getID(jatekosIds, cso.getJatekosRajta().get(0));
-                        String rossz = cso.getRossz()?"true":"false";
-                        String foltGar = Integer.toString(cso.getFoltozasiGarancia());
-                        String allapot = "";
-                        switch (cso.getAllapot()){
-                            case NORMALIS:
-                                allapot = "normalis";
-                                break;
-                            case CSUSZOS:
-                                allapot = "csuszos";
-                                break;
-                            case RAGADOS:
-                                allapot = "ragados";
-                                break;
-                            default:
-                                break;
-                        }
-                        String tTNormal = Integer.toString(cso.getTimeToNormal());
-                        kiir(key+" "+"Cso"+" "+jatekos+" "+vanViz+" "+rossz+" "+foltGar+" "+allapot+" "+tTNormal+csSz);
-                    }
-                    if(csucsIds.containsKey(key)){
-                        StringBuilder csucsonJatekos = new StringBuilder();
-                        if(value.getJatekosRajta().size() == 0)
-                            csucsonJatekos.append(" ").append("null");
-                        for (Jatekos j:value.getJatekosRajta()
-                        ) {
-                            csucsonJatekos.append(" ").append(getID(jatekosIds, j));
-                        }
-                        String jatekos = String.valueOf(csucsonJatekos);
-                        if(value.getClass()==Pumpa.class){
-                            Pumpa p = (Pumpa) value;
-                            String rossz = p.getRossz()?"true":"false";
-                            String be = getID(mezoIds, p.getNeighbours().get(p.getBemenetiCso()));
-                            String ki = getID(mezoIds, p.getNeighbours().get(p.getKimenetiCso()));
-                            kiir(key+" "+"Pumpa"+" "+jatekos+" "+vanViz+" "+rossz+" "+be+" "+ki+sz);
-                        }
-                        if(value.getClass()==Ciszterna.class){
-                            Ciszterna c = (Ciszterna) value;
-                            kiir(key+" "+"Ciszterna"+" "+jatekos+sz);
-                        }
-                        if(value.getClass()==Forras.class){
-                            Forras forras = (Forras) value;
-                            kiir(key+" "+"Forras"+" "+jatekos+sz);
-                        }
-                    }
+            if (parancs.length == 1) {
+                mezoIds.forEach((key, value) -> {
+                    infotKiir(key);
                 });
 
-            }
-            else if(checkIdentifier(parancs[1], "mezo")){
-                String vanViz = mezoIds.get(parancs[1]).getVanViz()?"true":"false";
-                StringBuilder csoSzomszedok = new StringBuilder();
-                if(mezoIds.get(parancs[1]).getNeighbours().size()==2){
-                    csoSzomszedok.append(" ").append(getID(mezoIds, mezoIds.get(parancs[1]).getNeighbours().get(0)));
-                    csoSzomszedok.append(" ").append(getID(mezoIds, mezoIds.get(parancs[1]).getNeighbours().get(1)));
-                }
-                else if(mezoIds.get(parancs[1]).getNeighbours().size()==1) {
-                    csoSzomszedok.append(" ").append(getID(mezoIds, mezoIds.get(parancs[1]).getNeighbours().get(0))).append(" null");
-                }
-                else
-                    csoSzomszedok.append(" null null");
-                String csSz = String.valueOf(csoSzomszedok);
-                StringBuilder csucsSzomszedok = new StringBuilder();
-                if(mezoIds.get(parancs[1]).getNeighbours().size()==0)
-                    csucsSzomszedok.append(" null");
-                else {
-                    for (Mezo m : mezoIds.get(parancs[1]).getNeighbours()
-                    ) {
-                        csucsSzomszedok.append(" ").append(getID(mezoIds, m));
-                    }
-                }
-                String sz = String.valueOf(csucsSzomszedok);
-
-                if(csoIds.containsKey(parancs[1])){
-                    Cso cso = (Cso)mezoIds.get(parancs[1]);
-                    String jatekos = getID(jatekosIds, cso.getJatekosRajta().size()==0?null:cso.getJatekosRajta().get(0));
-                    String rossz = cso.getRossz()?"true":"false";
-                    String foltGar = Integer.toString(cso.getFoltozasiGarancia());
-                    String allapot = "";
-                    switch (cso.getAllapot()){
-                        case NORMALIS:
-                            allapot = "normalis";
-                            break;
-                        case CSUSZOS:
-                            allapot = "csuszos";
-                            break;
-                        case RAGADOS:
-                            allapot = "ragados";
-                            break;
-                        default:
-                            break;
-                    }
-                    String tTNormal = Integer.toString(cso.getTimeToNormal());
-                    kiir(parancs[1]+" "+"Cso"+" "+jatekos+" "+vanViz+" "+rossz+" "+foltGar+" "+allapot+" "+tTNormal+csSz);
-                }
-                if(csucsIds.containsKey(parancs[1])){
-                    StringBuilder csucsonJatekos = new StringBuilder();
-                    if(mezoIds.get(parancs[1]).getJatekosRajta().size() == 0)
-                        csucsonJatekos.append(" ").append("null");
-                    for (Jatekos j:mezoIds.get(parancs[1]).getJatekosRajta()
-                    ) {
-                        csucsonJatekos.append(" ").append(getID(jatekosIds, j));
-                    }
-                    String jatekos = String.valueOf(csucsonJatekos);
-                    if(mezoIds.get(parancs[1]).getClass()==Pumpa.class){
-                        Pumpa p = (Pumpa) mezoIds.get(parancs[1]);
-                        String rossz = p.getRossz()?"true":"false";
-                        String be;
-                        if(p.getBemenetiCso() == -1)
-                            be = "null";
-                        else
-                            be= getID(mezoIds, p.getNeighbours().get(p.getBemenetiCso()));
-                        String ki;
-                        if(p.getKimenetiCso() == -1)
-                            ki = "null";
-                        else
-                            ki = getID(mezoIds, p.getNeighbours().get(p.getKimenetiCso()));
-                        kiir(parancs[1]+" "+"Pumpa"+jatekos+" "+vanViz+" "+rossz+" "+be+" "+ki+sz);
-                    }
-                    if(mezoIds.get(parancs[1]).getClass()==Ciszterna.class){
-                        Ciszterna c = (Ciszterna) mezoIds.get(parancs[1]);
-                        kiir(parancs[1]+" "+"Ciszterna"+jatekos+sz);
-                    }
-                    if(mezoIds.get(parancs[1]).getClass()==Forras.class){
-                        Forras forras = (Forras) mezoIds.get(parancs[1]);
-                        kiir(parancs[1]+" "+"Forras"+jatekos+sz);
-                    }
-                }
+            } else if (checkIdentifier(parancs[1], "mezo")) {
+                infotKiir(parancs[1]);
             }
         }
     }
     void CsapatInfo(String[] parancs){
-        if(checkParamCount(0,parancs,1)){
-            if(parancs.length == 1){
-                kiir("szabotor"+" "+kontroller.getSzabotorPontok());
-                kiir("szerelo"+" "+kontroller.getSzereloPontok());
-            }
-            else{
-                kiir(parancs[1]+" "+(parancs[1].equals("szabotor")?kontroller.getSzabotorPontok():kontroller.getSzereloPontok()));
+            if (checkParamCount(0, parancs, 1)) {
+                if (parancs.length == 1) {
+                    kiir("szabotor" + " " + kontroller.getSzabotorPontok());
+                    kiir("szerelo" + " " + kontroller.getSzereloPontok());
+                } else {
+                    kiir(parancs[1] + " " + (parancs[1].equals("szabotor") ? kontroller.getSzabotorPontok() : kontroller.getSzereloPontok()));
+                }
             }
         }
-    }
     void VizInfo(String[] parancs){
         if(checkParamCount(0,parancs)){
             StringBuilder sztring = new StringBuilder();

@@ -94,8 +94,9 @@ public class Cso extends Mezo {
 
         Csucs szCsucs = this.szomszedosCsucs.get(0);
         szCsucs.csoCsere(this, fele);
-        szCsucs.felcsatol(fele);
+        //szCsucs.felcsatol(fele);
         p.felcsatol(fele);
+        p.felcsatol(this);
     }
 
     /**
