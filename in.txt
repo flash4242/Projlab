@@ -1,24 +1,5 @@
-MezoHozzaadasa c1 Ciszterna
-MezoHozzaadasa cs1 Cso c1
-JatekosHozzaadasa sz1 Szerelo cs1
-Mozgas sz1 c1
-MezoInfo c1
-MezoInfo cs1
-JatekosInfo sz1
-TesztVege
-MezoHozzaadasa f1 Forras
-MezoHozzaadasa cs1 Cso f1
-JatekosHozzaadasa sz1 Szerelo cs1
-Mozgas sz1 f1
-MezoInfo f1
-MezoInfo cs1
-JatekosInfo sz1
-TesztVege
-MezoHozzaadasa p1 Pumpa
-MezoHozzaadasa cs1 Cso p1
-JatekosHozzaadasa sz1 Szabotor cs1
-Mozgas sz1 p1
-MezoInfo p1
-MezoInfo cs1
-JatekosInfo sz1
+MezoHozzaadasa c Ciszterna
+JatekosHozzaadasa sz Szerelo c
+PumpaFelvetel sz
+JatekosInfo sz
 TesztVege

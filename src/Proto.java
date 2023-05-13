@@ -312,8 +312,10 @@ public class Proto {
             if(checkIdentifier(parancs[1],"szerelo")){
                 if(szereloIds.get(parancs[1]).getPumpa()==null) {
                     szereloIds.get(parancs[1]).pumpaFelvetele();
-                    if (szereloIds.get(parancs[1]).getPumpa() != null)
+                    if (szereloIds.get(parancs[1]).getPumpa() != null) {
                         mezoIds.put(parancs.length == 3 ? parancs[2] : "p", szereloIds.get(parancs[1]).getPumpa());
+                        csucsIds.put(parancs.length == 3 ? parancs[2] : "p", szereloIds.get(parancs[1]).getPumpa());
+                    }
                 }
             }
         }
