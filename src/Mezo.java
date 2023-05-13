@@ -46,13 +46,13 @@ public abstract class Mezo {
 	 * Az adott mezőre lerakja a csövet, leszármazottak felülírhatják.
 	 * @param cs A kapott cső
 	 */
-	public void targyLerakas(Cso cs){}
+	public boolean targyLerakas(Cso cs){return false;}
 
 	/**
 	 * Az adott mezőre lerakja a pumpát, leszármazottak felülírhatják.
 	 * @param p A kapott pumpa
 	 */
-	public void targyLerakas(Pumpa p){}
+	public boolean targyLerakas(Pumpa p){return false;}
 
 	/**
 	 * A szerelő megjavít egy mezőt. Üres függvény, mivel a Mezo nem tud megjavulni.

@@ -87,7 +87,7 @@ public class Cso extends Mezo {
      * @param p A kapott pumpa, amit lerakunk a csőre.
      */
     @Override
-    public void targyLerakas(Pumpa p) {
+    public boolean targyLerakas(Pumpa p) {
         Cso fele = new Cso();
         Kontroller.getInstance().addCso(fele);
         Kontroller.getInstance().addCsucs(p);
@@ -97,6 +97,7 @@ public class Cso extends Mezo {
         //szCsucs.felcsatol(fele);
         p.felcsatol(fele);
         p.felcsatol(this);
+        return true;
     }
 
     /**

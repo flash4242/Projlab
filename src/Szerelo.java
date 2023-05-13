@@ -75,8 +75,8 @@ public class Szerelo extends Jatekos{
      */
     public void csovegetLerak(){
         if(getCsoveg()!=null){
-            getAktMezo().targyLerakas(csoveg);
-            setCsoveg(null);
+            if(getAktMezo().targyLerakas(csoveg))
+                setCsoveg(null);
         }
     }
 
@@ -100,8 +100,8 @@ public class Szerelo extends Jatekos{
      */
     public void pumpatLerak(){
         if(getPumpa()!=null){
-            getAktMezo().targyLerakas(pumpa);
-            setPumpa(null);
+            if(getAktMezo().targyLerakas(pumpa))
+                setPumpa(null);
         }
     }
 }

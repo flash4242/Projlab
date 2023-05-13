@@ -59,8 +59,9 @@ public abstract class Csucs extends Mezo{
      * @param cs A kapott cső, amit hozzáadunk a listához.
      */
     @Override
-    public void targyLerakas(Cso cs){
+    public boolean targyLerakas(Cso cs){
         felcsatol(cs);
+        return true;
     }
 
     /**
