@@ -600,6 +600,20 @@ public class Proto {
         if(checkParamCount(0,parancs)) {
             kontroller.vizLeptet();
             kontroller.stepTime();
+            for (Csucs cs:kontroller.getCsucsok()
+                 ) {
+                Cso csoo = cs.csoLetrehozasa();
+                String s = "";
+                boolean find = false;
+                for(int i = 0;!find;++i){
+                    if(!mezoIds.containsKey("cso"+i)) {
+                        s = "cso" + i;
+                        find = true;
+                    }
+                }
+                mezoIds.put(s, csoo);
+                csoIds.put(s, csoo);
+            }
         }
     }
     void CsucsVizetPumpal(String[] parancs){
