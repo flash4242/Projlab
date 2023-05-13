@@ -7,12 +7,12 @@ public class Pumpa extends Csucs{
     /**
      * Index a szomszedosCso listához. A bemeneti csövet jelzi.
      */
-    private int bemenetiCso = -1;
+    private int bemenetiCso = 0;
 
     /**
      * Index a szomszedosCso listához. A kimeneti csövet jelzi.
      */
-    private int kimenetiCso = -1;
+    private int kimenetiCso = 0;
 
     /**
      * A pumpa állapota
