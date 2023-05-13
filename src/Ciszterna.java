@@ -60,7 +60,7 @@ public class Ciszterna extends Csucs{
     public void vizetPumpal() {
         for (Cso c : getSzomszedosCso()){
             if (c.vizetVeszit()){
-                Kontroller.getInstance().pontNovel("szerelo");
+                Kontroller.getInstance().pontNovel("szerelok");
             }
         }
     }
