@@ -458,15 +458,15 @@ public class Proto {
         if(checkParamCount(2,parancs)&& checkIdentifier(parancs[1],"mezo")) {
             if(csoIds.containsKey(parancs[1])){
                 if(parancs[2].equals("true"))
-                    csoIds.get(parancs[1]).setRossz(false);
-                if(parancs[2].equals("false"))
                     csoIds.get(parancs[1]).setRossz(true);
+                if(parancs[2].equals("false"))
+                    csoIds.get(parancs[1]).setRossz(false);
             }
             if(csucsIds.containsKey(parancs[1])){
                 if(parancs[2].equals("true"))
-                    csucsIds.get(parancs[1]).setRossz(false);
-                if(parancs[2].equals("false"))
                     csucsIds.get(parancs[1]).setRossz(true);
+                if(parancs[2].equals("false"))
+                    csucsIds.get(parancs[1]).setRossz(false);
             }
         }
     }
