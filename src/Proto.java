@@ -737,12 +737,12 @@ public class Proto {
                 Pumpa p = (Pumpa) mezoIds.get(nev);
                 String rossz = p.getRossz()?"true":"false";
                 String be;
-                if(p.getBemenetiCso() == -1)
+                if(p.getNeighbours().size() == 0||p.getBemenetiCso() ==-1)
                     be = "null";
                 else
                     be= getID(mezoIds, p.getNeighbours().get(p.getBemenetiCso()));
                 String ki;
-                if(p.getKimenetiCso() == -1)
+                if(p.getNeighbours().size() == 0||p.getKimenetiCso() ==-1)
                     ki = "null";
                 else
                     ki = getID(mezoIds, p.getNeighbours().get(p.getKimenetiCso()));
