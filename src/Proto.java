@@ -676,9 +676,13 @@ public class Proto {
                         csoSzomszedok.append(" null null");
                     String csSz = String.valueOf(csoSzomszedok);
                     StringBuilder csucsSzomszedok = new StringBuilder();
-                    for (Mezo m:value.getNeighbours()
-                    ) {
-                        csucsSzomszedok.append(" ").append(getID(mezoIds, m));
+                    if(value.getNeighbours().size()==0)
+                        csucsSzomszedok.append(" null");
+                    else {
+                        for (Mezo m : value.getNeighbours()
+                        ) {
+                            csucsSzomszedok.append(" ").append(getID(mezoIds, m));
+                        }
                     }
                     String sz = String.valueOf(csucsSzomszedok);
                     if(csoIds.containsKey(key)){
@@ -745,9 +749,13 @@ public class Proto {
                     csoSzomszedok.append(" null null");
                 String csSz = String.valueOf(csoSzomszedok);
                 StringBuilder csucsSzomszedok = new StringBuilder();
-                for (Mezo m:mezoIds.get(parancs[1]).getNeighbours()
-                ) {
-                    csucsSzomszedok.append(" ").append(getID(mezoIds, m));
+                if(mezoIds.get(parancs[1]).getNeighbours().size()==0)
+                    csucsSzomszedok.append(" null");
+                else {
+                    for (Mezo m : mezoIds.get(parancs[1]).getNeighbours()
+                    ) {
+                        csucsSzomszedok.append(" ").append(getID(mezoIds, m));
+                    }
                 }
                 String sz = String.valueOf(csucsSzomszedok);
 
