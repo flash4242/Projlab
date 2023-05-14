@@ -59,9 +59,11 @@ public class Cso extends Mezo {
     public boolean jatekostElfogad(Jatekos j) {
         if(getJatekosRajta().size() == 0 && szomszedosCsucs.size() == 2){
             if(allapot == Allapot.NORMALIS){
+                getJatekosRajta().add(j);
                 return true;
             } else if (allapot == Allapot.RAGADOS) {
                 j.leragad(true);
+                getJatekosRajta().add(j);
                 return true;
             } else if (allapot == Allapot.CSUSZOS) {
                 Mezo aktMezo = j.getAktMezo();
