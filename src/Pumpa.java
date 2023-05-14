@@ -30,7 +30,7 @@ public class Pumpa extends Csucs{
      * @param bemeneti kimeneti cső index a szomszédos csövekhez
      */
     @Override
-    public void atallit(int kimeneti, int bemeneti) {
+    public void atallit(int bemeneti, int kimeneti) {
         bemenetiCso = bemeneti % getSzomszedosCso().size();
         kimenetiCso = kimeneti % getSzomszedosCso().size();
     }
