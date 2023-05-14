@@ -140,7 +140,7 @@ public class Cso extends Mezo {
         if(getVanViz())
             return false;
         if(szomszedosCsucs.size() != 2 || rossz){
-            Kontroller.getInstance().pontNovel("szabotor");
+            Kontroller.getInstance().pontNovel("szabotorok");
             return true;
         }
         setVanViz(true);
