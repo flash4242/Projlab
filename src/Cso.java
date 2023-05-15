@@ -219,26 +219,40 @@ public class Cso extends Mezo {
     }
 
     /**
-     * Beállítja a cső állapotát
-     * @param r A cső állapota.
+     * Beállítja a cső hibásságát
+     * @param r A cső hibássága.
      */
     public void setRossz(boolean r){
         rossz = r;
     }
 
-    //TODO protohoz getterek??
+    /**
+     * visszaadja a cső hibásságát
+     * @return a rossz értéke
+     */
     public boolean getRossz(){
         return rossz;
     }
 
+    /**
+     * visszaadja a cső állapotát
+     * @return az allapot
+     */
     public Allapot getAllapot(){
         return allapot;
     }
 
+    /**
+     * visszaadja a cső timeToNormal változójának értékét
+     * @return timeToNormal
+     */
     public int getTimeToNormal(){
         return timeToNormal;
     }
-
+    /**
+     * visszaadja a cső foltozasiGarancia változójának értékét
+     * @return foltozasiGarancia
+     */
     public int getFoltozasiGarancia(){
         return foltozasiGarancia;
     }
