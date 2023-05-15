@@ -1,2 +1,68 @@
-sz Szerelo c false null
+cs Cso sz false false 0 ragados 3 null null
+*
+f0 Forras sz1 null
+*
+c0 Ciszterna sz1 null
+*
+p0 Pumpa sz1 false false null null null
+*
+cs Cso sz false false 4 normalis 0 null null
+*
+cs Cso sz false false 2 normalis 0 null null
+*
+hibas_azonosito
+sz Szerelo cs false null
+*
+sz Szerelo m false cs
+m Forras sz cs2
+*
+sz Szerelo m false cs
+m Ciszterna sz cs2
+*
+sz Szerelo m false null
+m Pumpa sz false false cs cs cs
+*
+sz Szerelo m false p2
+m Forras sz cs
+*
+sz Szerelo m false cs2
+m Forras sz cs
+*
+sz Szerelo m false cs
+m Pumpa sz false false cs2 cs2 cs2
+*
+sz Szerelo m false null
+m Forras sz cs
+*
+sz Szerelo m false cs
+sz2 Szerelo p false cs
+cs Cso null false false 0 normalis 0 null null
+*
+cs Cso sz false false 0 normalis 0 p2 p3
+cs2 Cso null false false 0 normalis 0 p1 p3
+p1 Pumpa null false false cs2 cs2 cs2
+p2 Pumpa null false false cs cs cs
+p3 Pumpa null false false cs2 cs2 cs2 cs
+*
+sz Szerelo m false p
+*
+sz Szerelo m false p
+*
+sz Szerelo m false p
+*
+cs Cso sz false false 0 normalis 0 p1 p2
+*
+sz Szerelo cs false cs2
+cs Cso sz false false 0 normalis 0 null null
+*
+sz Szerelo m false null
+m Pumpa sz false false cs2 cs2 cs2 cs
+*
+sz Szerelo m false null
+m Ciszterna sz cs
+*
+sz Szerelo m false null
+m Forras sz cs
+*
+m Pumpa sz false false null null null
 *

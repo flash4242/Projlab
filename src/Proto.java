@@ -16,31 +16,12 @@ public class Proto {
     private TreeMap<String, Mezo> mezoIds;
     private TreeMap<String, Cso> csoIds;
     private TreeMap<String, Csucs> csucsIds;
-//    private List<String> tesztNevek = List.of("Szerelő üres pumpára mozog", "Szerelő üres ciszternára mozog", "Szerelő üres forrásra mozog", "Szabotőr üres pumpára mozog",
-//            "Szabotőr üres ciszternára mozog", "Szabotőr üres forrásra mozog", "Szerelő üres csőre mozog", "Szabotőr üres csőre mozog", "Szerelő foglalt pumpára mozog",
-//            "Szerelő foglalt ciszternára mozog", "Szerelő foglalt forrásra mozog", "Szabotőr foglalt pumpára mozog", "Szabotőr foglalt ciszternára mozog",
-//            "Szabotőr foglalt forrásra mozog", "Szerelő foglalt csőre mozog", "Szabotőr foglalt csőre mozog", "Szerelő csőre ragad", "Szabotőr csőre ragad",
-//            "Szerelő csövön csúszik", "Szabotőr csövön csúszik", "Felvett csőre mozogás", "Szerelő pumpát átállít", "Szabotőr pumpát átállít",
-//            "Szabotőr csövet átállít", "Szabotőr ciszternát átállít", "Szabotőr forrást átállít", "Szerelő csövet átállít", "Szerelő ciszternát átállít",
-//            "Szerelő forrást átállít", "Szerelő csövet lyukaszt", "Szabotőr csövet lyukaszt", "Szerelő ciszternát lyukaszt",
-//            "Szerelő forrást lyukaszt", "Szerelő pumpát lyukaszt", "Szabotőr ciszternát lyukaszt", "Szabotőr forrást lyukaszt", "Szabotőr pumpát lyukaszt",
-//            "Szerelő csövet ragadóssá tesz", "Szabotőr csövet ragadóssá tesz", "Szerelő pumpát ragadóssá tesz", "Szerelő ciszternát ragadóssá tesz",
-//            "Szerelő forrást ragadóssá tesz", "Szabotőr pumpát ragadóssá tesz", "Szabotőr ciszternát ragadóssá tesz", "Szabotőr forrást ragadóssá tesz",
-//            "Ragasztó szerelő ragasztott csőről lemozog", "Szabotőr csövet csúszóssá tesz", "Szabotőr pumpát csúszóssá tesz", "Szabotőr ciszternát csúszóssá tesz",
-//            "Szabotőr forrást csúszóssá tesz", "Szerelő forrást javít", "Szerelő ciszternát javít", "Szerelő pumpát javít", "Szerelő csövet javít",
-//            "Szerelő javított csövet lyukaszt", "Szerelő felvesz csővéget csőről", "Szerelő felvesz csővéget forrásról", "Szerelő felvesz csővéget ciszteráról",
-//            "Szerelő felvesz lekötött csővéget pumpáról", "Szerelő felvesz csővéget, de már pumpás a keze", "Szerelő felvesz csővéget, de már csöves a keze",
-//            "Szerelő felvesz szabad csővéget pumpáról", "Szerelő felvesz egy foglalt csőnek a csővégét", "Két szerelő felvesz egy csövet", "Szerelő lerak pumpát csőre",
-//            "Szerelő lerak pumpát forrásra", "Szerelő lerak pumpát cisztenára", "Szerelő lerak pumpát pumpára", "Szerelő lerak nem létező pumpát csőre",
-//            "Szerelő lerak csővéget csőre", "Szerelő lerak csővéget pumpára", "Szerelő lerak csővéget ciszternára", "Szerelő lerak csővéget forrásra",
-//            "Szerelő lerak nem létező csővéget pumpára", "Szerelő lerak nem létező csővéget ciszternára", "Szerelő lerak nem létező csővéget forrásra",
-//            "Szerelő felvesz pumpát ciszternáról", "Szerelő felvesz pumpát ciszternáról, de már pumpás a keze", "Szerelő felvesz pumpát ciszternáról, de már csöves a keze",
-//            "Szerelő felvesz pumpát csőről", "Szerelő felvesz pumpát pumpáról", "Szerelő felvesz pumpát forrásról", "Kontroller csúcsokat ront",
-//            "Kontroller csőnek visszaszámol", "Elrontott pumpa pumpál. (nincs, van, nincs)", "Pumpa pumpál. (nincs, nincs, nincs)", "Pumpa pumpál. (nincs, nincs, van)",
-//            "Pumpa pumpál. (nincs, van, nincs)", "Pumpa pumpál. (nincs, van, van)", "Pumpa pumpál. (van, nincs, nincs)", "Pumpa pumpál. (van, nincs, van)",
-//            "Pumpa pumpál. (van, van, nincs)", "Pumpa pumpál. (van, van, van)", "Pumpa pumpál lyukas csőbe. (nincs, van, nincs)", "Pumpa pumpál felvett csőbe. (nincs, van, nincs)",
-//            "Ciszterna pumpál", "Forrás pumpál", "Ciszterna csövet gyárt");
 
+    /**
+     * A proto osztály konstruktora, inicializálja a map-eket, illetve létrehozza a kimeneti és bemeneti fájlt
+     * @param in a kimeneti fájl neve
+     * @param out a bemeneti fájl neve
+     */
     public Proto(String in, String out){
         inputFile = new File(in);
         if(new File(out).exists())
@@ -61,6 +42,9 @@ public class Proto {
         tesztek = new ArrayList<>();
     }
 
+    /**
+     * Beolvassa a bemeneti fájlt, és eltárolja a benne megadott parancsokat
+     */
     public void beolvas() {
         Scanner scanner = null;
         try {
@@ -85,6 +69,10 @@ public class Proto {
         scanner.close();
     }
 
+    /**
+     * kiírja a megadott szoveget a kimeneti fájlba
+     * @param szoveg a  kiírandó szöveg
+     */
     public void kiir(String szoveg){
         FileWriter fileWriter = null;
         try {
@@ -97,6 +85,13 @@ public class Proto {
         }
     }
 
+    /**
+     * visszaadja a megadott objektum kulcsértékét a megadott mapben
+     * @param map a map amiben keressük az objektumot
+     * @param object az objektum aminek a kulcsát keressük
+     * @return visszaadja a kulcsot
+     * @param <T> a keresendő objektum típusa
+     */
     public <T> String getID(Map<String, T> map, T object){
         if(object == null)
             return "null";
@@ -108,12 +103,12 @@ public class Proto {
         return null;
     }
 
-    public boolean checkIdentifier(String id){
-        boolean helyes = mezoIds.containsKey(id)||jatekosIds.containsKey(id);
-        if(!helyes)
-            kiir("hibas_azonosito");
-        return helyes;
-    }
+    /**
+     * megnézi, hogy a megadott kulcs megtalálható-e a megadott tipusú mapben
+     * @param id a keresendő kulcs
+     * @param tipus a mapben tárolt objektumok típusa
+     * @return visszaadja, hogy megtalálható-e a kulcs
+     */
     public boolean checkIdentifier(String id, String tipus){
         boolean helyes = false;
         if(tipus.equals("mezo"))
@@ -132,6 +127,14 @@ public class Proto {
             kiir("hibas_azonosito");
         return helyes;
     }
+
+    /**
+     * ellenőrzi, hogy a megadott parancsnak legalább elvart és maximum max paramétere van-e
+     * @param elvart a minimum paraméterszám
+     * @param akt az ellenőrizendő parancs
+     * @param max a maximum paraméterszám
+     * @return visszaadja, hogy megfelelő-e a paraméterszám
+     */
     public boolean checkParamCount(int elvart, String[] akt, int max){
         boolean helyes;
             helyes = elvart <= akt.length-1 && akt.length-1 <= max;
@@ -139,6 +142,12 @@ public class Proto {
             kiir("hibas_parameter");
         return helyes;
     }
+    /**
+     * ellenőrzi, hogy a megadott parancsnak pontosan elvart számú paramétere van-e
+     * @param elvart a paraméterszám
+     * @param akt az ellenőrizendő parancs
+     * @return visszaadja, hogy megfelelő-e a paraméterszám
+     */
     public boolean checkParamCount(int elvart, String[] akt){
         boolean helyes;
         helyes = elvart == akt.length-1;
@@ -146,6 +155,11 @@ public class Proto {
             kiir("hibas_parameter");
         return helyes;
     }
+
+    /**
+     * a megadott parancshoz tartozó függvényt meghívja
+     * @param parancs a megadott parancs, paraméterekkel együtt
+     */
     public void parancsValaszto(String[] parancs){
         switch (parancs[0]){
             case "TesztVege":
@@ -250,6 +264,10 @@ public class Proto {
         }
     }
 
+    /**
+     * végrehajtja vagy a megadott, vagy az összes teszthez tartozó parancsot
+     * @param args a megadott teszt
+     */
     public void vegrehajt(String args[]){
         if(args.length ==1) {
             if(Integer.parseInt(args[0]) >99||Integer.parseInt(args[0]) <1)
@@ -270,6 +288,11 @@ public class Proto {
             }
         }
     }
+
+    /**
+     *újra inicializálja map-eket, hogy a következő tesztek is hiba nélkül futhassanak
+     * @param parancs az aktuális parancs
+     */
     public void TesztVege(String[] parancs){
         szereloIds = new TreeMap<>();
         szabotorIds = new TreeMap<>();
@@ -282,6 +305,11 @@ public class Proto {
         }
         kiir("*");
     }
+
+    /**
+     * beállítja az adott cso állapotat a parancsban megadottra
+     * @param parancs az aktuális parancs
+     */
     public void AllapotAllit(String[] parancs){
         if(checkParamCount(2,parancs, 3)&&csoIds.containsKey(parancs[1])){
             switch (parancs[2]){
@@ -307,6 +335,11 @@ public class Proto {
         else
             kiir("hibas_azonosito");
     }
+
+    /**
+     * a szerelő felvesz egy pumpát az aktuális mezőről
+     * @param parancs az aktuális parancs
+     */
     public void PumpaFelvetel(String[] parancs){
         if(checkParamCount(1,parancs,2)){
             if(checkIdentifier(parancs[1],"szerelo")){
@@ -320,6 +353,11 @@ public class Proto {
             }
         }
     }
+
+    /**
+     * lerakja a parancsban megadott szerelő a nála tartott tárgyat az aktuális mezőre
+     * @param parancs aktuális parancs
+     */
     public void TargyLerakasa(String[] parancs){
         if(checkParamCount(1,parancs,2)&&checkIdentifier(parancs[1],"szerelo")){
             if(szereloIds.get(parancs[1]).getPumpa() !=null&&parancs.length == 3){
@@ -336,11 +374,21 @@ public class Proto {
             }
         }
     }
+
+    /**
+     * a parancsban megadott szerelő megjavítja a pumpát amin áll
+     * @param parancs megadott parancs
+     */
     void PumpaJavitasa(String[] parancs){
         if(checkParamCount(1,parancs)&&checkIdentifier(parancs[1],"szerelo")){
             szereloIds.get(parancs[1]).mezotJavit();
         }
     }
+
+    /**
+     * hozzáad egy új mezőt a játékhoz, a parancsban megadott azonosítóval, típussal és szomszéddal
+     * @param parancs megadott parancs
+     */
     void MezoHozzaadasa(String[] parancs){
         if(checkParamCount(2,parancs,3)){
             switch (parancs[2]){
@@ -390,6 +438,10 @@ public class Proto {
             }
         }
     }
+    /**
+     * hozzáad egy új játékost a játékhoz, a parancsban megadott azonosítóval, szereppel és aktuális mezővel
+     * @param parancs megadott parancs
+     */
     void JatekosHozzaadasa(String[] parancs){
         if(checkParamCount(3,parancs)){
             if(parancs[2].equals("Szerelo")){
@@ -414,6 +466,11 @@ public class Proto {
                 kiir("hibas_parameter");
         }
     }
+
+    /**
+     * eltávolítja a parancsban megadott játékost a játékból
+     * @param parancs megadott parancs
+     */
     void JatekosEltavolitasa(String[] parancs){
         if(checkParamCount(1,parancs)&&checkIdentifier(parancs[1],"jatekos")){
             jatekosIds.get(parancs[1]).getAktMezo().setJatekosRajta(null);
@@ -425,6 +482,11 @@ public class Proto {
                 szabotorIds.remove(parancs[1]);
         }
     }
+
+    /**
+     * a parancsban megadott mezők szomszédságát megszűnteti
+     * @param parancs megadott parancs
+     */
     void MezokSzetkapcsolasa(String[] parancs){
         if(checkParamCount(2,parancs)&& checkIdentifier(parancs[1],"mezo")&&checkIdentifier(parancs[2],"mezo")) {
             if(mezoIds.get(parancs[1]).getNeighbours().contains(mezoIds.get(parancs[2]))&&
@@ -440,6 +502,11 @@ public class Proto {
             }
         }
     }
+
+    /**
+     * beállítja, hogy a parancsban megadott mezőn a parancsbeli megadás szerint legyen vagy ne legyen víz
+     * @param parancs megadott parancs
+     */
     void VizAllit(String[] parancs){
         if(checkParamCount(2,parancs)&& checkIdentifier(parancs[1],"mezo")){
             switch (parancs[2]){
@@ -454,6 +521,10 @@ public class Proto {
                 }
         }
     }
+    /**
+     * beállítja, hogy a parancsban megadott mező a parancsbeli megadás szerint legyen hibás, vagy nem hibás
+     * @param parancs megadott parancs
+     */
     void HibasAllit(String[] parancs){
         if(checkParamCount(2,parancs)&& checkIdentifier(parancs[1],"mezo")) {
             if(csoIds.containsKey(parancs[1])){
@@ -470,6 +541,10 @@ public class Proto {
             }
         }
     }
+    /**
+     * beállítja, hogy a parancsban megadott játékosnál a parancsbeli megadás szerint legyen-e tárgy, és ha igen, milyen tipusú
+     * @param parancs megadott parancs
+     */
     void TargyAllit(String[] parancs){
         if(checkParamCount(1,parancs,3)&& checkIdentifier(parancs[1],"szerelo")) {
             if(parancs.length == 2){
@@ -498,6 +573,10 @@ public class Proto {
             }
         }
     }
+    /**
+     * beállítja, hogy a parancsban megadott pumpának a parancsbeli megadás szerint melyik cső legyen a bemeneti csöve
+     * @param parancs megadott parancs
+     */
     void PumpaBemenetAllit(String[] parancs){
         if(checkParamCount(1,parancs,2)&& checkIdentifier(parancs[1],"csucs")) {
             if(parancs.length == 2){
@@ -508,6 +587,10 @@ public class Proto {
             }
         }
     }
+    /**
+     * beállítja, hogy a parancsban megadott pumpának a parancsbeli megadás szerint melyik cső legyen a kimeneti csöve
+     * @param parancs megadott parancs
+     */
     void PumpaKimenetAllit(String[] parancs){
         if(checkParamCount(1,parancs,2)&& checkIdentifier(parancs[1],"csucs")) {
             if(parancs.length == 2){
@@ -518,6 +601,11 @@ public class Proto {
             }
         }
     }
+
+    /**
+     * a parancsban megadott játékost átmozgatja a megadott mezőre
+     * @param parancs megadott parancs
+     */
     void Mozgas(String[] parancs){
         if(checkParamCount(2,parancs)&& checkIdentifier(parancs[1],"jatekos")&&
                 checkIdentifier(parancs[2],"mezo")) {
@@ -526,21 +614,37 @@ public class Proto {
             );
         }
     }
+    /**
+     * a parancsban megadott játékos kilyukasztja az aktuális mezőjét, ha az cső
+     * @param parancs megadott parancs
+     */
     void Lyukaszt(String[] parancs){
         if(checkParamCount(1,parancs)&& checkIdentifier(parancs[1],"jatekos")) {
             jatekosIds.get(parancs[1]).csoKilyukasztasa();
         }
     }
+    /**
+     * a parancsban megadott szerelő befoltozza az aktuális mezőjét, ha az lyukas cső
+     * @param parancs megadott parancs
+     */
     void Foltoz(String[] parancs){
         if(checkParamCount(1,parancs)&& checkIdentifier(parancs[1],"szerelo")) {
             szereloIds.get(parancs[1]).mezotJavit();
         }
     }
+    /**
+     * a parancsban megadott jatekos beragasztozza az aktuális mezőjét, ha az cső
+     * @param parancs megadott parancs
+     */
     void Ragasztoz(String[] parancs){
         if(checkParamCount(1,parancs)&& checkIdentifier(parancs[1],"jatekos")) {
             jatekosIds.get(parancs[1]).beragasztoz();
         }
     }
+    /**
+     * a parancsban megadott szabotor csuszositja az aktuális mezőjét, ha az cső
+     * @param parancs megadott parancs
+     */
     void Csuszosit(String[] parancs){
         if(checkParamCount(1,parancs, 2)&& checkIdentifier(parancs[1],"szabotor")) {
             szabotorIds.get(parancs[1]).csuszosit();
@@ -549,6 +653,11 @@ public class Proto {
             }
         }
     }
+
+    /**
+     * a parancsban megadott játékos átállítja az aktuális mezője ki és bemeneti csövét a parancs szerint, ha az pumpa
+     * @param parancs megadott parancs
+     */
     void PumpaAllit(String[] parancs){
         if(checkParamCount(3,parancs)&& checkIdentifier(parancs[1],"jatekos")) {
             List<? extends Mezo> m = jatekosIds.get(parancs[1]).getAktMezo().getNeighbours();
@@ -556,6 +665,11 @@ public class Proto {
                 jatekosIds.get(parancs[1]).pumpaAtallitasa(m.indexOf(mezoIds.get(parancs[2])), m.indexOf(mezoIds.get(parancs[3])));
         }
     }
+
+    /**
+     * a parancsban megadott szerelo felvesz egy csovet az aktuális mezőjéről
+     * @param parancs megadott parancs
+     */
     void CsoFelvetel(String[] parancs){
         if(checkParamCount(2,parancs)&& checkIdentifier(parancs[1],"szerelo")&& checkIdentifier(parancs[2],"cso")) {
             if(szereloIds.get(parancs[1]).getAktMezo().getNeighbours().contains(csoIds.get(parancs[2]))){
@@ -563,16 +677,31 @@ public class Proto {
             }
         }
     }
+
+    /**
+     * az összes csucs pumpál egyet
+     * @param parancs megadott parancs
+     */
     void VizLeptet(String[] parancs){
         if(checkParamCount(0,parancs)) {
             kontroller.vizLeptet();
         }
     }
+
+    /**
+     * a parancsban megadott csapat pontjait eggyel növeli
+     * @param parancs megadott parancs
+     */
     void PontNovel(String[] parancs){
         if(checkParamCount(1,parancs)) {
             kontroller.pontNovel(parancs[1]);
         }
     }
+
+    /**
+     * parancsban megadottak szerint determinisztikusan, vagy véletlenszerűen elrontja a pumpákat
+     * @param parancs megadott parancs
+     */
     void VeletlenPumpaElrontas(String[] parancs){
         if(checkParamCount(0,parancs, 1)) {
             if(parancs.length == 2){
@@ -591,11 +720,21 @@ public class Proto {
             }
         }
     }
+
+    /**
+     * lépteti az időt a kontrollerben
+     * @param parancs megadott parancs
+     */
     void StepTime(String[] parancs){
         if(checkParamCount(0,parancs)) {
             kontroller.stepTime();
         }
     }
+
+    /**
+     * lépteti a kört, és minden ezzel járó eseményt meghív
+     * @param parancs megadott parancs
+     */
     void KorLeptetese(String[] parancs){
         if(checkParamCount(0,parancs)) {
             kontroller.vizLeptet();
@@ -616,11 +755,20 @@ public class Proto {
             }
         }
     }
+
+    /**
+     * a parancsban megadott csucsban lépteti a vizet
+     * @param parancs megadott parancs
+     */
     void CsucsVizetPumpal(String[] parancs){
         if(checkParamCount(1,parancs)) {
             csucsIds.get(parancs[1]).vizetPumpal();
         }
     }
+    /**
+     * a parancsban megadott mezőket szomszédossá teszi
+     * @param parancs megadott parancs
+     */
     void MezokOsszekapcsolasa(String[] parancs){
         if(checkParamCount(2,parancs)&& checkIdentifier(parancs[1],"mezo")&&checkIdentifier(parancs[2],"mezo")) {
                 if(csoIds.containsKey(parancs[1])&&csucsIds.containsKey(parancs[2])){
@@ -633,6 +781,11 @@ public class Proto {
                 }
         }
     }
+
+    /**
+     * a parancs szerint vagy egy, vagy mindegyik játékos adatát kiírja a kimeneti fájlba
+     * @param parancs megadott parancs
+     */
     void JatekosInfo(String[] parancs){
         if(checkParamCount(0,parancs,1)) {
             if(parancs.length == 1){
@@ -678,6 +831,11 @@ public class Proto {
                 kiir("hibas_parameter");
         }
     }
+
+    /**
+     * egy megadott mezo adatait kiírja a kimeneti fájlba
+     * @param nev a megadott mezo azonosítója
+     */
     public void infotKiir(String nev){
         String vanViz = mezoIds.get(nev).getVanViz()?"true":"false";
         StringBuilder csoSzomszedok = new StringBuilder();
@@ -758,18 +916,11 @@ public class Proto {
             }
         }
     }
-//    public void sort(){
-//        mezoIds = sortTreeMap(mezoIds);
-//        jatekosIds = sortTreeMap(jatekosIds);
-//        csucsIds = sortTreeMap(csucsIds);
-//        csoIds = sortTreeMap(csoIds);
-//        szereloIds = sortTreeMap(szereloIds);
-//        szabotorIds = sortTreeMap(szabotorIds);
-//    }
-//    public <T> TreeMap<String, T> sortTreeMap(TreeMap<String, T> map){
-//        TreeMap<String, T> sortedMap = new TreeMap<>(map);
-//        return new TreeMap<>(sortedMap);
-//    }
+
+    /**
+     * a parancs szerint mindegyik, vagy a megadott mezo adatait kiírja a kimeneti fájlba
+     * @param parancs megadott parancs
+     */
     void MezoInfo(String[] parancs){
         if(checkParamCount(0,parancs,1)) {
             if (parancs.length == 1) {
@@ -782,6 +933,10 @@ public class Proto {
             }
         }
     }
+    /**
+     * a parancs szerint mindegyik, vagy a megadott csapat pontjait kiírja a kimeneti fájlba
+     * @param parancs megadott parancs
+     */
     void CsapatInfo(String[] parancs){
             if (checkParamCount(0, parancs, 1)) {
                 if (parancs.length == 1) {
@@ -792,6 +947,11 @@ public class Proto {
                 }
             }
         }
+
+    /**
+     * kiírja a vizet tartalmazó mezők azonosítóját a kimeneti fájlba
+     * @param parancs megadott parancs
+     */
     void VizInfo(String[] parancs){
         if(checkParamCount(0,parancs)){
             StringBuilder sztring = new StringBuilder();
