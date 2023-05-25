@@ -64,9 +64,14 @@ public  class Kontroller {
     /**
      * Mindegyik csúcsban indít egy pumpálást
      */
-    public void vizLeptet(){
-        for (Csucs csucs:csucsok)
+    public void stepKor(){
+        for (Csucs csucs:csucsok) {
+            Cso cs = csucs.csoLetrehozasa();
+            if(cs!=null)
+                csovek.add(cs);
             csucs.vizetPumpal();
+        }
+        veletlenPumpaElrontas();
     }
 
     /**
@@ -178,19 +183,17 @@ public  class Kontroller {
     }
 
     /**
-     * Véletlenszerűen elront pumpákat. Választ egy véletlen számot a csucsok tömb elemszámának 20%-a és 50%-a között
-     * és ennyiszer elront egy véletlenszerűen választott (azaz egy indexet választ véletlenszerűen a tömb elemszámának minimuma és maximuma között) pumpát.
+     * Véletlenszerűen elront pumpákat. Az összes csúcsot 5%-os eséllyel elrontja.
      */
     public void veletlenPumpaElrontas(){
-        Random r = new Random();
-        int alsohatar = (int)(csucsok.size()*0.2);
-        int felsohatar = (int)(csucsok.size()*0.5);
-        int mennyit_rontsak_el = r.nextInt(felsohatar-alsohatar) + alsohatar;
+        float percent = 5;
 
-        while(mennyit_rontsak_el>0) {
-            int melyiket = r.nextInt(csucsok.size()-1);
-            csucsok.get(melyiket).kontrollerElront();
-            mennyit_rontsak_el--;
+        Random r = new Random();
+
+        for (Csucs cs : csucsok) {
+            if (r.nextInt(100) < percent) {
+                cs.kontrollerElront();
+            }
         }
     }
 

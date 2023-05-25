@@ -104,4 +104,11 @@ public abstract class Jatekos {
     public void pumpaAtallitasa(int bemeneti, int kimeneti){
         getAktMezo().atallit(bemeneti, kimeneti);
     }
+
+    public void csuszosit(){};
+    public void mezotJavit(){};
+    public void csovegFelvetele(int cs){};
+    public void csovegetLerak(){};
+    public void pumpaFelvetele(){};
+    public void pumpatLerak(){};
 }

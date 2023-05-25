@@ -684,7 +684,7 @@ public class Proto {
      */
     void VizLeptet(String[] parancs){
         if(checkParamCount(0,parancs)) {
-            kontroller.vizLeptet();
+            kontroller.stepKor();
         }
     }
 
@@ -737,7 +737,7 @@ public class Proto {
      */
     void KorLeptetese(String[] parancs){
         if(checkParamCount(0,parancs)) {
-            kontroller.vizLeptet();
+            kontroller.stepKor();
             kontroller.stepTime();
             for (Csucs cs:kontroller.getCsucsok()
                  ) {
