@@ -1,3 +1,5 @@
+package Main.View;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -93,7 +95,7 @@ public class GameFrame extends JFrame {
         pan.add(buttinosej);
         //North are buttons
         this.add(pan, BorderLayout.NORTH);
-        //Center is the GamePanel
+        //Center is the Main.View.GamePanel
         this.add(m, BorderLayout.CENTER);
     }
 }

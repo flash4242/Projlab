@@ -1,3 +1,7 @@
+package Main;
+
+import Main.View.GameFrame;
+
 public class Main {
     public static void main(String args[])
     {

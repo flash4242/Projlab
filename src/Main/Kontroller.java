@@ -1,3 +1,7 @@
+package Main;
+
+import Main.Model.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -224,7 +228,7 @@ public  class Kontroller {
     }
 
     /**
-     * Eltávolítja a paraméterként kapott Jatekos-t a jatekosok listából.
+     * Eltávolítja a paraméterként kapott Main.Model.Jatekos-t a jatekosok listából.
      * @param jatekos
      */
     public void removeJatekos(Jatekos jatekos){
@@ -237,7 +241,7 @@ public  class Kontroller {
     }
 
     /**
-     * Eltávolítja a paraméterként kapott Cso-t a csovek listából.
+     * Eltávolítja a paraméterként kapott Main.Model.Cso-t a csovek listából.
      * @param cso
      */
     public void removeCso(Cso cso){
@@ -250,7 +254,7 @@ public  class Kontroller {
     }
 
     /**
-     * Eltávolítja a paraméterként kapott Csucs-ot a csucsok listából.
+     * Eltávolítja a paraméterként kapott Main.Model.Csucs-ot a csucsok listából.
      * @param csucs
      */
     public void removeCsucs(Csucs csucs){

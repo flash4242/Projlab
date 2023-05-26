@@ -1,3 +1,7 @@
+package Main.Model;
+
+import Main.Kontroller;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -103,7 +107,7 @@ public class Cso extends Mezo {
     }
 
     /**
-     * Visszaadja a csővel szomszédos csúcsok listáját, Mezo típusú listaként.
+     * Visszaadja a csővel szomszédos csúcsok listáját, Main.Model.Mezo típusú listaként.
      * @return A szomszédos csúcsok listája.
      */
     @Override
@@ -258,7 +262,7 @@ public class Cso extends Mezo {
     }
 
     /**
-     * Visszaadja a szomszédos csúcsok listáját, Csucs típusú listaként.
+     * Visszaadja a szomszédos csúcsok listáját, Main.Model.Csucs típusú listaként.
      * @return A szomszédos csúcsok listája.
      */
     public List<Csucs> getSzomszedosCsucs() {

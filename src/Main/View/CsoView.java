@@ -1,3 +1,7 @@
+package Main.View;
+
+import Main.Model.Cso;
+
 import java.awt.*;
 
 public class CsoView {

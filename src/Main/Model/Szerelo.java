@@ -1,3 +1,5 @@
+package Main.Model;
+
 /**
  * A játékban lévő szerelőket reprezentálja. Képes pumpát és csövet szerelni,
  * csövet kilyukasztani valamint ragadóssá tenni. Célja, hogy minél több víz folyjon a ciszternákba.

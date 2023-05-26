@@ -1,3 +1,7 @@
+package Main.View;
+
+import Main.Model.Ciszterna;
+
 import java.awt.*;
 
 public class CiszternaView extends CsucsView{

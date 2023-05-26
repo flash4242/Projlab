@@ -1,3 +1,5 @@
+package Main.Model;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,12 +96,12 @@ public abstract class Csucs extends Mezo{
     }
 
     /**
-     * A Csucs működését jelző függvény. Ezt minden leszármazottnak meg kell valósítania.
+     * A Main.Model.Csucs működését jelző függvény. Ezt minden leszármazottnak meg kell valósítania.
      */
     public abstract void vizetPumpal();
 
     /**
-     * A Kontroller elront egy Csucsot. Ez egy üres függvény, mert a Csucs nem tud elromlani.
+     * A Main.Main.Kontroller elront egy Csucsot. Ez egy üres függvény, mert a Main.Model.Csucs nem tud elromlani.
      * Azon leszármazottakban amik el tudnak romlani meg kell valósítani
      */
     public void kontrollerElront(){
@@ -135,7 +137,7 @@ public abstract class Csucs extends Mezo{
     }
 
     /**
-     * Visszaadja a szomszédos csövek listáját, Mezo típusú listaként.
+     * Visszaadja a szomszédos csövek listáját, Main.Model.Mezo típusú listaként.
      * @return A szomszédos csövek listája.
      */
     @Override
@@ -144,7 +146,7 @@ public abstract class Csucs extends Mezo{
     }
 
     /**
-     * Visszaadja a szomszédos csövek listáját, Cso típusú listaként.
+     * Visszaadja a szomszédos csövek listáját, Main.Model.Cso típusú listaként.
      * @return A szomszédos csövek listája.
      */
     public List<Cso> getSzomszedosCso(){

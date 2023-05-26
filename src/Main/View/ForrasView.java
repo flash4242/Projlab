@@ -1,7 +1,11 @@
+package Main.View;
+
+import Main.Model.Forras;
+
 import java.awt.*;
 
-public class SzereloView extends JatekosView{
-    private Szerelo szerelo;
+public class ForrasView extends CsucsView{
+    private Forras forras;
 
     @Override
     public void draw(Graphics g){

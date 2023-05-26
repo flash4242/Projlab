@@ -1,23 +1,23 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+package Main.Model;
+
+import Main.Kontroller;
 
 /**
  * A játékban lévő Ciszternákat reprezentáló osztály.
- * Egy Ciszterna egy olyan Csúcs, amelynek mőködése során az összes szomszédos csőből vizet szív be.
+ * Egy Main.Model.Ciszterna egy olyan Csúcs, amelynek mőködése során az összes szomszédos csőből vizet szív be.
  * Ez a víz egyből el is tűnik. És a szerelők pontot kapnak.
  */
 public class Ciszterna extends Csucs{
     /**
-     * Létrehoz egy Ciszterna objektumot.
+     * Létrehoz egy Main.Model.Ciszterna objektumot.
      */
     public Ciszterna(){
         super();
     }
 
     /**
-     * Létrehoz egy új Cso objektumot, amit kétszer felcsatol.
-     * Ezt akkor teszi meg, ha a Ciszterna szomszédos csövei között nincs hurok.
+     * Létrehoz egy új Main.Model.Cso objektumot, amit kétszer felcsatol.
+     * Ezt akkor teszi meg, ha a Main.Model.Ciszterna szomszédos csövei között nincs hurok.
      */
     @Override
     public Cso csoLetrehozasa(){
@@ -31,7 +31,7 @@ public class Ciszterna extends Csucs{
     }
 
     /**
-     * Ellenőrzi, hogy a Ciszterna szomszédos csövei között van-e hurok.
+     * Ellenőrzi, hogy a Main.Model.Ciszterna szomszédos csövei között van-e hurok.
      * @return Igazat ad vissza, ha van hurok, egyébként hamisat.
      */
     private boolean vanHurok(){
@@ -44,8 +44,8 @@ public class Ciszterna extends Csucs{
     }
 
     /**
-     * Létrehoz egy új Pumpa objektumot amit visszaad.
-     * @return A létrehozott Pumpa objektum.
+     * Létrehoz egy új Main.Model.Pumpa objektumot amit visszaad.
+     * @return A létrehozott Main.Model.Pumpa objektum.
      */
     @Override
     public Pumpa pumpaLetrehozasa(){

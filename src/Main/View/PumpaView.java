@@ -1,7 +1,11 @@
+package Main.View;
+
+import Main.Model.Pumpa;
+
 import java.awt.*;
 
-public class SzabotorView extends JatekosView{
-    private Szabotor szabotor;
+public class PumpaView extends CsucsView{
+    private Pumpa pumpa;
 
     @Override
     public void draw(Graphics g){
