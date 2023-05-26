@@ -32,21 +32,21 @@ public class PumpaView extends CsucsView{
 
     /**
      * Kirajzolja a pumpát.
-     * A pumpa sugara a radius. Ezzel lehet a meretet allítani.
+     * A pumpa sugara a radius. Ezzel lehet a méretet állítani.
      * Ha a pumpa rossz, akkor piros keretet rajzol a pumpa köré.
      * Ha a pumpában van víz, akkor kék a pumpa, különben fekete.
      * A szomszédos csövek számát a pumpa szélére írja.
      * A kimeneti cső irányába egy nyilat rajzol a pumpán kívülre.
      * A bemeneti cső irányába egy nyilat rajzol a pumpán kívülre.
-     * @param g
+     * @param g A kirajzoló grafikus objektum.
      */
     @Override
     public void draw(Graphics g){
-        int widthOfRossz = 10;
+        int widthOfKorvonal = 10;
         //Kirajzolja a pumpa keretét.
         if (pumpa.getRossz()){
             g.setColor(Color.RED);
-            g.fillOval(x-radius-widthOfRossz/2,y-radius-widthOfRossz/2,2*radius+widthOfRossz,2*radius+widthOfRossz);
+            g.fillOval(x-radius-widthOfKorvonal/2,y-radius-widthOfKorvonal/2,2*radius+widthOfKorvonal,2*radius+widthOfKorvonal);
         }
         //Kirajzolja a pumpa körét, ha van benne víz, akkor kék, különben fekete.
         if(pumpa.getVanViz()){
@@ -57,9 +57,8 @@ public class PumpaView extends CsucsView{
         }
         g.fillOval(x-radius,y-radius,2*radius,2*radius);
 
-        g.setColor(Color.WHITE);
-
         //Kirajzolja a szomszedos csovek szamat.
+        g.setColor(Color.WHITE);
         List<Cso> szomszedoscsovek = pumpa.getSzomszedosCso();
         for (int i=0; i<szomszedoscsovek.size(); i++){
             CsoView cv = GamePanel.getInstance().getCsoViewFromCso(szomszedoscsovek.get(i));
@@ -69,7 +68,7 @@ public class PumpaView extends CsucsView{
             }
             direction = direction.normalize();
             direction = direction.multiply(radius-10);
-            g.drawString(Integer.toString(i+1),(int)(getX()+direction.getX()),(int)(getY()+direction.getY()));
+            g.drawString(Integer.toString(i+1),(int)(getX()+direction.getX()-5),(int)(getY()+direction.getY()+5));
         }
 
         //kirajzolja a kimeno cso iranyat
@@ -99,6 +98,7 @@ public class PumpaView extends CsucsView{
     /**
      * Kiszámolja a rajta álló játékosok helyzetét.
      */
+    //TODO Aki ezt megvalósítja. Ez minden csúcsra ugyanolyan azt hiszem, lehet egyel feljebb.
     @Override
     public void calculate(){
     }

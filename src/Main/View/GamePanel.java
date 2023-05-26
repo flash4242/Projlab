@@ -1,10 +1,7 @@
 package Main.View;
 
 import Main.Kontroller;
-import Main.Model.Cso;
-import Main.Model.Csucs;
-import Main.Model.Jatekos;
-import Main.Model.Pumpa;
+import Main.Model.*;
 import Main.Vec2;
 
 import javax.swing.*;
@@ -59,33 +56,49 @@ public class GamePanel extends JPanel {
         jatekosok = new ArrayList<>();
         csovek = new ArrayList<>();
         csucsok = new ArrayList<>();
+
+        //TODO EZ ALATT CSAK TESZTELES FOLYT EGY PELDA PALYA, DELETE LATER
         Pumpa p = new Pumpa();
         p.setVanViz(true);
         p.setRossz(true);
         PumpaView pm = new PumpaView(p);
         pm.setX(400);
-        pm.setY(400);
+        pm.setY(200);
         csucsok.add(pm);
+
+        Ciszterna c = new Ciszterna();
+        CiszternaView cv = new CiszternaView(c);
+        cv.setX(800);
+        cv.setY(200);
+        csucsok.add(cv);
+
+        Forras f = new Forras();
+        ForrasView fv = new ForrasView(f);
+        fv.setX(300);
+        fv.setY(100);
+        csucsok.add(fv);
 
         Cso cs = new Cso();
         p.felcsatol(cs);
         CsoView csv = new CsoView(cs);
         csv.setX1(400);
-        csv.setY1(400);
-        csv.setX2(900);
-        csv.setY2(900);
+        csv.setY1(200);
+        csv.setX2(800);
+        csv.setY2(200);
         csovek.add(csv);
 
         Cso cs2 = new Cso();
         p.felcsatol(cs2);
         CsoView csv2 = new CsoView(cs2);
         csv2.setX1(400);
-        csv2.setY1(400);
+        csv2.setY1(200);
         csv2.setX2(300);
         csv2.setY2(100);
         csovek.add(csv2);
 
         p.setBemenetiCso(1);
+        c.felcsatol(cs);
+        f.felcsatol(cs2);
     }
 
     /**
