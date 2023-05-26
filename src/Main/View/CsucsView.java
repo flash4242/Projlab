@@ -1,5 +1,7 @@
 package Main.View;
 
+import Main.Model.Csucs;
+
 import java.awt.*;
 
 public abstract class CsucsView {
@@ -24,4 +26,5 @@ public abstract class CsucsView {
 
     public abstract void draw(Graphics g);
     public abstract void calculate();
+    public abstract Csucs getCsucs();
 }

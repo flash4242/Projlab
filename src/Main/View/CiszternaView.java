@@ -14,4 +14,9 @@ public class CiszternaView extends CsucsView{
     @Override
     public void calculate(){
     }
+
+    @Override
+    public Ciszterna getCsucs(){
+        return ciszterna;
+    }
 }

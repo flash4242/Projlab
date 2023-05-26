@@ -14,4 +14,9 @@ public class ForrasView extends CsucsView{
     @Override
     public void calculate(){
     }
+
+    @Override
+    public Forras getCsucs(){
+        return forras;
+    }
 }

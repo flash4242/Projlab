@@ -15,6 +15,10 @@ public class CsoView {
     CsoView(){
     }
 
+    public Cso getCso(){
+        return cso;
+    }
+
     public void draw(Graphics g){
     }
 

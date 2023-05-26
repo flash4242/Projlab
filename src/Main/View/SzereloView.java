@@ -12,6 +12,7 @@ public class SzereloView extends JatekosView{
     }
 
     @Override
-    public void calculate(){
+    public Szerelo getJatekos(){
+        return szerelo;
     }
 }

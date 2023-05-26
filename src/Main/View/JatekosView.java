@@ -1,5 +1,7 @@
 package Main.View;
 
+import Main.Model.Jatekos;
+
 import java.awt.*;
 
 public abstract class JatekosView {
@@ -23,5 +25,5 @@ public abstract class JatekosView {
     }
 
     public abstract void draw(Graphics g);
-    public abstract void calculate();
+    public abstract Jatekos getJatekos();
 }

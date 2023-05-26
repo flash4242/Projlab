@@ -106,4 +106,9 @@ public class Szerelo extends Jatekos{
                 setPumpa(null);
         }
     }
+
+    @Override
+    public Cso getCso(){
+        return getCsoveg();
+    }
 }

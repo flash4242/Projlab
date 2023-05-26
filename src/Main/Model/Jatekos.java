@@ -113,4 +113,5 @@ public abstract class Jatekos {
     public void csovegetLerak(){};
     public void pumpaFelvetele(){};
     public void pumpatLerak(){};
+    public Cso getCso(){return null;};
 }

@@ -12,6 +12,7 @@ public class SzabotorView extends JatekosView{
     }
 
     @Override
-    public void calculate(){
+    public Szabotor getJatekos(){
+        return szabotor;
     }
 }
