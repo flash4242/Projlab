@@ -1,5 +1,6 @@
 package Main.View;
 
+import Main.Kontroller;
 import Main.Model.Cso;
 import Main.Model.Csucs;
 import Main.Model.Jatekos;
@@ -17,6 +18,15 @@ import java.util.List;
  */
 public class GamePanel extends JPanel {
 
+    private static GamePanel single_instance = null;
+
+    public static synchronized GamePanel getInstance()
+    {
+        if (single_instance == null)
+            single_instance = new GamePanel();
+
+        return single_instance;
+    }
     List<JatekosView> jatekosok;
     List<CsoView> csovek;
     List<CsucsView> csucsok;
