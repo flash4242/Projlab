@@ -58,6 +58,7 @@ public class CsoView {
     public void draw(Graphics g){
     }
 
+    //TODO IMPORTANT: Aki ezt csinalja, az fontos, hogy amennyiben egy cso egy csucshoz van kotve(nem embernek van), akkor ugyanazok a koordinatai legyenek annal a vegnel, mint a csucsnak.
     public void calculate(){
 
     }
