@@ -34,7 +34,7 @@ public class GamePanel extends JPanel {
     /**
      * Default ctor.
      */
-    public GamePanel(){
+    private GamePanel(){
         super();
         jatekosok = new ArrayList<>();
         csovek = new ArrayList<>();
@@ -44,8 +44,26 @@ public class GamePanel extends JPanel {
         p.setRossz(false);
         PumpaView pm = new PumpaView(p);
         pm.setX(400);
-        pm.setY(200);
+        pm.setY(400);
         csucsok.add(pm);
+
+        Cso cs = new Cso();
+        p.felcsatol(cs);
+        CsoView csv = new CsoView(cs);
+        csv.setX1(400);
+        csv.setY1(400);
+        csv.setX2(900);
+        csv.setY2(900);
+        csovek.add(csv);
+
+        Cso cs2 = new Cso();
+        p.felcsatol(cs2);
+        CsoView csv2 = new CsoView(cs2);
+        csv2.setX1(400);
+        csv2.setY1(400);
+        csv2.setX2(100);
+        csv2.setY2(100);
+        csovek.add(csv2);
     }
     /**
      * Paints the components.

@@ -14,7 +14,6 @@ import java.util.*;
 import java.util.List;
 
 public class GameFrame extends JFrame {
-    private GamePanel m;
 
     /**
      * Example of how one can create a JTextArea
@@ -40,8 +39,6 @@ public class GameFrame extends JFrame {
      * Sets up the action listeners of the menu buttons.
      */
     private void InitComponents(){
-        m = new GamePanel();
-
         this.setLayout(new BorderLayout());
         //example buttons and labels
         JButton butt = new JButton("Step");
@@ -59,16 +56,12 @@ public class GameFrame extends JFrame {
 
         //example action listeners, they use lambdas
         butt.addActionListener((ActionEvent e) -> {
-            m.repaint();
         });
         butti.addActionListener((ActionEvent e) -> {
-            m.repaint();
         });
         buttin.addActionListener((ActionEvent e) -> {
-            m.repaint();
         });
         buttino.addActionListener((ActionEvent e) -> {
-            m.repaint();
         });
 
         buttinos.addActionListener((ActionEvent e) -> {
@@ -96,6 +89,6 @@ public class GameFrame extends JFrame {
         //North are buttons
         this.add(pan, BorderLayout.NORTH);
         //Center is the Main.View.GamePanel
-        this.add(m, BorderLayout.CENTER);
+        this.add(GamePanel.getInstance(), BorderLayout.CENTER);
     }
 }
