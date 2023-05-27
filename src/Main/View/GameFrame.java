@@ -1,5 +1,8 @@
 package Main.View;
 
+import Main.Kontroller;
+import Main.Model.Jatekos;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,19 +15,18 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.*;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 public class GameFrame extends JFrame {
 
     /**
      * Example of how one can create a JTextField
      */
-    private JTextField hova;
-    private JTextField ki;
-    private JTextField be;
-    private JTextField hanyadik;
+    private JTextField hova, ki, be, hanyadik;
+
+    private JButton Mozog, Atallit, Lyukaszt, Ragaszt, Javit, CsFelvesz, CsLerak, PFelvesz, PLerak, Csuszosit;
     private CardLayout card = new CardLayout();
-    private JTextField szereloszam;
-    private JTextField szabotorszam;
+    private JTextField szereloszam, szabotorszam;
     private JPanel menu;
 
     /**
@@ -84,56 +86,43 @@ public class GameFrame extends JFrame {
 
         //kozos
         JLabel kozos = new JLabel("Kozos akciok");
-        JButton Mozog = new JButton("Mozog");
+        Mozog = new JButton("Mozog");
         JLabel hova_ = new JLabel("Hova:");
         hova = new JTextField("", 2);
-        JButton Atallit = new JButton("Pumpat atallit");
+        Atallit = new JButton("Pumpat atallit");
         JLabel ki_ = new JLabel("Ki:");
         ki = new JTextField("", 2);
         JLabel be_ = new JLabel("Be:");
         be = new JTextField("", 2);
-        JButton Lyukaszt = new JButton("Csovet lyukaszt");
-        JButton Ragaszt = new JButton("Csovet ragasztoz");
+        Lyukaszt = new JButton("Csovet lyukaszt");
+        Ragaszt = new JButton("Csovet ragasztoz");
 
         //szerelo
         JLabel szerelo = new JLabel("Szerelo akcioi");
         szerelo.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        JButton Javit = new JButton("Mezot javit");
+        Javit = new JButton("Mezot javit");
         Javit.setAlignmentX(JButton.CENTER_ALIGNMENT);
-        JButton CsFelvesz = new JButton("Csovet felvesz");
+        CsFelvesz = new JButton("Csovet felvesz");
         CsFelvesz.setAlignmentX(JButton.CENTER_ALIGNMENT);
         JLabel hanyadik_ = new JLabel("Hanyadik:");
         hanyadik_.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         hanyadik = new JTextField("", 2);
         hanyadik.setMaximumSize(hanyadik.getPreferredSize());
         hanyadik_.setAlignmentX(JTextField.CENTER_ALIGNMENT);
-        JButton CsLerak = new JButton("Csovet lerak");
+        CsLerak = new JButton("Csovet lerak");
         CsLerak.setAlignmentX(JButton.CENTER_ALIGNMENT);
-        JButton PFelvesz = new JButton("Pumpat felvesz");
+        PFelvesz = new JButton("Pumpat felvesz");
         PFelvesz.setAlignmentX(JButton.CENTER_ALIGNMENT);
-        JButton PLerak = new JButton("Pumpat lerak");
+        PLerak = new JButton("Pumpat lerak");
         PLerak.setAlignmentX(JButton.CENTER_ALIGNMENT);
 
         //szabotor
         JLabel szabotor = new JLabel("Szabotor akcioi");
         szabotor.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        JButton Csuszosit = new JButton("Csovet csuszosit");
+        Csuszosit = new JButton("Csovet csuszosit");
         Csuszosit.setAlignmentX(JButton.CENTER_ALIGNMENT);
 
-        //Mozog.addActionListener((ActionEvent e) -> {
-        //});
-        //Atallit.addActionListener((ActionEvent e) -> {
-        //});
-        //Lyukaszt.addActionListener((ActionEvent e) -> {
-        //});
-        //buttino.addActionListener((ActionEvent e) -> {
-        //});
-        //buttinos.addActionListener((ActionEvent e) -> {
-        //});
-        //Ragaszt.addActionListener((ActionEvent e) ->{
-        //});
-        //buttinosej.addActionListener((ActionEvent e) -> {
-        //});
+        AddLambdas();
 
         //egy fő panel ami tartalmazza a játékhoz szükséges paneleket, így lehet váltani közte es a menu között
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -192,5 +181,169 @@ public class GameFrame extends JFrame {
     public void showGame() {
         this.setSize(Toolkit.getDefaultToolkit().getScreenSize().width,Toolkit.getDefaultToolkit().getScreenSize().height);
         card.show(getContentPane(), "game");
+    }
+
+    /**
+     * Ne töröld!!
+     */
+
+    //public void AddLambdas(){
+    //    Mozog.addActionListener((ActionEvent e) -> {
+    //        int akt = Kontroller.getInstance().getAktualisJatekos();
+    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
+    //        jatekosok.get(akt).mozgas(Integer.parseInt(hova.getText()));
+    //        Kontroller.getInstance().stepKor();
+    //        if(akt == jatekosok.size()-1){
+    //            Kontroller.getInstance().stepTime();
+    //        }
+    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
+    //    });
+    //    Atallit.addActionListener((ActionEvent e) -> {
+    //        int akt = Kontroller.getInstance().getAktualisJatekos();
+    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
+    //        jatekosok.get(akt).pumpaAtallitasa(Integer.parseInt(be.getText()), Integer.parseInt(ki.getText()));
+    //        Kontroller.getInstance().stepKor();
+    //        if(akt == jatekosok.size()-1){
+    //            Kontroller.getInstance().stepTime();
+    //        }
+    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
+    //    });
+    //    Lyukaszt.addActionListener((ActionEvent e) -> {
+    //        int akt = Kontroller.getInstance().getAktualisJatekos();
+    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
+    //        jatekosok.get(akt).csoKilyukasztasa();
+    //        Kontroller.getInstance().stepKor();
+    //        if(akt == jatekosok.size()-1){
+    //            Kontroller.getInstance().stepTime();
+    //        }
+    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
+    //    });
+    //    Ragaszt.addActionListener((ActionEvent e) -> {
+    //        int akt = Kontroller.getInstance().getAktualisJatekos();
+    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
+    //        jatekosok.get(akt).beragasztoz();
+    //        Kontroller.getInstance().stepKor();
+    //        if(akt == jatekosok.size()-1){
+    //            Kontroller.getInstance().stepTime();
+    //        }
+    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
+    //    });
+    //    Javit.addActionListener((ActionEvent e) -> {
+    //        int akt = Kontroller.getInstance().getAktualisJatekos();
+    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
+    //        jatekosok.get(akt).mezotJavit();
+    //        Kontroller.getInstance().stepKor();
+    //        if(akt == jatekosok.size()-1){
+    //            Kontroller.getInstance().stepTime();
+    //        }
+    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
+    //    });
+    //    CsFelvesz.addActionListener((ActionEvent e) -> {
+    //        int akt = Kontroller.getInstance().getAktualisJatekos();
+    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
+    //        jatekosok.get(akt).csovegFelvetele(Integer.parseInt(hanyadik.getText()));
+    //        Kontroller.getInstance().stepKor();
+    //        if(akt == jatekosok.size()-1){
+    //            Kontroller.getInstance().stepTime();
+    //        }
+    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
+    //    });
+    //    CsLerak.addActionListener((ActionEvent e) -> {
+    //        int akt = Kontroller.getInstance().getAktualisJatekos();
+    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
+    //        jatekosok.get(akt).csovegetLerak();
+    //        Kontroller.getInstance().stepKor();
+    //        if(akt == jatekosok.size()-1){
+    //            Kontroller.getInstance().stepTime();
+    //        }
+    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
+    //    });
+    //    PFelvesz.addActionListener((ActionEvent e) -> {
+    //        int akt = Kontroller.getInstance().getAktualisJatekos();
+    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
+    //        jatekosok.get(akt).pumpaFelvetele();
+    //        Kontroller.getInstance().stepKor();
+    //        if(akt == jatekosok.size()-1){
+    //            Kontroller.getInstance().stepTime();
+    //        }
+    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
+    //    });
+    //    PLerak.addActionListener((ActionEvent e) -> {
+    //        int akt = Kontroller.getInstance().getAktualisJatekos();
+    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
+    //        jatekosok.get(akt).pumpatLerak();
+    //        Kontroller.getInstance().stepKor();
+    //        if(akt == jatekosok.size()-1){
+    //            Kontroller.getInstance().stepTime();
+    //        }
+    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
+    //    });
+    //    Csuszosit.addActionListener((ActionEvent e) -> {
+    //        int akt = Kontroller.getInstance().getAktualisJatekos();
+    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
+    //        jatekosok.get(akt).csuszosit();
+    //        Kontroller.getInstance().stepKor();
+    //        if(akt == jatekosok.size()-1){
+    //            Kontroller.getInstance().stepTime();
+    //        }
+    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
+    //    });
+    //}
+
+    /**
+     * Na ez nem tudom, hogy működik-e úgyhogy fentebb benthagytam még a kódismétléses verziót is
+     */
+    public void AddLambdas() {
+        addActionListenerToButton(Mozog, hova.getText(), (jatekos, value) -> jatekos.mozgas(Integer.parseInt(value)));
+        addActionListenerToButton(Atallit, be.getText() + "," + ki.getText(), (jatekos, value) -> {
+            String[] values = value.split(",");
+            jatekos.pumpaAtallitasa(Integer.parseInt(values[0]), Integer.parseInt(values[1]));
+        });
+        addActionListenerToButton(Lyukaszt, null, (jatekos, value) -> {
+            jatekos.csoKilyukasztasa();
+        });
+        addActionListenerToButton(Ragaszt, null, (jatekos, value) -> {
+            jatekos.beragasztoz();
+        });
+        addActionListenerToButton(Javit, null, (jatekos, value) -> {
+            jatekos.mezotJavit();
+        });
+        addActionListenerToButton(CsFelvesz, hanyadik.getText(), (jatekos, value) -> {
+            jatekos.csovegFelvetele(Integer.parseInt(value));
+        });
+        addActionListenerToButton(CsLerak, null, (jatekos, value) -> {
+            jatekos.csovegetLerak();
+        });
+        addActionListenerToButton(PFelvesz, null, (jatekos, value) -> {
+            jatekos.pumpaFelvetele();
+        });
+        addActionListenerToButton(PLerak, null, (jatekos, value) -> {
+            jatekos.pumpatLerak();
+        });
+        addActionListenerToButton(Csuszosit, null, (jatekos, value) -> {
+            jatekos.csuszosit();
+        });
+    }
+
+    private void addActionListenerToButton(JButton button, String value, BiConsumer<Jatekos, String> action) {
+        button.addActionListener((ActionEvent e) -> {
+            int akt = Kontroller.getInstance().getAktualisJatekos();
+            List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
+            Jatekos jatekos = jatekosok.get(akt);
+
+            if (value != null) {
+                action.accept(jatekos, value);
+            } else {
+                action.accept(jatekos, null);
+            }
+
+            Kontroller.getInstance().stepKor();
+
+            if (akt == jatekosok.size() - 1) {
+                Kontroller.getInstance().stepTime();
+            }
+
+            Kontroller.getInstance().setAktJatekos((akt + 1) % jatekosok.size());
+        });
     }
 }

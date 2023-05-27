@@ -46,7 +46,7 @@ public  class Kontroller {
     public int getAktualisKor(){return aktualisKor;}
     public int getSzerelokSzama(){return szerelokSzama;}
     public int getSzabotorokSzama(){return szabotorokSzama;}
-    public Jatekos getAktualisJatekos(){return jatekosok.get(aktualisJatekos);}
+    public int getAktualisJatekos(){return aktualisJatekos;}
     public List<Csucs> getCsucsok(){return csucsok;}
     public List<Cso> getCsovek(){return csovek;}
     public List<Jatekos> getJatekosok(){return jatekosok;}

@@ -47,7 +47,7 @@ public abstract class Jatekos {
      * A játékos ragados attribútumát lehet állítani a paraméterként megadott értékre.
      * @param b ragados új értéke
      */
-    void leragad(boolean b){
+    public void leragad(boolean b){
         ragados=b;
     }
 
@@ -55,7 +55,7 @@ public abstract class Jatekos {
      * A játékos ragados attribútumát lehet állítani a paraméterként megadott értékre.
      * @return ragados értéke
      */
-    boolean getRagados(){
+    public boolean getRagados(){
         return ragados;
     }
 
@@ -63,7 +63,7 @@ public abstract class Jatekos {
      * A játékos ragadóssá teszi azt a csövet, amin áll, hogy a következő érkező játékos odaragadjon.
      * A játékos az aktMezo-re meghívja annak az allapotValtozas() metódusát RAGADOS paraméterrel.
      */
-    void beragasztoz(){
+    public void beragasztoz(){
         getAktMezo().allapotValtozas(Allapot.RAGADOS);
     }
 
@@ -71,7 +71,7 @@ public abstract class Jatekos {
      * A játékos kilyukasztja a csövet, amin áll, hogy kifolyjon belőle a víz.
      * A játékos az aktMezo-re meghívja annak a jatekosElront() metódusát.
      */
-    void csoKilyukasztasa(){
+    public void csoKilyukasztasa(){
         getAktMezo().jatekosElront();
     }
 
