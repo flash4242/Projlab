@@ -72,7 +72,7 @@ public class PumpaView extends CsucsView{
         }
 
         //kirajzolja a kimeno cso iranyat
-        g.setColor(Color.BLACK);
+        g.setColor(Color.WHITE);
         Cso kimeneti = szomszedoscsovek.get(pumpa.getKimenetiCso());
         CsoView kimenetiView = GamePanel.getInstance().getCsoViewFromCso(kimeneti);
         Vec2 direction = new Vec2(kimenetiView.getX1()-getX(),kimenetiView.getY1()-getY());
