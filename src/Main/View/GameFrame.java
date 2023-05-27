@@ -36,7 +36,6 @@ public class GameFrame extends JFrame {
     public GameFrame() {
         super("CsipCsap Jateka woooohoo");
 
-        // Induláskor valami init kell ide initGame?
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(500, 500);
         this.setLayout(card);
@@ -47,8 +46,9 @@ public class GameFrame extends JFrame {
 
     private void InitMenu(){
         menu = new JPanel();
-        JButton newGame = new JButton("Jatek inditasa");
+        JButton newGame = new JButton("Játék indítása");
         newGame.addActionListener((ActionEvent e) -> {
+            //TODO Kontrollert setupolni kell és alap pálya inicializálás
             showGame();
         });
         newGame.setPreferredSize(new Dimension(150, 60));
@@ -85,48 +85,48 @@ public class GameFrame extends JFrame {
     private void InitComponents(){
 
         //kozos
-        JLabel kozos = new JLabel("Kozos akciok");
+        JLabel kozos = new JLabel("Közös akciók");
         Mozog = new JButton("Mozog");
         JLabel hova_ = new JLabel("Hova:");
         hova = new JTextField("", 2);
-        Atallit = new JButton("Pumpat atallit");
+        Atallit = new JButton("Pumpát átállít");
         JLabel ki_ = new JLabel("Ki:");
         ki = new JTextField("", 2);
         JLabel be_ = new JLabel("Be:");
         be = new JTextField("", 2);
-        Lyukaszt = new JButton("Csovet lyukaszt");
-        Ragaszt = new JButton("Csovet ragasztoz");
+        Lyukaszt = new JButton("Csövet lyukaszt");
+        Ragaszt = new JButton("Csövet ragasztóz");
 
         //szerelo
-        JLabel szerelo = new JLabel("Szerelo akcioi");
+        JLabel szerelo = new JLabel("Szerelő akciói");
         szerelo.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        Javit = new JButton("Mezot javit");
+        Javit = new JButton("Mezőt javít");
         Javit.setAlignmentX(JButton.CENTER_ALIGNMENT);
-        CsFelvesz = new JButton("Csovet felvesz");
+        CsFelvesz = new JButton("Csövet felvesz");
         CsFelvesz.setAlignmentX(JButton.CENTER_ALIGNMENT);
         JLabel hanyadik_ = new JLabel("Hanyadik:");
         hanyadik_.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         hanyadik = new JTextField("", 2);
         hanyadik.setMaximumSize(hanyadik.getPreferredSize());
         hanyadik_.setAlignmentX(JTextField.CENTER_ALIGNMENT);
-        CsLerak = new JButton("Csovet lerak");
+        CsLerak = new JButton("Csövet lerak");
         CsLerak.setAlignmentX(JButton.CENTER_ALIGNMENT);
-        PFelvesz = new JButton("Pumpat felvesz");
+        PFelvesz = new JButton("Pumpát felvesz");
         PFelvesz.setAlignmentX(JButton.CENTER_ALIGNMENT);
-        PLerak = new JButton("Pumpat lerak");
+        PLerak = new JButton("Pumpát lerak");
         PLerak.setAlignmentX(JButton.CENTER_ALIGNMENT);
 
         //szabotor
-        JLabel szabotor = new JLabel("Szabotor akcioi");
+        JLabel szabotor = new JLabel("Szabotőr akciói");
         szabotor.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        Csuszosit = new JButton("Csovet csuszosit");
+        Csuszosit = new JButton("Csövet csuszósít");
         Csuszosit.setAlignmentX(JButton.CENTER_ALIGNMENT);
 
+        //gombok lenyomásának lekezelése
         AddLambdas();
 
         //egy fő panel ami tartalmazza a játékhoz szükséges paneleket, így lehet váltani közte es a menu között
         JPanel mainPanel = new JPanel(new BorderLayout());
-
         //Felso panel (kozos gombok)
         JPanel pan = new JPanel();
         pan.add(kozos);
