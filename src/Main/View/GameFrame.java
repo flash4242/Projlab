@@ -16,9 +16,13 @@ import java.util.List;
 public class GameFrame extends JFrame {
 
     /**
-     * Example of how one can create a JTextArea
+     * Example of how one can create a JTextField
      */
-    private JTextArea input;
+    private JTextField hova;
+    private JTextField ki;
+    private JTextField be;
+    private JTextField hanyadik;
+    private CardLayout card = new CardLayout();
 
     /**
      * Default Ctor
@@ -30,6 +34,7 @@ public class GameFrame extends JFrame {
         // Induláskor valami init kell ide initGame?
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(Toolkit.getDefaultToolkit().getScreenSize().width,Toolkit.getDefaultToolkit().getScreenSize().height);
+        this.setLayout(card);
         InitComponents();
     }
 
@@ -39,56 +44,115 @@ public class GameFrame extends JFrame {
      * Sets up the action listeners of the menu buttons.
      */
     private void InitComponents(){
-        this.setLayout(new BorderLayout());
-        //example buttons and labels
-        JButton butt = new JButton("Step");
-        JButton butti = new JButton("Init");
-        JButton buttin = new JButton("Execute");
-        JButton buttinose = new JButton("Walk");
-        JLabel labil = new JLabel("Delete:");
-        JButton buttino = new JButton("Vertex");
-        JButton buttinos = new JButton("Graph");
-        JButton buttinosej = new JButton("Process");
-        JLabel labi = new JLabel("BFS:");
-        JLabel labilo = new JLabel("Enter n*n Matrix of 0 and 1s:");
 
-        input = new JTextArea(5,10);
+        //kozos
+        JLabel kozos = new JLabel("Kozos akciok");
+        JButton Mozog = new JButton("Mozog");
+        //Mozog.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        JLabel hova_ = new JLabel("Hova:");
+        hova = new JTextField("", 2);
+        JButton Atallit = new JButton("Pumpat atallit");
+        //Atallit.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        JLabel ki_ = new JLabel("Ki:");
+        ki = new JTextField("", 2);
+        JLabel be_ = new JLabel("Be:");
+        be = new JTextField("", 2);
+        JButton Lyukaszt = new JButton("Csovet lyukaszt");
+        JButton Ragaszt = new JButton("Csovet ragasztoz");
 
-        //example action listeners, they use lambdas
-        butt.addActionListener((ActionEvent e) -> {
-        });
-        butti.addActionListener((ActionEvent e) -> {
-        });
-        buttin.addActionListener((ActionEvent e) -> {
-        });
-        buttino.addActionListener((ActionEvent e) -> {
-        });
+        //szerelo
+        JLabel szerelo = new JLabel("Szerelo akcioi");
+        szerelo.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        JButton Javit = new JButton("Mezot javit");
+        Javit.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        JButton CsFelvesz = new JButton("Csovet felvesz");
+        CsFelvesz.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        JLabel hanyadik_ = new JLabel("Hanyadik:");
+        hanyadik_.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        hanyadik = new JTextField("", 2);
+        hanyadik.setMaximumSize(hanyadik.getPreferredSize());
+        hanyadik_.setAlignmentX(JTextField.CENTER_ALIGNMENT);
+        JButton CsLerak = new JButton("Csovet lerak");
+        CsLerak.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        JButton PFelvesz = new JButton("Pumpat felvesz");
+        PFelvesz.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        JButton PLerak = new JButton("Pumpat lerak");
+        PLerak.setAlignmentX(JButton.CENTER_ALIGNMENT);
 
-        buttinos.addActionListener((ActionEvent e) -> {
-        });
+        //szabotor
+        JLabel szabotor = new JLabel("Szabotor akcioi");
+        szabotor.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        JButton Csuszosit = new JButton("Csovet csuszosit");
+        Csuszosit.setAlignmentX(JButton.CENTER_ALIGNMENT);
 
-        buttinose.addActionListener((ActionEvent e) ->{
-        });
+        //Mozog.addActionListener((ActionEvent e) -> {
+        //});
+        //Atallit.addActionListener((ActionEvent e) -> {
+        //});
+        //Lyukaszt.addActionListener((ActionEvent e) -> {
+        //});
+        //buttino.addActionListener((ActionEvent e) -> {
+        //});
+        //buttinos.addActionListener((ActionEvent e) -> {
+        //});
+        //Ragaszt.addActionListener((ActionEvent e) ->{
+        //});
+        //buttinosej.addActionListener((ActionEvent e) -> {
+        //});
 
-        buttinosej.addActionListener((ActionEvent e) -> {
-        });
-
-        //Add the buttons to the panel on the top
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        //Felso panel, kozos gombok
         JPanel pan = new JPanel();
-        pan.add(labi);
-        pan.add(butti);
-        pan.add(butt);
-        pan.add(buttin);
-        pan.add(buttinose);
-        pan.add(labil);
-        pan.add(buttino);
-        pan.add(buttinos);
-        pan.add(labilo);
-        pan.add(input);
-        pan.add(buttinosej);
+        pan.add(kozos);
+        pan.add(Mozog);
+        pan.add(hova_);
+        pan.add(hova);
+        pan.add(Atallit);
+        pan.add(ki_);
+        pan.add(ki);
+        pan.add(be_);
+        pan.add(be);
+        pan.add(Lyukaszt);
+        pan.add(Ragaszt);
+
+        //left panel
+        JPanel left_panel = new JPanel();
+        left_panel.setLayout(new BoxLayout(left_panel, BoxLayout.Y_AXIS));
+        left_panel.add(szerelo);
+        //left_panel.add(Box.createVerticalStrut(15));
+        left_panel.add(Javit);
+        left_panel.add(Box.createVerticalStrut(15));
+        left_panel.add(CsFelvesz);
+        left_panel.add(hanyadik_);
+        left_panel.add(hanyadik);
+        left_panel.add(Box.createVerticalStrut(15));
+        left_panel.add(CsLerak);
+        left_panel.add(Box.createVerticalStrut(15));
+        left_panel.add(PFelvesz);
+        left_panel.add(Box.createVerticalStrut(15));
+        left_panel.add(PLerak);
+        mainPanel.add(left_panel, BorderLayout.WEST);
+
+        //right panel
+        JPanel right_panel = new JPanel();
+        right_panel.setLayout(new BoxLayout(right_panel, BoxLayout.Y_AXIS));
+        right_panel.add(szabotor);
+        right_panel.add(Csuszosit);
+        mainPanel.add(right_panel, BorderLayout.EAST);
+
         //North are buttons
-        this.add(pan, BorderLayout.NORTH);
+        mainPanel.add(pan, BorderLayout.NORTH);
         //Center is the Main.View.GamePanel
-        this.add(GamePanel.getInstance(), BorderLayout.CENTER);
+        mainPanel.add(GamePanel.getInstance(), BorderLayout.CENTER);
+
+        this.add(mainPanel, "game");
+    }
+
+    public void showMenu() {
+        card.show(getContentPane(), "menu");
+    }
+
+    public void showGame() {
+        card.show(getContentPane(), "game");
     }
 }
