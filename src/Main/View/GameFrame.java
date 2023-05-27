@@ -295,7 +295,7 @@ public class GameFrame extends JFrame {
     public void AddLambdas() {
         addActionListenerToButton(Mozog, hova.getText(), (jatekos, value) -> {
             if(!value.isEmpty())
-                jatekos.mozgas(Integer.parseInt(value));
+                jatekos.mozgas(Integer.parseInt(value)-1);
             else
                 jatekos.csovegFelvetele(0);
         });
@@ -303,7 +303,7 @@ public class GameFrame extends JFrame {
             //ha esetleg a textfield-ekben nincs szoveg, akkor alapértékek vannak a lambdaban
             String[] values = value.split(",");
             if(!values[0].isEmpty() && !values[1].isEmpty())
-                jatekos.pumpaAtallitasa(Integer.parseInt(values[0]), Integer.parseInt(values[1]));
+                jatekos.pumpaAtallitasa(Integer.parseInt(values[0])-1, Integer.parseInt(values[1])-1);
             else
                 jatekos.pumpaAtallitasa(0, 0);
         });
@@ -318,7 +318,7 @@ public class GameFrame extends JFrame {
         });
         addActionListenerToButton(CsFelvesz, hanyadik.getText(), (jatekos, value) -> {
             if(!value.isEmpty())
-                jatekos.csovegFelvetele(Integer.parseInt(value));
+                jatekos.csovegFelvetele(Integer.parseInt(value)-1);
             else
                 jatekos.csovegFelvetele(0);
         });
