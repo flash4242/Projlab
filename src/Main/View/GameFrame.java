@@ -186,7 +186,6 @@ public class GameFrame extends JFrame {
     /**
      * Ne töröld!!
      */
-
     //public void AddLambdas(){
     //    Mozog.addActionListener((ActionEvent e) -> {
     //        int akt = Kontroller.getInstance().getAktualisJatekos();
@@ -291,10 +290,15 @@ public class GameFrame extends JFrame {
     //}
 
     /**
-     * Na ez nem tudom, hogy működik-e úgyhogy fentebb benthagytam még a kódismétléses verziót is
+     * Na ez nem tudom, hogy jól működik-e úgyhogy fentebb benthagytam még a kódismétléses verziót is
      */
     public void AddLambdas() {
-        addActionListenerToButton(Mozog, hova.getText(), (jatekos, value) -> jatekos.mozgas(Integer.parseInt(value)));
+        addActionListenerToButton(Mozog, hova.getText(), (jatekos, value) -> {
+            if(!value.isEmpty())
+                jatekos.mozgas(Integer.parseInt(value));
+            else
+                jatekos.csovegFelvetele(0);
+        });
         addActionListenerToButton(Atallit, be.getText() + "," + ki.getText(), (jatekos, value) -> {
             //ha esetleg a textfield-ekben nincs szoveg, akkor alapértékek vannak a lambdaban
             String[] values = value.split(",");
