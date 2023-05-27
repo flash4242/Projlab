@@ -23,6 +23,9 @@ public class GameFrame extends JFrame {
     private JTextField be;
     private JTextField hanyadik;
     private CardLayout card = new CardLayout();
+    private JTextField szereloszam;
+    private JTextField szabotorszam;
+    private JPanel menu;
 
     /**
      * Default Ctor
@@ -33,26 +36,58 @@ public class GameFrame extends JFrame {
 
         // Induláskor valami init kell ide initGame?
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(Toolkit.getDefaultToolkit().getScreenSize().width,Toolkit.getDefaultToolkit().getScreenSize().height);
+        this.setSize(500, 500);
         this.setLayout(card);
         InitComponents();
+        InitMenu();
+        showMenu();
+    }
+
+    private void InitMenu(){
+        menu = new JPanel();
+        JButton newGame = new JButton("Jatek inditasa");
+        newGame.addActionListener((ActionEvent e) -> {
+            showGame();
+        });
+        newGame.setPreferredSize(new Dimension(150, 60));
+        szereloszam = new JTextField(10);
+        szabotorszam = new JTextField(10);
+
+        //pfff ez valami
+        GridBagConstraints gbc = new GridBagConstraints();
+        GridBagLayout layout = new GridBagLayout();
+        menu.setLayout(layout);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        menu.add(newGame, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridwidth = 1;
+        menu.add(new JLabel("Szerelok"), gbc);
+        gbc.gridx = 1;
+        menu.add(szereloszam, gbc);
+        gbc.gridy = 8;
+        gbc.gridx = 0;
+        menu.add(new JLabel("Szabotorok"), gbc);
+        gbc.gridx = 1;
+        menu.add(szabotorszam, gbc);
+        menu.setBackground(Color.GRAY);
+        this.add(menu, "menu");
     }
 
     /**
-     * Initialises the components of the main.graph.
-     * Creates a border layout north are the menu options and center is the gamepanel.
-     * Sets up the action listeners of the menu buttons.
+     *
      */
     private void InitComponents(){
 
         //kozos
         JLabel kozos = new JLabel("Kozos akciok");
         JButton Mozog = new JButton("Mozog");
-        //Mozog.setAlignmentX(JButton.CENTER_ALIGNMENT);
         JLabel hova_ = new JLabel("Hova:");
         hova = new JTextField("", 2);
         JButton Atallit = new JButton("Pumpat atallit");
-        //Atallit.setAlignmentX(JButton.CENTER_ALIGNMENT);
         JLabel ki_ = new JLabel("Ki:");
         ki = new JTextField("", 2);
         JLabel be_ = new JLabel("Be:");
@@ -100,8 +135,10 @@ public class GameFrame extends JFrame {
         //buttinosej.addActionListener((ActionEvent e) -> {
         //});
 
+        //egy fő panel ami tartalmazza a játékhoz szükséges paneleket, így lehet váltani közte es a menu között
         JPanel mainPanel = new JPanel(new BorderLayout());
-        //Felso panel, kozos gombok
+
+        //Felso panel (kozos gombok)
         JPanel pan = new JPanel();
         pan.add(kozos);
         pan.add(Mozog);
@@ -115,11 +152,10 @@ public class GameFrame extends JFrame {
         pan.add(Lyukaszt);
         pan.add(Ragaszt);
 
-        //left panel
+        //left panel (szerelo akciok)
         JPanel left_panel = new JPanel();
         left_panel.setLayout(new BoxLayout(left_panel, BoxLayout.Y_AXIS));
         left_panel.add(szerelo);
-        //left_panel.add(Box.createVerticalStrut(15));
         left_panel.add(Javit);
         left_panel.add(Box.createVerticalStrut(15));
         left_panel.add(CsFelvesz);
@@ -133,7 +169,7 @@ public class GameFrame extends JFrame {
         left_panel.add(PLerak);
         mainPanel.add(left_panel, BorderLayout.WEST);
 
-        //right panel
+        //right panel (szabotor akciok)
         JPanel right_panel = new JPanel();
         right_panel.setLayout(new BoxLayout(right_panel, BoxLayout.Y_AXIS));
         right_panel.add(szabotor);
@@ -149,10 +185,12 @@ public class GameFrame extends JFrame {
     }
 
     public void showMenu() {
+        this.setSize(500, 500);
         card.show(getContentPane(), "menu");
     }
 
     public void showGame() {
+        this.setSize(Toolkit.getDefaultToolkit().getScreenSize().width,Toolkit.getDefaultToolkit().getScreenSize().height);
         card.show(getContentPane(), "game");
     }
 }
