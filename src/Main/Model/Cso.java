@@ -95,14 +95,13 @@ public class Cso extends Mezo {
     @Override
     public boolean targyLerakas(Pumpa p) {
         Cso fele = new Cso();
-        Kontroller.getInstance().addCso(fele);
-        Kontroller.getInstance().addCsucs(p);
-
         Csucs szCsucs = this.szomszedosCsucs.get(0);
         szCsucs.csoCsere(this, fele);
         //szCsucs.felcsatol(fele);
         p.felcsatol(fele);
         p.felcsatol(this);
+        Kontroller.getInstance().addCso(fele);
+        Kontroller.getInstance().addCsucs(p);
         return true;
     }
 

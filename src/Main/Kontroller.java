@@ -240,14 +240,22 @@ public  class Kontroller {
      */
     public void addCso(Cso cso){
         csovek.add(cso);
+        CsoView cv = new CsoView(cso);
+        GamePanel.getInstance().addCsoView(cv);
     }
 
     /**
      * Hozzáad egy csúcsot a csucsok listájához. A paramétert berakja a lista végére.
      * @param csucs
      */
-    public void addCsucs(Csucs csucs){
+    public void addCsucs(Pumpa csucs){ //TODO Fix!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         csucsok.add(csucs);
+        PumpaView pv = new PumpaView((csucs));
+        Cso holvolt =csucs.getSzomszedosCso().get(1);
+        CsoView cv = new CsoView(holvolt);
+        pv.setX((cv.getX1() + cv.getX2())/2);
+        pv.setY((cv.getY1() + cv.getY2())/2);
+        GamePanel.getInstance().addCsucsView(pv);
     }
 
     /**
