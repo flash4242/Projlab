@@ -98,6 +98,18 @@ public class GamePanel extends JPanel {
         csv2.setY2(100);
         csovek.add(csv2);
 
+        Cso cs3 = new Cso();
+        cs3.allapotValtozas(Allapot.RAGADOS);
+        p.felcsatol(cs3);
+        p.felcsatol(cs3);
+        CsoView csv3 = new CsoView(cs3);
+        csv3.setX1(400);
+        csv3.setY1(200);
+        csv3.setX2(400);
+        csv3.setY2(200);
+        //csv3.calculate();
+        csovek.add(csv3);
+
         p.setBemenetiCso(1);
         c.felcsatol(cs);
         f.felcsatol(cs2);
@@ -122,10 +134,12 @@ public class GamePanel extends JPanel {
         Szabotor sza =new Szabotor();
         sza.setAktMezo(p);
         p.setJatekosRajta(sza);
-        SzabotorView szav= new SzabotorView(sza);
+        SzabotorView szav = new SzabotorView(sza);
         szav.setX(pm.getX()); //pumpára kerül
         szav.setY(pm.getY());
         jatekosok.add(szav);
+
+        pm.calculate();
 
         Szabotor sza2 =new Szabotor();
         sza2.setAktMezo(cs);

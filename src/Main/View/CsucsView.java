@@ -1,8 +1,11 @@
 package Main.View;
 
 import Main.Model.Csucs;
+import Main.Model.Jatekos;
+import Main.Vec2;
 
 import java.awt.*;
+import java.util.List;
 
 public abstract class CsucsView {
     int x;
@@ -25,8 +28,19 @@ public abstract class CsucsView {
     }
 
     public abstract void draw(Graphics g);
-    public void calculate(){
 
+    /**
+     * Kiszámolja a csúcson található játékosok koordinátáit, körben helyezve el őket a csúcson
+     */
+    public void calculate(){
+        List<Jatekos> jatekosList = getCsucs().getJatekosRajta();
+        int count = jatekosList.size();
+        double alpha = Math.PI*2/count;
+        for(int i = 0; i<count;++i){
+            Vec2 coord = new Vec2(x+4*Math.cos(alpha*(i+1)),y-4*Math.sin(alpha*(i+1)));
+            GamePanel.getInstance().getPlayerViewFromPlayer(jatekosList.get(i)).setX((int) coord.getX());
+            GamePanel.getInstance().getPlayerViewFromPlayer(jatekosList.get(i)).setY((int) coord.getY());
+        }
     }
     public abstract Csucs getCsucs();
 }

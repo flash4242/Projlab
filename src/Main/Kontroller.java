@@ -1,7 +1,11 @@
 package Main;
 
 import Main.Model.*;
+<<<<<<< HEAD
 import Main.View.*;
+=======
+import Main.View.GamePanel;
+>>>>>>> e17b0273c0baa79f97531dd0350834146346c24b
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -65,7 +69,12 @@ public  class Kontroller {
     public void setSzabotorokSzama(int sz){szabotorokSzama=sz;}
     public void setAktKor(int k){aktualisKor=k;}
 
-
+    /**
+     * Értesíti a megjelenítő modellt arról hogy változás történt a játékban
+     */
+    public void ujraRajzol(){
+        GamePanel.getInstance().drawAll();
+    }
 
     /**
      * Mindegyik csúcsban indít egy pumpálást
@@ -78,6 +87,8 @@ public  class Kontroller {
             csucs.vizetPumpal();
         }
         veletlenPumpaElrontas();
+        Kontroller.getInstance().ujraRajzol();
+
     }
 
     /**
@@ -86,6 +97,7 @@ public  class Kontroller {
     public void initJatek(){
         initPalya();
         initJatekosok(szerelokSzama, szabotorokSzama);
+        Kontroller.getInstance().ujraRajzol();
     }
 
     /**
@@ -204,6 +216,7 @@ public  class Kontroller {
                 cs.kontrollerElront();
             }
         }
+        Kontroller.getInstance().ujraRajzol();
     }
 
     /**
@@ -214,6 +227,10 @@ public  class Kontroller {
         for(Cso cs: csovek){
             cs.stepTime();
         }
+        Kontroller.getInstance().ujraRajzol();
+    }
+    public void vizLeptet(){
+        Kontroller.getInstance().ujraRajzol();
     }
 
     /**
