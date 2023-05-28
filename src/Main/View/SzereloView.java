@@ -1,5 +1,7 @@
 package Main.View;
 
+import Main.Kontroller;
+import Main.Model.Jatekos;
 import Main.Model.Szerelo;
 
 import java.awt.*;
@@ -19,7 +21,10 @@ public class SzereloView extends JatekosView{
         if(szerelo.getRagados()){
             g.setColor(new Color(230, 243, 86));
         }
-        if(getAktiv()){
+
+        int aktIndex = Kontroller.getInstance().getAktualisJatekos();
+        Jatekos aktJatekos = Kontroller.getInstance().getJatekosok().get(aktIndex);
+        if(aktJatekos == szerelo){
             g.setColor(new Color(102, 215, 50));
         }
 

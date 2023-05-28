@@ -1,5 +1,7 @@
 package Main.View;
 
+import Main.Kontroller;
+import Main.Model.Jatekos;
 import Main.Model.Szabotor;
 
 import java.awt.*;
@@ -17,7 +19,10 @@ public class SzabotorView extends JatekosView{
         if(szabotor.getRagados()){
             g.setColor(new Color(230, 243, 86));
         }
-        if(getAktiv()){
+
+        int aktIndex = Kontroller.getInstance().getAktualisJatekos();
+        Jatekos aktJatekos = Kontroller.getInstance().getJatekosok().get(aktIndex);
+        if(aktJatekos == szabotor){
             g.setColor(new Color(102, 215, 50));
         }
 

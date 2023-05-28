@@ -134,7 +134,6 @@ public class GamePanel extends JPanel {
         sza2.leragad(true);
         jatekosok.add(sza2v);
 
-        jatekosok.get(0).setAktiv(true);
     }
 
     /**
