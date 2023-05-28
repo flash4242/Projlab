@@ -72,11 +72,6 @@ public class CsoView {
     private Polygon getPolygon(int size){
         Vec2 vektor1 = new Vec2(x1, y1);
         Vec2 vektor2 = new Vec2(x2, y2);
-        if(x1 == x2 && y1 == y2){
-            vektor1 = new Vec2(x1, y1);
-            //cso.getSzomszedosCsucs().get(0).getSzomszedosCso().indexOf(cso)
-            vektor2 = new Vec2(x1-60, y2);
-        }
         Vec2 n = (vektor1.substract(vektor2)).getPerpendicular().normalize();
         Vec2 vonalCsucs1 = vektor1.add(n.multiply(size));
         Vec2 vonalCsucs2 = vektor1.add(n.multiply(-size));
@@ -146,11 +141,14 @@ public class CsoView {
                 // Ha a csőnek két szomszédja van, akkor a két szomszédjától kérdezi le a csővégek koordinátáit
 
                 CsucsView csucs1 = GamePanel.getInstance().getCsucsViewFromCsucs(cso.getSzomszedosCsucs().get(0));
-                x2 = csucs1.x;
-                y2 = csucs1.y;
-                CsucsView csucs2 = GamePanel.getInstance().getCsucsViewFromCsucs(cso.getSzomszedosCsucs().get(0));
+                x1 = csucs1.x;
+                y1 = csucs1.y;
+                CsucsView csucs2 = GamePanel.getInstance().getCsucsViewFromCsucs(cso.getSzomszedosCsucs().get(1));
                 x2 = csucs2.x;
                 y2 = csucs2.y;
+                if(x1 == x2 && y1 == y2){
+                    x1 = x1-60;
+                }
                 break;
         }
 

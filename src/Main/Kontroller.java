@@ -156,6 +156,10 @@ public  class Kontroller {
             csucsok.get(i+9).felcsatol(c);
         }
 
+        for (int i=8; i<12; i++){
+            csucsok.get(i).setBemenetiCso(csovek.get(i-4));
+        }
+
         ujraRajzol();
     }
 

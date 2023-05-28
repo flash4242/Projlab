@@ -270,8 +270,7 @@ public class GamePanel extends JPanel {
      * @param from Az egyenlő szárú háromszög rövidebb oldalának a középpontja.
      * @param dir Az egyenlő szárú háromszög rövidebb oldalának a közeppontjából a szembe lévő csúcsba mutató vektor, ezzel arányos lesz a háromszög elnyúlása.
      */
-    public void drawTriangle(Graphics g, Vec2 from, Vec2 dir){
-        int size = 8;
+    public void drawTriangle(Graphics g, Vec2 from, Vec2 dir, int size){
         Vec2 a;
         Vec2 b;
         Vec2 c;
