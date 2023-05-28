@@ -82,6 +82,8 @@ public  class Kontroller {
             csucs.vizetPumpal();
         }
         veletlenPumpaElrontas();
+        Kontroller.getInstance().ujraRajzol();
+
     }
 
     /**
@@ -90,6 +92,7 @@ public  class Kontroller {
     public void initJatek(){
         initPalya();
         initJatekosok(szerelokSzama, szabotorokSzama);
+        Kontroller.getInstance().ujraRajzol();
     }
 
     /**
@@ -205,6 +208,7 @@ public  class Kontroller {
                 cs.kontrollerElront();
             }
         }
+        Kontroller.getInstance().ujraRajzol();
     }
 
     /**
@@ -215,6 +219,10 @@ public  class Kontroller {
         for(Cso cs: csovek){
             cs.stepTime();
         }
+        Kontroller.getInstance().ujraRajzol();
+    }
+    public void vizLeptet(){
+        Kontroller.getInstance().ujraRajzol();
     }
 
     /**

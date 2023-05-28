@@ -71,6 +71,7 @@ public class Szerelo extends Jatekos{
             Cso kapottCso = getAktMezo().adjCsovet(cs);
             setCsoveg(kapottCso);
         }
+        Kontroller.getInstance().ujraRajzol();
     }
 
     /**
@@ -83,6 +84,7 @@ public class Szerelo extends Jatekos{
             if(getAktMezo().targyLerakas(csoveg))
                 setCsoveg(null);
         }
+        Kontroller.getInstance().ujraRajzol();
     }
 
     /**
@@ -96,6 +98,7 @@ public class Szerelo extends Jatekos{
             Pumpa kapottPumpa= getAktMezo().pumpaLetrehozasa();
             setPumpa(kapottPumpa);
         }
+        Kontroller.getInstance().ujraRajzol();
     }
 
     /**
@@ -108,6 +111,7 @@ public class Szerelo extends Jatekos{
             if(getAktMezo().targyLerakas(pumpa))
                 setPumpa(null);
         }
+        Kontroller.getInstance().ujraRajzol();
     }
 
     @Override

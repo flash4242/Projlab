@@ -76,6 +76,7 @@ public abstract class Jatekos {
      */
     public void csoKilyukasztasa(){
         getAktMezo().jatekosElront();
+        Kontroller.getInstance().ujraRajzol();
     }
 
     /**
@@ -98,6 +99,7 @@ public abstract class Jatekos {
                 setAktMezo(hovamezo);
             }
         }
+        Kontroller.getInstance().ujraRajzol();
     }
 
     /**
@@ -108,6 +110,7 @@ public abstract class Jatekos {
      */
     public void pumpaAtallitasa(int bemeneti, int kimeneti){
         getAktMezo().atallit(bemeneti, kimeneti);
+        Kontroller.getInstance().ujraRajzol();
     }
 
     public void csuszosit(){};
