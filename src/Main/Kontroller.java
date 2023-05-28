@@ -1,11 +1,7 @@
 package Main;
 
 import Main.Model.*;
-<<<<<<< HEAD
 import Main.View.*;
-=======
-import Main.View.GamePanel;
->>>>>>> e17b0273c0baa79f97531dd0350834146346c24b
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -161,10 +157,6 @@ public  class Kontroller {
         }
 
         ujraRajzol();
-    }
-
-    public void ujraRajzol(){
-        GamePanel.getInstance().drawAll();
     }
 
     /**
