@@ -1,6 +1,7 @@
 package Main;
 
 import Main.Model.*;
+import Main.View.GamePanel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +64,12 @@ public  class Kontroller {
     public void setSzabotorokSzama(int sz){szabotorokSzama=sz;}
     public void setAktKor(int k){aktualisKor=k;}
 
-
+    /**
+     * Értesíti a megjelenítő modellt arról hogy változás történt a játékban
+     */
+    public void ujraRajzol(){
+        GamePanel.getInstance().drawAll();
+    }
 
     /**
      * Mindegyik csúcsban indít egy pumpálást

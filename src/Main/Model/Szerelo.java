@@ -1,5 +1,7 @@
 package Main.Model;
 
+import Main.Kontroller;
+
 /**
  * A játékban lévő szerelőket reprezentálja. Képes pumpát és csövet szerelni,
  * csövet kilyukasztani valamint ragadóssá tenni. Célja, hogy minél több víz folyjon a ciszternákba.
@@ -53,6 +55,7 @@ public class Szerelo extends Jatekos{
      */
     public void mezotJavit(){
         getAktMezo().szereloJavit();
+        Kontroller.getInstance().ujraRajzol();
     }
 
     /**

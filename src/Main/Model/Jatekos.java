@@ -1,5 +1,7 @@
 package Main.Model;
 
+import Main.Kontroller;
+
 import java.util.List;
 /**
  * A játékban lévő játékosokat reprezentálja. A Szerelő és Szabotőr közös
@@ -65,6 +67,7 @@ public abstract class Jatekos {
      */
     public void beragasztoz(){
         getAktMezo().allapotValtozas(Allapot.RAGADOS);
+        Kontroller.getInstance().ujraRajzol();
     }
 
     /**
