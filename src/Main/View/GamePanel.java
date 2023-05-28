@@ -99,6 +99,42 @@ public class GamePanel extends JPanel {
         p.setBemenetiCso(1);
         c.felcsatol(cs);
         f.felcsatol(cs2);
+
+        //jatekos tesztek
+        Szerelo sz1 =new Szerelo();
+        sz1.setAktMezo(p);
+        p.setJatekosRajta(sz1);
+        SzereloView szv= new SzereloView(sz1);
+        szv.setX(pm.getX()); //pumpára kerül
+        szv.setY(pm.getY());
+        jatekosok.add(szv);
+
+        Szerelo sz2 =new Szerelo();
+        sz2.setAktMezo(p);
+        p.setJatekosRajta(sz2);
+        SzereloView szv2= new SzereloView(sz2);
+        szv2.setX(pm.getX()); //pumpára kerül
+        szv2.setY(pm.getY());
+        jatekosok.add(szv2);
+
+        Szabotor sza =new Szabotor();
+        sza.setAktMezo(p);
+        p.setJatekosRajta(sza);
+        SzabotorView szav= new SzabotorView(sza);
+        szav.setX(pm.getX()); //pumpára kerül
+        szav.setY(pm.getY());
+        jatekosok.add(szav);
+
+        Szabotor sza2 =new Szabotor();
+        sza2.setAktMezo(cs);
+        cs.setJatekosRajta(sza2);
+        SzabotorView sza2v= new SzabotorView(sza2);
+        sza2v.setX((csv.getX1()+csv.getX2())/2); //pumpára kerül
+        sza2v.setY((csv.getY1()+csv.getY2())/2);
+        sza2.leragad(true);
+        jatekosok.add(sza2v);
+
+        jatekosok.get(0).setAktiv(true);
     }
 
     /**
