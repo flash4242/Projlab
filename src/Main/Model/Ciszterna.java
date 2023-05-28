@@ -36,7 +36,7 @@ public class Ciszterna extends Csucs{
      */
     private boolean vanHurok(){
         for (Cso c : getSzomszedosCso()){
-            if(c.getNeighbours().get(0) == this && c.getNeighbours().get(1) == this){
+            if(c.getNeighbours().size()==2 && c.getNeighbours().get(0) == this && c.getNeighbours().get(1) == this){
                 return true;
             }
         }
