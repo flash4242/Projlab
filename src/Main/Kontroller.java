@@ -280,4 +280,8 @@ public  class Kontroller {
         szereloPontok=0;
         szabotorPontok=0;
     }
+
+    public void addJatekos(Jatekos jatekos){
+        jatekosok.add(jatekos);
+    }
 }

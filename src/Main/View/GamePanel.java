@@ -134,6 +134,12 @@ public class GamePanel extends JPanel {
         sza2.leragad(true);
         jatekosok.add(sza2v);
 
+        Kontroller.getInstance().addJatekos(sz1);
+        Kontroller.getInstance().addJatekos(sz2);
+        Kontroller.getInstance().addJatekos(sza);
+        Kontroller.getInstance().addJatekos(sza2);
+
+        Kontroller.getInstance().setAktJatekos(2);
     }
 
     /**
