@@ -58,7 +58,7 @@ public class GamePanel extends JPanel {
         csucsok = new ArrayList<>();
 
         //TODO EZ ALATT CSAK TESZTELES FOLYT EGY PELDA PALYA, DELETE LATER
-        Pumpa p = new Pumpa();
+        /*Pumpa p = new Pumpa();
         p.setVanViz(true);
         p.setRossz(true);
         PumpaView pm = new PumpaView(p);
@@ -141,7 +141,7 @@ public class GamePanel extends JPanel {
         Kontroller.getInstance().addJatekos(sza);
         Kontroller.getInstance().addJatekos(sza2);
 
-        Kontroller.getInstance().setAktJatekos(2);
+        Kontroller.getInstance().setAktJatekos(2);*/
     }
 
     /**
@@ -270,6 +270,27 @@ public class GamePanel extends JPanel {
         int x[] = {(int)a.getX(),(int)b.getX(),(int)c.getX()};
         int y[] = {(int)a.getY(),(int)b.getY(),(int)c.getY()};
         g.fillPolygon(x,y,3);
+    }
+
+    /**
+     * Hozzáad egy CsoView-t a nézethez.
+     * @param csoView a hozzáadandó CsoView.
+     */
+    public void addCsoView(CsoView csoView){
+        csovek.add(csoView);
+    }
+
+    /**
+     * Hozzáad egy CsucsView-t a nézethez.
+     * @param csucsView a hozzáadandó CsucsView.
+     */
+    public void addCsucsView(CsucsView csucsView){
+        csucsok.add(csucsView);
+    }
+
+
+    public void addJatekosView(JatekosView jatekosView){
+        jatekosok.add(jatekosView);
     }
 }
 

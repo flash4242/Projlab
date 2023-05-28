@@ -1,7 +1,9 @@
 package Main;
 
 import Main.Model.*;
+import Main.View.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -90,64 +92,67 @@ public  class Kontroller {
      * A játék pályáját hozza létre: a ciszternákat, forrásokat, csöveket, pumpákat és az ezek közötti kapcsolatokat is beállítja.
      */
     public void initPalya(){
-        int forrasokszama=6;
-        int pumpakszama = 25;
-        int ciszternakszama = forrasokszama;
-
-        //források létreozása csövekkel: minden forráshoz egyből kapcsolunk egy csövet is; pontosan annyi cső jön létre mint forrás
-        for(int i=0; i<forrasokszama; i++){
-            Forras f = new Forras();
-            Cso cs = new Cso();
-            f.felcsatol(cs);
-            cs.addCsucs(f);
-            csucsok.add(f);
-            csovek.add(cs);
+        for (int i = 0; i < 4; i++) {
+            Ciszterna c = new Ciszterna();
+            CiszternaView cv = new CiszternaView(c);
+            cv.setX(100);
+            cv.setY(125*(i+1));
+            GamePanel.getInstance().addCsucsView(cv);
+            csucsok.add(c);
         }
 
-        //pumpák létrehozása, köztük csövekkel
-        for(int i=0; i<pumpakszama; i++){
+        for (int i = 0; i < 4; i++) {
+            Forras f = new Forras();
+            ForrasView fv = new ForrasView(f);
+            int x = Toolkit.getDefaultToolkit().getScreenSize().width-400;
+            fv.setX(x);
+            fv.setY(125*(i+1));
+            GamePanel.getInstance().addCsucsView(fv);
+            csucsok.add(f);
+        }
+
+        for(int i = 0; i < 4; i++){
             Pumpa p = new Pumpa();
-            //először a forrásokból kilógó csövek lekötése
-            if(i<forrasokszama){
-                //forrasbol kijövő csövek felcsatolása
-                csovek.get(i).addCsucs(p);
-                p.felcsatol(csovek.get(i));
-
-                //ezekbe a pumpákba új csövek (amik a fentebbiekbe csatlakoznak majd), mindbe 2
-                Cso cs1=new Cso(), cs2= new Cso();
-                cs1.addCsucs(p);
-                cs2.addCsucs(p);
-                p.felcsatol(cs1);
-                p.felcsatol(cs2);
-                csovek.add(cs1);
-                csovek.add(cs2);
-            }
-            //ha már nincs forrásból lógó cső, akkor jöhetnek az éppen létrejött pumpákhoz új csövek és a forrásokhoz csatlakozó pumpákból a szabad végek lerögzítése
-            else{
-                Cso cs = new Cso();
-                cs.addCsucs(p);
-                p.felcsatol(cs);
-                csovek.add(cs);
-
-                //itt a lógó csövek rögzítése. Minden pumpához csak 1 lógó csővéget, hogy a többinek is maradjon, ezért kell a break.
-                for(Cso csoo: csovek){
-                    if(csoo.getNeighbours().size()==1) {
-                        csoo.addCsucs(p);
-                        p.felcsatol(csoo);
-                        break;
-                    }
-                }
-            }
+            PumpaView pv = new PumpaView(p);
+            int x = (Toolkit.getDefaultToolkit().getScreenSize().width-400 + 100)/2;
+            pv.setX(x);
+            pv.setY(125*(i+1));
+            GamePanel.getInstance().addCsucsView(pv);
             csucsok.add(p);
         }
 
-        //végül ciszternák létrehozása
-        for(int i=0; i<ciszternakszama; i++){
-            Ciszterna c = new Ciszterna();
-            csovek.get(forrasokszama+i).addCsucs(c);
-            c.felcsatol(csovek.get(forrasokszama+i));
-            csucsok.add(c);
+        for (int i = 0; i < 4; i++) {
+            Cso c = new Cso();
+            CsoView cv = new CsoView(c);
+            GamePanel.getInstance().addCsoView(cv);
+            csovek.add(c);
+            csucsok.get(i).felcsatol(c);
+            csucsok.get(i+8).felcsatol(c);
         }
+
+        for(int i = 0; i < 4; i++){
+            Cso c = new Cso();
+            CsoView cv = new CsoView(c);
+            GamePanel.getInstance().addCsoView(cv);
+            csovek.add(c);
+            csucsok.get(i+4).felcsatol(c);
+            csucsok.get(i+8).felcsatol(c);
+        }
+
+        for(int i = 0; i < 3; i++){
+            Cso c = new Cso();
+            CsoView cv = new CsoView(c);
+            GamePanel.getInstance().addCsoView(cv);
+            csovek.add(c);
+            csucsok.get(i+8).felcsatol(c);
+            csucsok.get(i+9).felcsatol(c);
+        }
+
+        ujraRajzol();
+    }
+
+    public void ujraRajzol(){
+        GamePanel.getInstance().drawAll();
     }
 
     /**
@@ -158,7 +163,7 @@ public  class Kontroller {
     public void initJatekosok(int szerelokSz, int szabotorokSz){
         szerelokSzama=szerelokSz;
         szabotorokSzama=szabotorokSz;
-        int forrasokszama=6;
+        int forrasokszama=4;
 
         for(int i=0; i<szabotorokSz; i++){
             Jatekos szabotor= new Szerelo();
