@@ -208,7 +208,7 @@ public  class Kontroller {
      * Véletlenszerűen elront pumpákat. Az összes csúcsot 5%-os eséllyel elrontja.
      */
     public void veletlenPumpaElrontas(){
-        float percent = 5;
+        int percent = 1;
 
         Random r = new Random();
 

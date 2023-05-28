@@ -355,7 +355,9 @@ public class GameFrame extends JFrame {
             List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
             Jatekos jatekos = jatekosok.get(akt);
 
-            String value = wherefrom.getText();
+            String value = null;
+            if(wherefrom != null)
+                value = wherefrom.getText();
 
             if (value != null) {
                 action.accept(jatekos, value);
