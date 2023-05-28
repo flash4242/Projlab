@@ -296,20 +296,30 @@ public class GameFrame extends JFrame {
      * Na ez nem tudom, hogy jól működik-e úgyhogy fentebb benthagytam még a kódismétléses verziót is
      */
     public void AddLambdas() {
-        addActionListenerToButton(Mozog, hova.getText(), (jatekos, value) -> {
+        addActionListenerToButton(Mozog, hova, (jatekos, value) -> {
             if(!value.isEmpty())
                 jatekos.mozgas(Integer.parseInt(value)-1);
             else
                 jatekos.csovegFelvetele(0);
         });
-        addActionListenerToButton(Atallit, be.getText() + "," + ki.getText(), (jatekos, value) -> {
+        Atallit.addActionListener((ActionEvent e) -> {
+                    int akt = Kontroller.getInstance().getAktualisJatekos();
+                    List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
+                    jatekosok.get(akt).pumpaAtallitasa(Integer.parseInt(be.getText())-1, Integer.parseInt(ki.getText())-1);
+                    Kontroller.getInstance().stepKor();
+                    if(akt == jatekosok.size()-1){
+                        Kontroller.getInstance().stepTime();
+                    }
+                    Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
+                });
+        /*addActionListenerToButton(Atallit, be.getText() + "," + ki.getText(), (jatekos, value) -> {
             //ha esetleg a textfield-ekben nincs szoveg, akkor alapértékek vannak a lambdaban
             String[] values = value.split(",");
             if(!values[0].isEmpty() && !values[1].isEmpty())
                 jatekos.pumpaAtallitasa(Integer.parseInt(values[0])-1, Integer.parseInt(values[1])-1);
             else
                 jatekos.pumpaAtallitasa(0, 0);
-        });
+        });*/
         addActionListenerToButton(Lyukaszt, null, (jatekos, value) -> {
             jatekos.csoKilyukasztasa();
         });
@@ -319,7 +329,7 @@ public class GameFrame extends JFrame {
         addActionListenerToButton(Javit, null, (jatekos, value) -> {
             jatekos.mezotJavit();
         });
-        addActionListenerToButton(CsFelvesz, hanyadik.getText(), (jatekos, value) -> {
+        addActionListenerToButton(CsFelvesz, hanyadik, (jatekos, value) -> {
             if(!value.isEmpty())
                 jatekos.csovegFelvetele(Integer.parseInt(value)-1);
             else
@@ -339,11 +349,13 @@ public class GameFrame extends JFrame {
         });
     }
 
-    private void addActionListenerToButton(JButton button, String value, BiConsumer<Jatekos, String> action) {
+    private void addActionListenerToButton(JButton button, JTextField wherefrom, BiConsumer<Jatekos, String> action) {
         button.addActionListener((ActionEvent e) -> {
             int akt = Kontroller.getInstance().getAktualisJatekos();
             List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
             Jatekos jatekos = jatekosok.get(akt);
+
+            String value = wherefrom.getText();
 
             if (value != null) {
                 action.accept(jatekos, value);

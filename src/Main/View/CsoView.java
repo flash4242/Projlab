@@ -157,7 +157,7 @@ public class CsoView {
         if(!jatekosList.isEmpty()){
             JatekosView player = GamePanel.getInstance().getPlayerViewFromPlayer(jatekosList.get(0));
             player.setX(x1/2+x2/2);
-            player.setY(y1/2+y2+2);
+            player.setY(y1/2+y2/2);
         }
     }
 }

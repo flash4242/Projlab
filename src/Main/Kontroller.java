@@ -78,8 +78,11 @@ public  class Kontroller {
     public void stepKor(){
         for (Csucs csucs:csucsok) {
             Cso cs = csucs.csoLetrehozasa();
-            if(cs!=null)
+            if(cs!=null) {
+                CsoView csv = new CsoView(cs);
+                GamePanel.getInstance().addCsoView(csv);
                 csovek.add(cs);
+            }
             csucs.vizetPumpal();
         }
         veletlenPumpaElrontas();
@@ -109,16 +112,6 @@ public  class Kontroller {
             csucsok.add(c);
         }
 
-        for (int i = 0; i < 4; i++) {
-            Forras f = new Forras();
-            ForrasView fv = new ForrasView(f);
-            int x = Toolkit.getDefaultToolkit().getScreenSize().width-400;
-            fv.setX(x);
-            fv.setY(125*(i+1));
-            GamePanel.getInstance().addCsucsView(fv);
-            csucsok.add(f);
-        }
-
         for(int i = 0; i < 4; i++){
             Pumpa p = new Pumpa();
             PumpaView pv = new PumpaView(p);
@@ -130,12 +123,22 @@ public  class Kontroller {
         }
 
         for (int i = 0; i < 4; i++) {
+            Forras f = new Forras();
+            ForrasView fv = new ForrasView(f);
+            int x = Toolkit.getDefaultToolkit().getScreenSize().width-400;
+            fv.setX(x);
+            fv.setY(125*(i+1));
+            GamePanel.getInstance().addCsucsView(fv);
+            csucsok.add(f);
+        }
+
+        for (int i = 0; i < 4; i++) {
             Cso c = new Cso();
             CsoView cv = new CsoView(c);
             GamePanel.getInstance().addCsoView(cv);
             csovek.add(c);
             csucsok.get(i).felcsatol(c);
-            csucsok.get(i+8).felcsatol(c);
+            csucsok.get(i+4).felcsatol(c);
         }
 
         for(int i = 0; i < 4; i++){
@@ -152,12 +155,12 @@ public  class Kontroller {
             CsoView cv = new CsoView(c);
             GamePanel.getInstance().addCsoView(cv);
             csovek.add(c);
-            csucsok.get(i+8).felcsatol(c);
-            csucsok.get(i+9).felcsatol(c);
+            csucsok.get(i+4).felcsatol(c);
+            csucsok.get(i+5).felcsatol(c);
         }
 
-        for (int i=8; i<12; i++){
-            csucsok.get(i).setBemenetiCso(csovek.get(i-4));
+        for (int i=4; i<8; i++){
+            csucsok.get(i).setBemenetiCso(csovek.get(i));
         }
     }
 
