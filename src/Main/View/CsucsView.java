@@ -25,6 +25,8 @@ public abstract class CsucsView {
     }
 
     public abstract void draw(Graphics g);
-    public abstract void calculate();
+    public void calculate(){
+
+    }
     public abstract Csucs getCsucs();
 }

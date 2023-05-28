@@ -79,6 +79,7 @@ public class GamePanel extends JPanel {
         csucsok.add(fv);
 
         Cso cs = new Cso();
+        cs.allapotValtozas(Allapot.CSUSZOS);
         p.felcsatol(cs);
         CsoView csv = new CsoView(cs);
         csv.setX1(400);
@@ -88,6 +89,7 @@ public class GamePanel extends JPanel {
         csovek.add(csv);
 
         Cso cs2 = new Cso();
+        cs2.allapotValtozas(Allapot.RAGADOS);
         p.felcsatol(cs2);
         CsoView csv2 = new CsoView(cs2);
         csv2.setX1(400);
