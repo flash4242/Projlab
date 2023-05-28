@@ -100,14 +100,6 @@ public class PumpaView extends CsucsView{
     }
 
     /**
-     * Kiszámolja a rajta álló játékosok helyzetét.
-     */
-    //TODO Aki ezt megvalósítja. Ez minden csúcsra ugyanolyan azt hiszem, lehet egyel feljebb.
-    @Override
-    public void calculate(){
-    }
-
-    /**
      * Visszaadja a pumpát amit kirajzol
      * @return a pumpa, aminek a kirajzolásáért felelős.
      */

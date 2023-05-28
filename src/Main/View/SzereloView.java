@@ -10,7 +10,7 @@ public class SzereloView extends JatekosView{
     private Szerelo szerelo;
 
 
-    SzereloView(Szerelo sz){
+    public SzereloView(Szerelo sz){
         szerelo=sz;
     }
     @Override

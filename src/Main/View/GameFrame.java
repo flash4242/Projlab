@@ -49,7 +49,9 @@ public class GameFrame extends JFrame {
         JButton newGame = new JButton("Játék indítása");
         newGame.addActionListener((ActionEvent e) -> {
             //TODO Kontrollert setupolni kell és alap pálya inicializálás
-            Kontroller.getInstance().initPalya();
+            Kontroller.getInstance().setSzerelokSzama(Integer.parseInt(szereloszam.getText()));
+            Kontroller.getInstance().setSzabotorokSzama(Integer.parseInt(szabotorszam.getText()));
+            Kontroller.getInstance().initJatek();
             showGame();
         });
         newGame.setPreferredSize(new Dimension(150, 60));

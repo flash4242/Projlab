@@ -159,8 +159,6 @@ public  class Kontroller {
         for (int i=8; i<12; i++){
             csucsok.get(i).setBemenetiCso(csovek.get(i-4));
         }
-
-        ujraRajzol();
     }
 
     /**
@@ -171,20 +169,24 @@ public  class Kontroller {
     public void initJatekosok(int szerelokSz, int szabotorokSz){
         szerelokSzama=szerelokSz;
         szabotorokSzama=szabotorokSz;
-        int forrasokszama=4;
+        int ciszternakszama=4;
 
         for(int i=0; i<szabotorokSz; i++){
-            Jatekos szabotor= new Szerelo();
+            Szabotor szabotor= new Szabotor();
+            JatekosView szabotorView = new SzabotorView(szabotor);
+            GamePanel.getInstance().addJatekosView(szabotorView);
             jatekosok.add(szabotor);
         }
         for(int i=0; i<szerelokSz; i++){
-            Jatekos szerelo= new Szerelo();
+            Szerelo szerelo= new Szerelo();
+            JatekosView szereloView = new SzereloView(szerelo);
+            GamePanel.getInstance().addJatekosView(szereloView);
             jatekosok.add(szerelo);
         }
 
         for(int i=0; i<jatekosok.size(); i++) {
-            csucsok.get(i % forrasokszama).setJatekosRajta(jatekosok.get(i));
-            jatekosok.get(i).setAktMezo(csucsok.get(i % forrasokszama));
+            csucsok.get(i % ciszternakszama).setJatekosRajta(jatekosok.get(i));
+            jatekosok.get(i).setAktMezo(csucsok.get(i % ciszternakszama));
         }
     }
 
