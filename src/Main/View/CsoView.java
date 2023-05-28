@@ -61,6 +61,14 @@ public class CsoView {
         return cso;
     }
 
+    /**
+     * Segédfüggvény a cső kirajzolásához, kiszámol és visszaad egy téglalapot a megadott méretben,
+     * a cső koordinátáira illeszkedve
+     * @param size
+     * a négyszög viszonylagos mérete
+     * @return
+     * visszaadja a négyszöget
+     */
     private Polygon getPolygon(int size){
         Vec2 vektor1 = new Vec2(x1, y1);
         Vec2 vektor2 = new Vec2(x2, y2);
@@ -74,6 +82,13 @@ public class CsoView {
         Polygon polygon = new Polygon(x_ek, y_ok, 4);
         return polygon;
     }
+
+    /**
+     * Kirajzolja a csövet, lekérdezi a megjelenített cső adatait, majd annak megfelelő
+     * színű és vastagságú téglalapot rajzol ki a cső két vége közé
+     * @param g
+     * a Graphics objektum, aminek a segítségével kirajzolunk
+     */
     public void draw(Graphics g){
         if(cso.getAllapot() !=Allapot.NORMALIS) {
             if (cso.getAllapot() == Allapot.CSUSZOS) {
@@ -81,9 +96,6 @@ public class CsoView {
             } else if (cso.getAllapot() == Allapot.RAGADOS) {
                 g.setColor(Color.YELLOW);
             }
-
-            //Vec2 balfelso =
-            //Rectangle rectangle = new Rectangle(von)
             g.fillPolygon(getPolygon(4));
         }
         g.setColor(Color.BLACK);
@@ -93,8 +105,6 @@ public class CsoView {
             g.setColor(Color.blue);
         }
         g.fillPolygon(getPolygon(2));
-
-        //g.drawLine(x1,y1,x2,y2);
     }
 
     /**

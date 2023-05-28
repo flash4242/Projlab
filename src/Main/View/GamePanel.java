@@ -127,6 +127,8 @@ public class GamePanel extends JPanel {
         szav.setY(pm.getY());
         jatekosok.add(szav);
 
+        pm.calculate();
+
         Szabotor sza2 =new Szabotor();
         sza2.setAktMezo(cs);
         cs.setJatekosRajta(sza2);
