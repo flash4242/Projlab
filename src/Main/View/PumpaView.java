@@ -61,14 +61,16 @@ public class PumpaView extends CsucsView{
         g.setColor(Color.WHITE);
         List<Cso> szomszedoscsovek = pumpa.getSzomszedosCso();
         for (int i=0; i<szomszedoscsovek.size(); i++){
-            CsoView cv = GamePanel.getInstance().getCsoViewFromCso(szomszedoscsovek.get(i));
-            Vec2 direction = new Vec2(cv.getX1()-getX(),cv.getY1()-getY());
-            if (cv.getX1() == getX() && cv.getY1() == getY()) {
-                direction = new Vec2(cv.getX2() - getX(), cv.getY2() - getY());
+            if(!szomszedoscsovek.subList(0,i).contains(szomszedoscsovek.get(i))) {
+                CsoView cv = GamePanel.getInstance().getCsoViewFromCso(szomszedoscsovek.get(i));
+                Vec2 direction = new Vec2(cv.getX1() - getX(), cv.getY1() - getY());
+                if (cv.getX1() == getX() && cv.getY1() == getY()) {
+                    direction = new Vec2(cv.getX2() - getX(), cv.getY2() - getY());
+                }
+                direction = direction.normalize();
+                direction = direction.multiply(radius - 10);
+                g.drawString(Integer.toString(i + 1), (int) (getX() + direction.getX() - 5), (int) (getY() + direction.getY() + 5));
             }
-            direction = direction.normalize();
-            direction = direction.multiply(radius-10);
-            g.drawString(Integer.toString(i+1),(int)(getX()+direction.getX()-5),(int)(getY()+direction.getY()+5));
         }
 
         //kirajzolja a kimeno cso iranyat

@@ -93,10 +93,12 @@ public abstract class Jatekos {
     public void mozgas(int hova){
         if(!getRagados()){
             List<? extends Mezo> neighbours = getAktMezo().getNeighbours();
-            Mezo hovamezo=neighbours.get(hova);
-            if(hovamezo.jatekostElfogad(this)){
-                getAktMezo().jatekostEltavolit(this);
-                setAktMezo(hovamezo);
+            if(neighbours.size()<=hova) {
+                Mezo hovamezo = neighbours.get(hova);
+                if (hovamezo.jatekostElfogad(this)) {
+                    getAktMezo().jatekostEltavolit(this);
+                    setAktMezo(hovamezo);
+                }
             }
         }
         Kontroller.getInstance().ujraRajzol();
