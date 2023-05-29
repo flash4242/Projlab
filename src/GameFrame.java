@@ -4,20 +4,38 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 import java.util.function.BiConsumer;
 
+/**
+ *  A megjelenítő ablak, ez tartalmazza a menüt és a játékot megjelenítő paneleket.
+ */
 public class GameFrame extends JFrame {
 
     /**
-     * Example of how one can create a JTextField
+     * TextFieldek, amikbe a felhasználó paramétereket adhat meg egy gomblenyomáshoz.
      */
     private JTextField hova, ki, be, hanyadik;
 
+    /**
+     *  Gombok a játék irányításához
+     */
     private JButton Mozog, Atallit, Lyukaszt, Ragaszt, Javit, CsFelvesz, CsLerak, PFelvesz, PLerak, Csuszosit, JatekVege;
+
+    /**
+     *  GameFrame LayoutManagere, hogy váltani lehessen menü és játék között
+     */
     private CardLayout card = new CardLayout();
+
+    /**
+     *  Menühöz tartozó textFieldek, a szerelő és szabotőrszám megadására
+     */
     private JTextField szereloszam, szabotorszam;
+
+    /**
+     * Menühöz tartozó JPanel
+     */
     private JPanel menu;
 
     /**
-     * Default Ctor
+     * GameFrame konstruktora, meghívja az inicializáló függvényeket és megjeleníti a menüt.
      */
     @SuppressWarnings("unchecked")
     public GameFrame() {
@@ -32,12 +50,21 @@ public class GameFrame extends JFrame {
         showMenu();
     }
 
+    /**
+     *  Inicializálja a menüt és a gombját, valamint a hozzá tartozó textfieldeket és labeleket.
+     */
     private void InitMenu(){
         menu = new JPanel();
         JButton newGame = new JButton("Játék indítása");
         newGame.addActionListener((ActionEvent e) -> {
-            Kontroller.getInstance().setSzerelokSzama(Integer.parseInt(szereloszam.getText().equals("")?"2":szereloszam.getText()));
-            Kontroller.getInstance().setSzabotorokSzama(Integer.parseInt(szabotorszam.getText().equals("")?"2":szabotorszam.getText()));
+            try {
+                Kontroller.getInstance().setSzerelokSzama(Integer.parseInt(szereloszam.getText().equals("") ? "2" : szereloszam.getText()));
+                Kontroller.getInstance().setSzabotorokSzama(Integer.parseInt(szabotorszam.getText().equals("") ? "2" : szabotorszam.getText()));
+            }
+            catch(NumberFormatException h){
+                Kontroller.getInstance().setSzerelokSzama(2);
+                Kontroller.getInstance().setSzabotorokSzama(2);
+            }
             Kontroller.getInstance().initJatek();
             showGame();
         });
@@ -70,7 +97,7 @@ public class GameFrame extends JFrame {
     }
 
     /**
-     *
+     *  Létrehozza, inicializálja a gombokat, Labeleket, paneleket, amik a futáshoz kellenek.
      */
     private void InitComponents(){
 
@@ -166,129 +193,33 @@ public class GameFrame extends JFrame {
         this.add(mainPanel, "game");
     }
 
+    /**
+     * A Frame-ben átváltja a panelt és a menüt jeleníti meg.
+     */
     public void showMenu() {
         this.setSize(500, 500);
         card.show(getContentPane(), "menu");
     }
 
+    /**
+     *  A Frame-ben átváltja a panelt és a játékot jeleníti meg.
+     */
     public void showGame() {
         this.setSize(Toolkit.getDefaultToolkit().getScreenSize().width,Toolkit.getDefaultToolkit().getScreenSize().height);
         card.show(getContentPane(), "game");
     }
 
-    /**
-     * Ne töröld!!
-     */
-    //public void AddLambdas(){
-    //    Mozog.addActionListener((ActionEvent e) -> {
-    //        int akt = Kontroller.getInstance().getAktualisJatekos();
-    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
-    //        jatekosok.get(akt).mozgas(Integer.parseInt(hova.getText()));
-    //        Kontroller.getInstance().stepKor();
-    //        if(akt == jatekosok.size()-1){
-    //            Kontroller.getInstance().stepTime();
-    //        }
-    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
-    //    });
-    //    Atallit.addActionListener((ActionEvent e) -> {
-    //        int akt = Kontroller.getInstance().getAktualisJatekos();
-    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
-    //        jatekosok.get(akt).pumpaAtallitasa(Integer.parseInt(be.getText()), Integer.parseInt(ki.getText()));
-    //        Kontroller.getInstance().stepKor();
-    //        if(akt == jatekosok.size()-1){
-    //            Kontroller.getInstance().stepTime();
-    //        }
-    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
-    //    });
-    //    Lyukaszt.addActionListener((ActionEvent e) -> {
-    //        int akt = Kontroller.getInstance().getAktualisJatekos();
-    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
-    //        jatekosok.get(akt).csoKilyukasztasa();
-    //        Kontroller.getInstance().stepKor();
-    //        if(akt == jatekosok.size()-1){
-    //            Kontroller.getInstance().stepTime();
-    //        }
-    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
-    //    });
-    //    Ragaszt.addActionListener((ActionEvent e) -> {
-    //        int akt = Kontroller.getInstance().getAktualisJatekos();
-    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
-    //        jatekosok.get(akt).beragasztoz();
-    //        Kontroller.getInstance().stepKor();
-    //        if(akt == jatekosok.size()-1){
-    //            Kontroller.getInstance().stepTime();
-    //        }
-    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
-    //    });
-    //    Javit.addActionListener((ActionEvent e) -> {
-    //        int akt = Kontroller.getInstance().getAktualisJatekos();
-    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
-    //        jatekosok.get(akt).mezotJavit();
-    //        Kontroller.getInstance().stepKor();
-    //        if(akt == jatekosok.size()-1){
-    //            Kontroller.getInstance().stepTime();
-    //        }
-    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
-    //    });
-    //    CsFelvesz.addActionListener((ActionEvent e) -> {
-    //        int akt = Kontroller.getInstance().getAktualisJatekos();
-    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
-    //        jatekosok.get(akt).csovegFelvetele(Integer.parseInt(hanyadik.getText()));
-    //        Kontroller.getInstance().stepKor();
-    //        if(akt == jatekosok.size()-1){
-    //            Kontroller.getInstance().stepTime();
-    //        }
-    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
-    //    });
-    //    CsLerak.addActionListener((ActionEvent e) -> {
-    //        int akt = Kontroller.getInstance().getAktualisJatekos();
-    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
-    //        jatekosok.get(akt).csovegetLerak();
-    //        Kontroller.getInstance().stepKor();
-    //        if(akt == jatekosok.size()-1){
-    //            Kontroller.getInstance().stepTime();
-    //        }
-    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
-    //    });
-    //    PFelvesz.addActionListener((ActionEvent e) -> {
-    //        int akt = Kontroller.getInstance().getAktualisJatekos();
-    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
-    //        jatekosok.get(akt).pumpaFelvetele();
-    //        Kontroller.getInstance().stepKor();
-    //        if(akt == jatekosok.size()-1){
-    //            Kontroller.getInstance().stepTime();
-    //        }
-    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
-    //    });
-    //    PLerak.addActionListener((ActionEvent e) -> {
-    //        int akt = Kontroller.getInstance().getAktualisJatekos();
-    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
-    //        jatekosok.get(akt).pumpatLerak();
-    //        Kontroller.getInstance().stepKor();
-    //        if(akt == jatekosok.size()-1){
-    //            Kontroller.getInstance().stepTime();
-    //        }
-    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
-    //    });
-    //    Csuszosit.addActionListener((ActionEvent e) -> {
-    //        int akt = Kontroller.getInstance().getAktualisJatekos();
-    //        List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
-    //        jatekosok.get(akt).csuszosit();
-    //        Kontroller.getInstance().stepKor();
-    //        if(akt == jatekosok.size()-1){
-    //            Kontroller.getInstance().stepTime();
-    //        }
-    //        Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
-    //    });
-    //}
 
     /**
-     * Na ez nem tudom, hogy jól működik-e úgyhogy fentebb benthagytam még a kódismétléses verziót is
+     *  Minden gombhoz hozzárendel egy actionListenert
      */
     public void AddLambdas() {
         addActionListenerToButton(Mozog, hova, (jatekos, value) -> {
             if(!value.isEmpty())
-                jatekos.mozgas(Integer.parseInt(value)-1);
+                try {
+                    jatekos.mozgas(Integer.parseInt(value) - 1);
+                }
+                catch (NumberFormatException e){}
             else
                 jatekos.mozgas(0);
             hova.setText("");
@@ -296,7 +227,10 @@ public class GameFrame extends JFrame {
         Atallit.addActionListener((ActionEvent e) -> {
                     int akt = Kontroller.getInstance().getAktualisJatekos();
                     List<Jatekos> jatekosok = Kontroller.getInstance().getJatekosok();
-                    jatekosok.get(akt).pumpaAtallitasa(Integer.parseInt(be.getText())-1, Integer.parseInt(ki.getText())-1);
+                    try {
+                        jatekosok.get(akt).pumpaAtallitasa(Integer.parseInt(be.getText()) - 1, Integer.parseInt(ki.getText()) - 1);
+                    }
+                    catch (NumberFormatException f){}
                     Kontroller.getInstance().stepKor();
                     if(akt == jatekosok.size()-1){
                         Kontroller.getInstance().stepTime();
@@ -305,14 +239,6 @@ public class GameFrame extends JFrame {
                     be.setText("");
                     ki.setText("");
                 });
-        /*addActionListenerToButton(Atallit, be.getText() + "," + ki.getText(), (jatekos, value) -> {
-            //ha esetleg a textfield-ekben nincs szoveg, akkor alapértékek vannak a lambdaban
-            String[] values = value.split(",");
-            if(!values[0].isEmpty() && !values[1].isEmpty())
-                jatekos.pumpaAtallitasa(Integer.parseInt(values[0])-1, Integer.parseInt(values[1])-1);
-            else
-                jatekos.pumpaAtallitasa(0, 0);
-        });*/
         addActionListenerToButton(Lyukaszt, null, (jatekos, value) -> {
             jatekos.csoKilyukasztasa();
         });
@@ -324,7 +250,10 @@ public class GameFrame extends JFrame {
         });
         addActionListenerToButton(CsFelvesz, hanyadik, (jatekos, value) -> {
             if(!value.isEmpty())
-                jatekos.csovegFelvetele(Integer.parseInt(value)-1);
+                try {
+                    jatekos.csovegFelvetele(Integer.parseInt(value)-1);
+                }
+                catch (NumberFormatException g){}
             else
                 jatekos.csovegFelvetele(0);
             hanyadik.setText("");
@@ -346,6 +275,12 @@ public class GameFrame extends JFrame {
         });
     }
 
+    /**
+     * Egy gombhoz hozzárendel egy actionlistenert, ami a gomblenyomást kezeli. Mivel a legtöbb gomb hasonló metódusokat hív ez egy template.
+     * @param button Milyen gomb
+     * @param wherefrom Ha tartozik hozzá textfield akkor innen szedi ki a szöveget
+     * @param action Egy lambda függvény amit végrehajt
+     */
     private void addActionListenerToButton(JButton button, JTextField wherefrom, BiConsumer<Jatekos, String> action) {
         button.addActionListener((ActionEvent e) -> {
             int akt = Kontroller.getInstance().getAktualisJatekos();
