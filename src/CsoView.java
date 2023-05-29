@@ -1,15 +1,5 @@
-package Main.View;
-
-import Main.Kontroller;
-import Main.Model.Allapot;
-import Main.Model.Cso;
-import Main.Model.Csucs;
-import Main.Model.Jatekos;
-import Main.Vec2;
-
 import java.awt.*;
 import java.util.List;
-import java.util.Random;
 
 public class CsoView {
     private Cso cso;

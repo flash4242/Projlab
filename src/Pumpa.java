@@ -1,5 +1,3 @@
-package Main.Model;
-
 /**
  * A játékban lévő pumpákat reprezentáló osztály.
  * Aktív elem, ami a kimeneti csövén vizet továbbít, bemeneti csövén vizet szivattyúz, valamint vizet tárol.
@@ -22,7 +20,7 @@ public class Pumpa extends Csucs{
     private boolean rossz;
 
     /**
-     * Létrehoz egy Main.Model.Pumpa objektumot
+     * Létrehoz egy Pumpa objektumot
      */
     public Pumpa() { super(); }
 
@@ -90,7 +88,7 @@ public class Pumpa extends Csucs{
     }
 
     /**
-     * A Main.Main.Kontroller elrontja a Pumpát.
+     * A Mainroller elrontja a Pumpát.
      */
     @Override
     public void kontrollerElront() {

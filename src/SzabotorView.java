@@ -1,9 +1,3 @@
-package Main.View;
-
-import Main.Kontroller;
-import Main.Model.Jatekos;
-import Main.Model.Szabotor;
-
 import java.awt.*;
 
 /**

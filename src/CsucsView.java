@@ -1,9 +1,3 @@
-package Main.View;
-
-import Main.Model.Csucs;
-import Main.Model.Jatekos;
-import Main.Vec2;
-
 import java.awt.*;
 import java.util.List;
 

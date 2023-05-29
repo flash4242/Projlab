@@ -1,9 +1,3 @@
-package Main.View;
-
-import Main.Model.Ciszterna;
-import Main.Model.Cso;
-import Main.Vec2;
-
 import java.awt.*;
 import java.util.List;
 

@@ -1,5 +1,3 @@
-package Main.Model;
-
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -57,19 +55,19 @@ public abstract class Mezo {
 	public boolean targyLerakas(Pumpa p){return false;}
 
 	/**
-	 * A szerelő megjavít egy mezőt. Üres függvény, mivel a Main.Model.Mezo nem tud megjavulni.
+	 * A szerelő megjavít egy mezőt. Üres függvény, mivel a Mezo nem tud megjavulni.
 	 * Azon leszármazottakban, amiket meg lehet javítani meg kell valósítani.
 	 */
 	public void szereloJavit(){}
 
 	/**
-	 * Egy játékos elrontja a mezőt. Üres függvény, mivel a Main.Model.Mezo nem tud elromlani.
+	 * Egy játékos elrontja a mezőt. Üres függvény, mivel a Mezo nem tud elromlani.
 	 * Azon leszármazottakban, amiket el lehet rontani meg kell valósítani.
 	 */
 	public void jatekosElront(){}
 
 	/**
-	 * A mező létrehoz egy pumpát. Null-al tér vissza alapesetben, mivel a Main.Model.Mezo nem hozhat létre pumpát.
+	 * A mező létrehoz egy pumpát. Null-al tér vissza alapesetben, mivel a Mezo nem hozhat létre pumpát.
 	 * Azon leszármazottakban amik létrehoznak, meg kell valósítani.
 	 * @return A létrejött pumpa
 	 */
@@ -79,7 +77,7 @@ public abstract class Mezo {
 
 	/**
 	 * Jelezzük a mezőnek, hogy szeretnénk a hozzá kapcsolódó cs-edik csövet megkapni.
-	 * Mivel nem minden Main.Model.Mezo-nek vannak szomszédos csövei, alapesetben Null-al tér vissza.
+	 * Mivel nem minden Mezo-nek vannak szomszédos csövei, alapesetben Null-al tér vissza.
 	 * @param cs A szomszédos csövek közül melyiket szeretnénk megkapni.
 	 * @return A mező által visszaadott cső, vagy null.
 	 */
@@ -94,7 +92,7 @@ public abstract class Mezo {
 	public abstract List<? extends Mezo> getNeighbours();
 
 	/**
-	 * Egy Main.Model.Jatekos átállítja a mezőt. Üres függvény, mivel a Main.Model.Mezo nem átállítható.
+	 * Egy Jatekos átállítja a mezőt. Üres függvény, mivel a Mezo nem átállítható.
 	 * Azon leszármazottakban amik átállíthatók, meg kell valósítani.
 	 * @param kimeneti bemeneti cső index a szomszédos mezőkhöz
 	 * @param bemeneti kimeneti cső index a szomszédos mezőkhöz

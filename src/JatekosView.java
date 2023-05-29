@@ -1,7 +1,3 @@
-package Main.View;
-
-import Main.Model.Jatekos;
-
 import java.awt.*;
 
 /**

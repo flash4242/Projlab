@@ -1,19 +1,6 @@
-package Main.View;
-
-import Main.Kontroller;
-import Main.Model.Jatekos;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.*;
 import java.util.List;
 import java.util.function.BiConsumer;
 
@@ -172,7 +159,7 @@ public class GameFrame extends JFrame {
 
         //North are buttons
         mainPanel.add(pan, BorderLayout.NORTH);
-        //Center is the Main.View.GamePanel
+        //Center is the GamePanel
         mainPanel.add(GamePanel.getInstance(), BorderLayout.CENTER);
 
         this.add(mainPanel, "game");

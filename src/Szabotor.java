@@ -1,7 +1,3 @@
-package Main.Model;
-
-import Main.Kontroller;
-
 /**
  * A játékban lévő szabotőröket reprezentálja. Képes csövet kilyukasztani valamint ragadóssá
  * és csúszóssá tenni. Célja, hogy minél több víz elfolyjon a lyukas csöveken keresztül.

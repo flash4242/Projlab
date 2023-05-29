@@ -1,7 +1,3 @@
-package Main.Model;
-
-import Main.Kontroller;
-
 import java.util.List;
 /**
  * A játékban lévő játékosokat reprezentálja. A Szerelő és Szabotőr közös
