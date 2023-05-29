@@ -6,32 +6,38 @@ import Main.Model.Szabotor;
 
 import java.awt.*;
 
+/**
+ * A Szabotor osztály (azaz a szabotőrök) grafikus megjelenítéséért felel.
+ */
 public class SzabotorView extends JatekosView{
+    /**
+     * A nézethez tartozó szabotor objektum
+     */
     private Szabotor szabotor;
 
     public SzabotorView(Szabotor sz) {
         szabotor=sz;
     }
 
+    /**
+     * Kirajzolja a szabotőrt egy négyszög formájában.
+     * Alapesetben barna színnel, de ha le van ragadva sárga, míg ha aktív, akkor zöld színű.
+     * @param g A kirajzoló grafikus objektum.
+     */
     @Override
     public void draw(Graphics g){
-
-        setX(getX()+15); // valamiért arrébb van a csúcs mint kéne
-
-        g.setColor(new Color(109, 28, 28)); //brown
+        g.setColor(new Color(109, 28, 28)); //alapesetben barna
         if(szabotor.getRagados()){
-            g.setColor(new Color(230, 243, 86));
+            g.setColor(new Color(230, 243, 86));//ha le van ragadva, akkor sárga
         }
 
+        //aktív játékos lekérdezése
         int aktIndex = Kontroller.getInstance().getAktualisJatekos();
         Jatekos aktJatekos = Kontroller.getInstance().getJatekosok().get(aktIndex);
         if(aktJatekos == szabotor){
-            g.setColor(new Color(102, 215, 50));
+            g.setColor(new Color(102, 215, 50));//ha aktív, akkor zöld
         }
 
-        //ha több játékos van a mezőn, el kell, hogy férjenek
-        //int offset=szabotor.getAktMezo().getJatekosRajta().indexOf(szabotor);
-        //setX(getX()+offset*17);
 
         int[] xpoints = {getX()-9,getX()+9,getX()+9, getX()-9};
         int[] ypoints = {getY()-9, getY()-9, getY()+9, getY()+9};
