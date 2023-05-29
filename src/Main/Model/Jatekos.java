@@ -93,7 +93,7 @@ public abstract class Jatekos {
     public void mozgas(int hova){
         if(!getRagados()){
             List<? extends Mezo> neighbours = getAktMezo().getNeighbours();
-            if(neighbours.size()<=hova) {
+            if(neighbours.size()>hova) {
                 Mezo hovamezo = neighbours.get(hova);
                 if (hovamezo.jatekostElfogad(this)) {
                     getAktMezo().jatekostEltavolit(this);

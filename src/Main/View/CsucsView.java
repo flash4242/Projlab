@@ -37,7 +37,7 @@ public abstract class CsucsView {
         int count = jatekosList.size();
         double alpha = Math.PI*2/count;
         for(int i = 0; i<count;++i){
-            Vec2 coord = new Vec2(x+4*Math.cos(alpha*(i+1)),y-4*Math.sin(alpha*(i+1)));
+            Vec2 coord = new Vec2(x+10*Math.cos(alpha*(i+1)),y-10*Math.sin(alpha*(i+1)));
             GamePanel.getInstance().getPlayerViewFromPlayer(jatekosList.get(i)).setX((int) coord.getX());
             GamePanel.getInstance().getPlayerViewFromPlayer(jatekosList.get(i)).setY((int) coord.getY());
         }

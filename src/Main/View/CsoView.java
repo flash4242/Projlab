@@ -3,6 +3,7 @@ package Main.View;
 import Main.Kontroller;
 import Main.Model.Allapot;
 import Main.Model.Cso;
+import Main.Model.Csucs;
 import Main.Model.Jatekos;
 import Main.Vec2;
 
@@ -90,6 +91,7 @@ public class CsoView {
      * a Graphics objektum, aminek a segítségével kirajzolunk
      */
     public void draw(Graphics g){
+        //cső vonalának kirajzolása:
         if(cso.getAllapot() !=Allapot.NORMALIS) {
             if (cso.getAllapot() == Allapot.CSUSZOS) {
                 g.setColor(Color.MAGENTA);
@@ -105,6 +107,24 @@ public class CsoView {
             g.setColor(Color.blue);
         }
         g.fillPolygon(getPolygon(2));
+        // szomszédos csucsok számozásának kirajzolása:
+        g.setColor(Color.red);
+        List<Csucs> szomszedosCsucsok  =cso.getSzomszedosCsucs();
+        CsucsView csucsv1 = GamePanel.getInstance().getCsucsViewFromCsucs(szomszedosCsucsok.get(0));
+        CsucsView csucsv2 = GamePanel.getInstance().getCsucsViewFromCsucs(szomszedosCsucsok.get(1));
+
+
+        Vec2 veg1 = new Vec2(x1,y1);
+        Vec2 veg2 = new Vec2(x2,y2);
+        Vec2 from1to2 = veg2.substract(veg1).normalize();
+        Vec2 from2to1 = veg1.substract(veg2).normalize();
+
+        if(csucsv1 == csucsv2){
+            g.drawString("1", (int) (veg2.getX()-45), (int) veg2.getY());
+        }else{
+                g.drawString("1", (int) (veg1.getX()+from1to2.getX()*40), (int) (veg1.getY()+from1to2.getY()*40));
+                g.drawString("2", (int) (veg2.getX()+from2to1.getX()*40), (int) (veg2.getY()+from2to1.getY()*40));
+            }
     }
 
     /**

@@ -68,7 +68,7 @@ public class PumpaView extends CsucsView{
                     direction = new Vec2(cv.getX2() - getX(), cv.getY2() - getY());
                 }
                 direction = direction.normalize();
-                direction = direction.multiply(radius - 10);
+                direction = direction.multiply(radius - 5);
                 g.drawString(Integer.toString(i + 1), (int) (getX() + direction.getX() - 5), (int) (getY() + direction.getY() + 5));
             }
         }

@@ -15,7 +15,8 @@ public class SzereloView extends JatekosView{
     }
     @Override
     public void draw(Graphics g){
-        setY(getY()-8); //a haramoszog pozicioja az egyik csucsat adja meg, ezert kell eltolni
+        //setY(getY()-8); //a haramoszog pozicioja az egyik csucsat adja meg, ezert kell eltolni
+            setX(getX()+15); // valamiért arrébb van a csúcs mint kéne
 
         g.setColor(new Color(109, 28, 28)); //brown
         if(szerelo.getRagados()){
@@ -29,10 +30,10 @@ public class SzereloView extends JatekosView{
         }
 
         //ha több játékos van a mezőn, el kell, hogy férjenek
-        int offset=szerelo.getAktMezo().getJatekosRajta().indexOf(szerelo);
-        setX(getX()+offset*17);
-        int[] xpoints = {getX(),getX()-8,getX()+8};
-        int[] ypoints = {getY(), getY()+16, getY()+16};
+        //int offset=szerelo.getAktMezo().getJatekosRajta().indexOf(szerelo);
+        //setX(getX()+offset*17);
+        int[] xpoints = {getX(),(int)(getX()-9),(int)(getX()+9)};
+        int[] ypoints = {getY()-9, getY()+9, getY()+9};
         g.fillPolygon(xpoints, ypoints, 3/*haromszog*/);
     }
     @Override
