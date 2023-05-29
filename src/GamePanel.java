@@ -56,106 +56,6 @@ public class GamePanel extends JPanel {
         score_ = new JLabel("Score: "+Kontroller.getInstance().getSzabotorPontok()+"-"+Kontroller.getInstance().getSzereloPontok());
         score_.setAlignmentY(JLabel.BOTTOM_ALIGNMENT);
         this.add(score_);
-
-        //TODO EZ ALATT CSAK TESZTELES FOLYT EGY PELDA PALYA, DELETE LATER
-        /*Pumpa p = new Pumpa();
-        p.setVanViz(true);
-        p.setRossz(true);
-        PumpaView pm = new PumpaView(p);
-        pm.setX(400);
-        pm.setY(200);
-        csucsok.add(pm);
-
-        Ciszterna c = new Ciszterna();
-        CiszternaView cv = new CiszternaView(c);
-        cv.setX(800);
-        cv.setY(200);
-        csucsok.add(cv);
-
-        Forras f = new Forras();
-        ForrasView fv = new ForrasView(f);
-        fv.setX(300);
-        fv.setY(100);
-        csucsok.add(fv);
-
-        Cso cs = new Cso();
-        cs.allapotValtozas(Allapot.CSUSZOS);
-        p.felcsatol(cs);
-        CsoView csv = new CsoView(cs);
-        csv.setX1(400);
-        csv.setY1(200);
-        csv.setX2(800);
-        csv.setY2(200);
-        csovek.add(csv);
-
-        Cso cs2 = new Cso();
-        cs2.allapotValtozas(Allapot.RAGADOS);
-        p.felcsatol(cs2);
-        CsoView csv2 = new CsoView(cs2);
-        csv2.setX1(400);
-        csv2.setY1(200);
-        csv2.setX2(300);
-        csv2.setY2(100);
-        csovek.add(csv2);
-
-        Cso cs3 = new Cso();
-        cs3.allapotValtozas(Allapot.RAGADOS);
-        p.felcsatol(cs3);
-        p.felcsatol(cs3);
-        CsoView csv3 = new CsoView(cs3);
-        csv3.setX1(400);
-        csv3.setY1(200);
-        csv3.setX2(400);
-        csv3.setY2(200);
-        //csv3.calculate();
-        csovek.add(csv3);
-
-        p.setBemenetiCso(1);
-        c.felcsatol(cs);
-        f.felcsatol(cs2);
-
-        //jatekos tesztek
-        Szerelo sz1 =new Szerelo();
-        sz1.setAktMezo(p);
-        p.setJatekosRajta(sz1);
-        SzereloView szv= new SzereloView(sz1);
-        szv.setX(pm.getX()); //pumpára kerül
-        szv.setY(pm.getY());
-        jatekosok.add(szv);
-
-        Szerelo sz2 =new Szerelo();
-        sz2.setAktMezo(p);
-        p.setJatekosRajta(sz2);
-        SzereloView szv2= new SzereloView(sz2);
-        szv2.setX(pm.getX()); //pumpára kerül
-        szv2.setY(pm.getY());
-        jatekosok.add(szv2);
-
-        Szabotor sza =new Szabotor();
-        sza.setAktMezo(p);
-        p.setJatekosRajta(sza);
-        SzabotorView szav = new SzabotorView(sza);
-        szav.setX(pm.getX()); //pumpára kerül
-        szav.setY(pm.getY());
-        jatekosok.add(szav);
-
-        pm.calculate();
-
-        Szabotor sza2 =new Szabotor();
-        sza2.setAktMezo(cs);
-        cs.setJatekosRajta(sza2);
-        SzabotorView sza2v= new SzabotorView(sza2);
-        sza2v.setX((csv.getX1()+csv.getX2())/2); //pumpára kerül
-        sza2v.setY((csv.getY1()+csv.getY2())/2);
-        sza2.leragad(true);
-        jatekosok.add(sza2v);
-
-        Kontroller.getInstance().addJatekos(sz1);
-        Kontroller.getInstance().addJatekos(sz2);
-        Kontroller.getInstance().addJatekos(sza);
-        Kontroller.getInstance().addJatekos(sza2);
-
-        Kontroller.getInstance().setAktJatekos(2);*/
     }
 
     /**
@@ -302,7 +202,10 @@ public class GamePanel extends JPanel {
         csucsok.add(csucsView);
     }
 
-
+    /**
+     * Hozzáad egy JatekosView-t a nézethez.
+     * @param jatekosView a hozzáadandó JatekosView.
+     */
     public void addJatekosView(JatekosView jatekosView){
         jatekosok.add(jatekosView);
     }

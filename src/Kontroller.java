@@ -7,14 +7,42 @@ import java.util.Random;
  * A játék menetét kontrollálja, számolja a két csapat pontjait, számolja a köröket, az akciók után áramoltatja a vizet.
  */
 public  class Kontroller {
+
+    /**
+     * A szerelők által szerzett pontokat reprezentálja
+     */
     private int szereloPontok;
+    /**
+     * A szabotőrök által szerzett pontokat reprezentálja.
+     */
     private int szabotorPontok;
+    /**
+     * Az aktuális kör számat tartalmazza.
+     */
     private int aktualisKor;
+    /**
+     * A játékban lévő szerelők számát tartalmazza.
+     */
     private int szerelokSzama;
+    /**
+     * A játékban lévő szabotőrök számát tartalmazza.
+     */
     private int szabotorokSzama;
+    /**
+     * Az aktuális játékos indexét tartalmazza.
+     */
     private int aktualisJatekos;
+    /**
+     * A játékban lévő csúcsokat tartalmazó lista.
+     */
     private List<Csucs> csucsok = new ArrayList<>();
+    /**
+     * A játékban lévő csöveket tartalmazó lista.
+     */
     private List<Cso> csovek = new ArrayList<>();
+    /**
+     * A játékban lévő játékosokat tartalmazó lista.
+     */
     private List<Jatekos> jatekosok = new ArrayList<>();
 
     /**
@@ -23,8 +51,8 @@ public  class Kontroller {
     private static Kontroller single_instance = null;
 
     /**
-     * A singletont lekérdező függvény
-     * @return
+     * A singletont lekérdező függvény.
+     * @return A singleton referenciája.
      */
     public static synchronized Kontroller getInstance()
     {
@@ -35,29 +63,80 @@ public  class Kontroller {
     }
 
     /**
-     * Getterek
-     * @return
+     * Visszaadja a szerelők pontjait.
+     * @return A szerelők pontjai.
      */
     public int getSzereloPontok(){return szereloPontok;}
+    /**
+     * Visszaadja a szabotőrök pontjait.
+     * @return A szabotőrök pontjai.
+     */
     public int getSzabotorPontok(){return szabotorPontok;}
+    /**
+     * Visszaadja az aktuális kör számát.
+     * @return Az aktuális kör száma.
+     */
     public int getAktualisKor(){return aktualisKor;}
+    /**
+     * Visszaadja a szerelők számát.
+     * @return A szerelők száma.
+     */
     public int getSzerelokSzama(){return szerelokSzama;}
+    /**
+     * Visszaadja a szabotőrök számát.
+     * @return A szabotőrök száma.
+     */
     public int getSzabotorokSzama(){return szabotorokSzama;}
+    /**
+     * Visszaadja az aktuális játékos indexét.
+     * @return Az aktuális játékos indexe.
+     */
     public int getAktualisJatekos(){return aktualisJatekos;}
+    /**
+     * Visszaadja a csúcsokat tartalmazó listát.
+     * @return A csúcsokat tartalmazó lista.
+     */
     public List<Csucs> getCsucsok(){return csucsok;}
+    /**
+     * Visszaadja a csöveket tartalmazó listát.
+     * @return A csöveket tartalmazó lista.
+     */
     public List<Cso> getCsovek(){return csovek;}
+    /**
+     * Visszaadja a játékosokat tartalmazó listát.
+     * @return A játékosokat tartalmazó lista.
+     */
     public List<Jatekos> getJatekosok(){return jatekosok;}
 
     /**
-     * Setterek
-     * @param p
-     * @return
+     * Beállítja a szerelők pontjait.
+     * @param p A szerelők pontjai.
      */
     public void setSzereloPontok(int p){szereloPontok=p;}
+    /**
+     * Beállítja a szabotőrök pontjait.
+     * @param p A szabotőrök pontjai.
+     */
     public void setSzabotorPontok(int p){szabotorPontok=p;}
+    /**
+     * Beállítja az aktuális kör számát.
+     * @param j Az aktuális kör száma.
+     */
     public void setAktJatekos(int j){aktualisJatekos=j;}
+    /**
+     * Beállítja a szerelők számát.
+     * @param sz A szerelők száma.
+     */
     public void setSzerelokSzama(int sz){szerelokSzama=sz;}
+    /**
+     * Beállítja a szabotőrök számát.
+     * @param sz A szabotőrök száma.
+     */
     public void setSzabotorokSzama(int sz){szabotorokSzama=sz;}
+    /**
+     * Beállítja az aktuális kör számát.
+     * @param k Az aktuális kör száma.
+     */
     public void setAktKor(int k){aktualisKor=k;}
 
     /**
@@ -68,7 +147,9 @@ public  class Kontroller {
     }
 
     /**
-     * Mindegyik csúcsban indít egy pumpálást
+     * Minden csúcsban pumpálja a vizet.
+     * Minden ciszernában létrehozz egy csövet, ha nincs hurokél.
+     * Elront véletlenszerűen valahány pumpát.
      */
     public void stepKor(){
         for (Csucs csucs:csucsok) {
@@ -95,7 +176,13 @@ public  class Kontroller {
     }
 
     /**
-     * A játék pályáját hozza létre: a ciszternákat, forrásokat, csöveket, pumpákat és az ezek közötti kapcsolatokat is beállítja.
+     * Inicializálja a pályát.
+     * Létrehozza a csúcsokat, a pumpákat és a ciszternákat.
+     * 4 darab ciszterna, pumpa és forrás van.
+     * Minden ciszterna és forrás össze van kötve egy pumpával.
+     * Három pumpa kötött van cső.
+     * A csúcsokhoz létrehozza a csúcsok megjelenítőit.
+     * A ciszternákat bal oldalra helyezi, a pumpákat a képernyő közepére, a forrásokat pedig jobb oldalra.
      */
     public void initPalya(){
         for (int i = 0; i < 4; i++) {
@@ -160,7 +247,7 @@ public  class Kontroller {
     }
 
     /**
-     * Játékosokat hoz létre és elhelyezi őket a megfelelő forrásokon
+     * Játékosokat hoz létre és elhelyezi őket a megfelelő ciszternákon.
      * @param szerelokSz szerelők száma
      * @param szabotorokSz szabotőrök száma
      */
@@ -190,7 +277,7 @@ public  class Kontroller {
 
     /**
      * Megnöveli a paraméterben átadott csapat pontjait eggyel
-     * @param csapat
+     * @param csapat a csapat neve, lehet "szerelok" vagy "szabotorok".
      */
     public void pontNovel(String csapat){
         switch (csapat) {
@@ -201,7 +288,7 @@ public  class Kontroller {
     }
 
     /**
-     * Véletlenszerűen elront pumpákat. Az összes csúcsot 5%-os eséllyel elrontja.
+     * Véletlenszerűen elront pumpákat. Minden csúcsot 1%-os eséllyel ront el.
      */
     public void veletlenPumpaElrontas(){
         int percent = 1;
@@ -232,7 +319,8 @@ public  class Kontroller {
 
     /**
      * Hozzáad egy csövet a csovek listához. A paramétert berakja a lista végére.
-     * @param cso
+     * A csőhöz tartozó CsoView-t is hozzáadja a GamePanelhez.
+     * @param cso a hozzáadandó cső.
      */
     public void addCso(Cso cso){
         csovek.add(cso);
@@ -242,7 +330,8 @@ public  class Kontroller {
 
     /**
      * Hozzáad egy csúcsot a csucsok listájához. A paramétert berakja a lista végére.
-     * @param csucs
+     * A csúcshoz tartozó PumpaView-t is hozzáadja a GamePanelhez.
+     * @param csucs a hozzáadandó csúcs.
      */
     public void addCsucs(Pumpa csucs){
         csucsok.add(csucs);
@@ -256,7 +345,7 @@ public  class Kontroller {
 
     /**
      * Eltávolítja a paraméterként kapott Jatekos-t a jatekosok listából.
-     * @param jatekos
+     * @param jatekos a törölni kívánt játékos.
      */
     public void removeJatekos(Jatekos jatekos){
         for(int i=0; i<jatekosok.size(); i++){
@@ -269,7 +358,7 @@ public  class Kontroller {
 
     /**
      * Eltávolítja a paraméterként kapott Cso-t a csovek listából.
-     * @param cso
+     * @param cso a törölni kívánt cső.
      */
     public void removeCso(Cso cso){
         for(int i=0; i<csovek.size(); i++){
@@ -282,7 +371,7 @@ public  class Kontroller {
 
     /**
      * Eltávolítja a paraméterként kapott Csucs-ot a csucsok listából.
-     * @param csucs
+     * @param csucs a törölni kívánt csúcs.
      */
     public void removeCsucs(Csucs csucs){
         for(int i=0; i<csucsok.size(); i++){
@@ -308,6 +397,10 @@ public  class Kontroller {
         szabotorPontok=0;
     }
 
+    /**
+     * Hozzáad egy játékost a jatekosok listájához. A paramétert berakja a lista végére.
+     * @param jatekos a hozzáadandó játékos.
+     */
     public void addJatekos(Jatekos jatekos){
         jatekosok.add(jatekos);
     }
