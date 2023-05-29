@@ -25,6 +25,7 @@ public class GameFrame extends JFrame {
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(500, 500);
+        this.setResizable(false);
         this.setLayout(card);
         InitComponents();
         InitMenu();
