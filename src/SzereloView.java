@@ -29,6 +29,20 @@ public class SzereloView extends JatekosView{
         int aktIndex = Kontroller.getInstance().getAktualisJatekos();
         Jatekos aktJatekos = Kontroller.getInstance().getJatekosok().get(aktIndex);
         if(aktJatekos == szerelo){
+            //ha a szerelőnél van tárgy, akkor kiírja a képernyő aljára, ha nincs nála semmi, nem ír ki semmit
+            if(szerelo.getCsoveg()!=null || szerelo.getPumpa()!=null){
+                String itemString =new String("Item: ");
+                if(szerelo.getCsoveg()!=null){
+                    itemString+="Csővég";
+                }
+                if(szerelo.getPumpa()!=null){
+                    itemString+="Pumpa";
+                }
+                g.setColor(Color.BLACK);
+                g.setFont(new Font("TimesRoman", Font.BOLD, 25));
+                g.drawString(itemString, Toolkit.getDefaultToolkit().getScreenSize().width*2/5 , Toolkit.getDefaultToolkit().getScreenSize().height*7/8);
+            }
+
             g.setColor(new Color(102, 215, 50)); //ha aktív, akkor zöld
         }
 
@@ -37,19 +51,7 @@ public class SzereloView extends JatekosView{
         int[] ypoints = {getY()-9, getY()+9, getY()+9};
         g.fillPolygon(xpoints, ypoints, 3/*haromszog*/);
 
-        //ha a szerelőnél van tárgy, akkor kiírja a képernyő aljára, ha nincs nála semmi, nem ír ki semmit
-        if(szerelo.getCsoveg()!=null || szerelo.getPumpa()!=null){
-            String itemString =new String("Item: ");
-            if(szerelo.getCsoveg()!=null){
-                itemString+="Csővég";
-            }
-            if(szerelo.getPumpa()!=null){
-                itemString+="Pumpa";
-            }
-            g.setColor(Color.BLACK);
-            g.setFont(new Font("TimesRoman", Font.BOLD, 25));
-            g.drawString(itemString, Toolkit.getDefaultToolkit().getScreenSize().width*2/5 , Toolkit.getDefaultToolkit().getScreenSize().height*7/8);
-        }
+
     }
     @Override
     public Szerelo getJatekos(){
