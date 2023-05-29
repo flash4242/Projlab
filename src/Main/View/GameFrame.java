@@ -49,8 +49,8 @@ public class GameFrame extends JFrame {
         JButton newGame = new JButton("Játék indítása");
         newGame.addActionListener((ActionEvent e) -> {
             //TODO Kontrollert setupolni kell és alap pálya inicializálás
-            Kontroller.getInstance().setSzerelokSzama(Integer.parseInt(szereloszam.getText()));
-            Kontroller.getInstance().setSzabotorokSzama(Integer.parseInt(szabotorszam.getText()));
+            Kontroller.getInstance().setSzerelokSzama(Integer.parseInt(szereloszam.getText().equals("")?"2":szereloszam.getText()));
+            Kontroller.getInstance().setSzabotorokSzama(Integer.parseInt(szabotorszam.getText().equals("")?"2":szabotorszam.getText()));
             Kontroller.getInstance().initJatek();
             showGame();
         });
@@ -301,6 +301,7 @@ public class GameFrame extends JFrame {
                 jatekos.mozgas(Integer.parseInt(value)-1);
             else
                 jatekos.csovegFelvetele(0);
+            hova.setText("");
         });
         Atallit.addActionListener((ActionEvent e) -> {
                     int akt = Kontroller.getInstance().getAktualisJatekos();
@@ -311,6 +312,8 @@ public class GameFrame extends JFrame {
                         Kontroller.getInstance().stepTime();
                     }
                     Kontroller.getInstance().setAktJatekos((akt+1)% jatekosok.size());
+                    be.setText("");
+                    ki.setText("");
                 });
         /*addActionListenerToButton(Atallit, be.getText() + "," + ki.getText(), (jatekos, value) -> {
             //ha esetleg a textfield-ekben nincs szoveg, akkor alapértékek vannak a lambdaban
@@ -334,6 +337,7 @@ public class GameFrame extends JFrame {
                 jatekos.csovegFelvetele(Integer.parseInt(value)-1);
             else
                 jatekos.csovegFelvetele(0);
+            hanyadik.setText("");
         });
         addActionListenerToButton(CsLerak, null, (jatekos, value) -> {
             jatekos.csovegetLerak();
