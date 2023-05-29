@@ -98,7 +98,7 @@ public class GameFrame extends JFrame {
         be = new JTextField("", 2);
         Lyukaszt = new JButton("Csövet lyukaszt");
         Ragaszt = new JButton("Csövet ragasztóz");
-        JatekVege = new JButton("Jaték vége");
+        JatekVege = new JButton("Játék vége");
 
         //szerelo
         JLabel szerelo = new JLabel("Szerelő akciói");
