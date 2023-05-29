@@ -49,6 +49,11 @@ public class GamePanel extends JPanel {
     List<CsucsView> csucsok;
 
     /**
+     * A pontokat szemléltető címke: "szabotőrok pontja - szerelők pontja" formátumban
+     */
+    JLabel score_;
+
+    /**
      * Default Konstruktora a Game Panelnek.
      */
     private GamePanel(){
@@ -56,6 +61,9 @@ public class GamePanel extends JPanel {
         jatekosok = new ArrayList<>();
         csovek = new ArrayList<>();
         csucsok = new ArrayList<>();
+        score_ = new JLabel("Score: "+Kontroller.getInstance().getSzabotorPontok()+"-"+Kontroller.getInstance().getSzereloPontok());
+        score_.setAlignmentY(JLabel.BOTTOM_ALIGNMENT);
+        this.add(score_);
 
         //TODO EZ ALATT CSAK TESZTELES FOLYT EGY PELDA PALYA, DELETE LATER
         /*Pumpa p = new Pumpa();
@@ -174,6 +182,7 @@ public class GamePanel extends JPanel {
         for (JatekosView j : jatekosok){
             j.draw(g);
         }
+        score_.setText("Score: "+Kontroller.getInstance().getSzabotorPontok()+"-"+Kontroller.getInstance().getSzereloPontok());
     }
 
     /**

@@ -202,6 +202,7 @@ public  class Kontroller {
             case "szerelok" -> szereloPontok++;
             case "szabotorok" -> szabotorPontok++;
         }
+        Kontroller.getInstance().ujraRajzol();
     }
 
     /**

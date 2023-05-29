@@ -24,7 +24,7 @@ public class GameFrame extends JFrame {
      */
     private JTextField hova, ki, be, hanyadik;
 
-    private JButton Mozog, Atallit, Lyukaszt, Ragaszt, Javit, CsFelvesz, CsLerak, PFelvesz, PLerak, Csuszosit;
+    private JButton Mozog, Atallit, Lyukaszt, Ragaszt, Javit, CsFelvesz, CsLerak, PFelvesz, PLerak, Csuszosit, JatekVege;
     private CardLayout card = new CardLayout();
     private JTextField szereloszam, szabotorszam;
     private JPanel menu;
@@ -48,7 +48,6 @@ public class GameFrame extends JFrame {
         menu = new JPanel();
         JButton newGame = new JButton("Játék indítása");
         newGame.addActionListener((ActionEvent e) -> {
-            //TODO Kontrollert setupolni kell és alap pálya inicializálás
             Kontroller.getInstance().setSzerelokSzama(Integer.parseInt(szereloszam.getText().equals("")?"2":szereloszam.getText()));
             Kontroller.getInstance().setSzabotorokSzama(Integer.parseInt(szabotorszam.getText().equals("")?"2":szabotorszam.getText()));
             Kontroller.getInstance().initJatek();
@@ -99,6 +98,7 @@ public class GameFrame extends JFrame {
         be = new JTextField("", 2);
         Lyukaszt = new JButton("Csövet lyukaszt");
         Ragaszt = new JButton("Csövet ragasztóz");
+        JatekVege = new JButton("Jaték vége");
 
         //szerelo
         JLabel szerelo = new JLabel("Szerelő akciói");
@@ -143,6 +143,8 @@ public class GameFrame extends JFrame {
         pan.add(be);
         pan.add(Lyukaszt);
         pan.add(Ragaszt);
+        pan.add(JatekVege);
+
 
         //left panel (szerelo akciok)
         JPanel left_panel = new JPanel();
@@ -350,6 +352,9 @@ public class GameFrame extends JFrame {
         });
         addActionListenerToButton(Csuszosit, null, (jatekos, value) -> {
             jatekos.csuszosit();
+        });
+        addActionListenerToButton(JatekVege, null, (jatekos, value) -> {
+            System.exit(0);
         });
     }
 
