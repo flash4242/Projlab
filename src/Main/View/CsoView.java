@@ -110,8 +110,12 @@ public class CsoView {
         // szomszédos csucsok számozásának kirajzolása:
         g.setColor(Color.red);
         List<Csucs> szomszedosCsucsok  =cso.getSzomszedosCsucs();
-        CsucsView csucsv1 = GamePanel.getInstance().getCsucsViewFromCsucs(szomszedosCsucsok.get(0));
-        CsucsView csucsv2 = GamePanel.getInstance().getCsucsViewFromCsucs(szomszedosCsucsok.get(1));
+        CsucsView csucsv1  =null;
+        CsucsView csucsv2 = null;
+        if(szomszedosCsucsok.size() !=0)
+            csucsv1 = GamePanel.getInstance().getCsucsViewFromCsucs(szomszedosCsucsok.get(0));
+        if(szomszedosCsucsok.size() ==2)
+            csucsv2 = GamePanel.getInstance().getCsucsViewFromCsucs(szomszedosCsucsok.get(1));
 
 
         Vec2 veg1 = new Vec2(x1,y1);
@@ -119,10 +123,12 @@ public class CsoView {
         Vec2 from1to2 = veg2.substract(veg1).normalize();
         Vec2 from2to1 = veg1.substract(veg2).normalize();
 
-        if(csucsv1 == csucsv2){
+        if(csucsv1 == csucsv2&& csucsv1 != null){
             g.drawString("1", (int) (veg2.getX()-45), (int) veg2.getY());
         }else{
+            if(csucsv1 != null)
                 g.drawString("1", (int) (veg1.getX()+from1to2.getX()*40), (int) (veg1.getY()+from1to2.getY()*40));
+            if(csucsv2 != null)
                 g.drawString("2", (int) (veg2.getX()+from2to1.getX()*40), (int) (veg2.getY()+from2to1.getY()*40));
             }
     }
