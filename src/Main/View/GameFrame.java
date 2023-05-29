@@ -300,7 +300,7 @@ public class GameFrame extends JFrame {
             if(!value.isEmpty())
                 jatekos.mozgas(Integer.parseInt(value)-1);
             else
-                jatekos.csovegFelvetele(0);
+                jatekos.mozgas(0);
             hova.setText("");
         });
         Atallit.addActionListener((ActionEvent e) -> {
