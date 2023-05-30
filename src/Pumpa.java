@@ -110,6 +110,11 @@ public class Pumpa extends Csucs{
     public void setRossz(boolean r){
         rossz = r;
     }
+
+    /**
+     *
+     * @param cso
+     */
     public void setBemenetiCso(Cso cso){
         if(cso == null)
             bemenetiCso = -1;

@@ -18,6 +18,11 @@ public abstract class Csucs extends Mezo{
         szomszedosCso = new ArrayList<Cso>();
     }
 
+    /**
+     * Hozzáad egy csövet a szomszedosCso listához
+     * @param cso
+     * A hozzáadott cső
+     */
     public void addCso(Cso cso){
         szomszedosCso.add(cso);
     }
@@ -32,6 +37,11 @@ public abstract class Csucs extends Mezo{
 
     }
 
+    /**
+     * Etávolítja a megadott csövet a szomszedosCso listából
+     * @param cso
+     * Az eltávolítandó cső
+     */
     public void removeNeighbour(Cso cso){
         szomszedosCso.remove(cso);
     }

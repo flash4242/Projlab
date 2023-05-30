@@ -2,10 +2,25 @@ import java.awt.*;
 import java.util.List;
 
 public class CsoView {
+    /**
+     * Az adott csoView-höz tartozó modellbeli cső
+     */
     private Cso cso;
+    /**
+     * A cső egyes számú végének x koordinátája
+     */
     private int x1;
+    /**
+     * A cső egyes számú végének y koordinátája
+     */
     private int y1;
+    /**
+     * A cső kettes számú végének x koordinátája
+     */
     private int x2;
+    /**
+     * A cső kettes számú végének y koordinátája
+     */
     private int y2;
 
     public int getY1() {
