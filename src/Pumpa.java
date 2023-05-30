@@ -112,14 +112,20 @@ public class Pumpa extends Csucs{
     }
 
     /**
-     *
+     *Beállítja a bemeneti csőnek a megadott csövet
      * @param cso
+     * a beállítandó bemeneti cső
      */
     public void setBemenetiCso(Cso cso){
         if(cso == null)
             bemenetiCso = -1;
         bemenetiCso = getSzomszedosCso().indexOf(cso);
     }
+    /**
+     *Beállítja a kimeneti csőnek a megadott csövet
+     * @param cso
+     * a beállítandó kimeneti cső
+     */
     public void setKimenetiCso(Cso cso){
         if(cso == null)
             kimenetiCso = -1;
